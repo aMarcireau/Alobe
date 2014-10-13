@@ -1,23 +1,24 @@
-#ifndef __alobe__periodicEvent__
-#define __alobe__periodicEvent__
+#ifndef __ALOBE__PERIODIC_EVENT__
+#define __ALOBE__PERIODIC_EVENT__
 
 #include "event.h"
+
+//using namespace std;
 
 /**
  * <<Abstract>> PeriodicEvent
  * Inherits Event
  *
- * Starting at triggerStep, PeriodicEvent objects call their action method every triggerPeriod
+ * Starting at triggerStep, PeriodicEvent objects call their filteredAction method every triggerPeriod
  */
 class PeriodicEvent: public Event
 {
     public:
-        PeriodicEvent(unsigned int step = 0, unsigned int period = 1); // Constructor
-        void notify(unsigned int step);                                // Notification called by the Stepper
-        unsigned int getTriggerPeriod();                               // Getter for triggerPeriod
+        PeriodicEvent(unsigned int step = 0, unsigned int period = 1); 
+        void action(Actor & actor, unsigned int step);                 // Change event filter rules (add periodicity)
 
     private:
-        unsigned int triggerPeriod;                                    // Store the trigger step value
+        unsigned int triggerPeriod;
 };
 
-#endif /* defined(__alobe__periodicEvent__) */
+#endif // __ALOBE__PERIODIC_EVENT__
