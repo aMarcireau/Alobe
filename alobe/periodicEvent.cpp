@@ -10,20 +10,11 @@ PeriodicEvent::PeriodicEvent(unsigned int step, unsigned int period):
 }
 
 /**
- * Notification called by the Stepper
+ * Change event filter rules (add periodicity)
  */
-void PeriodicEvent::notify(unsigned int step)
+void PeriodicEvent::action(Actor & actor, unsigned int step)
 {
-    if (step >= this->getTriggerStep() and (step - this->getTriggerStep()) % this->getTriggerPeriod() == 0)
-    {
-        this->action();
+    if (step >= triggerStep & (step - triggerStep) % triggerPeriod == 0) {
+        this->filteredAction(actor);
     }
-}
-
-/**
- * Getter for triggerPeriod
- */
-unsigned int PeriodicEvent::getTriggerPeriod()
-{
-    return triggerPeriod;
 }

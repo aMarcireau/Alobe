@@ -3,26 +3,16 @@
 /**
  * Constructor
  */
-Event::Event(unsigned int step):
-    triggerStep(step)
+Event::Event(unsigned int step)
 {
 }
 
 /**
- * Notification called by the Stepper
+ * Trigger event action on an actor with a given step
  */
-void Event::notify(unsigned int step)
+void Event::action(Actor & actor, unsigned int step)
 {
-    if (step == this->getTriggerStep())
-    {
-        this->action();
+    if (step == triggerStep) {
+        this->filteredAction(actor);
     }
-}
-
-/**
- * Getter for triggerStep
- */
-unsigned int Event::getTriggerStep()
-{
-    return triggerStep;
 }
