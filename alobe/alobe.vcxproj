@@ -78,7 +78,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="actor.cpp" />
+    <ClCompile Include="event.cpp" />
+    <ClCompile Include="Land.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="periodicEvent.cpp" />
+    <ClCompile Include="simulation.cpp" />
+    <ClCompile Include="stepper.cpp" />
+    <ClCompile Include="Tile.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="actor.h" />
+    <ClInclude Include="event.h" />
+    <ClInclude Include="Land.h" />
+    <ClInclude Include="periodicEvent.h" />
+    <ClInclude Include="simulation.h" />
+    <ClInclude Include="stepper.h" />
+    <ClInclude Include="Tile.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

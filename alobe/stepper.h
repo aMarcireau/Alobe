@@ -2,6 +2,7 @@
 #define __ALOBE__STEPPER__
 
 #include <vector>
+#include <algorithm>
 
 #include "actor.h"
 
