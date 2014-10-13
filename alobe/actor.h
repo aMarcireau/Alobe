@@ -2,6 +2,7 @@
 #define __ALOBE__ACTOR__
 
 #include <vector>
+#include <memory>
 
 #include "event.h"
 
