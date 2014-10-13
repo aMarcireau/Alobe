@@ -4,8 +4,8 @@
  * Constructor
  */
 Stepper::Stepper():
-    step(0),
-    eventsByWeight(multimap<int, Event *>())
+    _step(0),
+    _actors(vector<Actor *>())
 {
 }
 
@@ -14,15 +14,14 @@ Stepper::Stepper():
  */
 void Stepper::increment()
 {
-    step += 1;
+    _step += 1;
 
     for (
-        multimap<int, Event *>::iterator weightAndEventIterator = eventsByWeight.begin();
-        weightAndEventIterator != eventsByWeight.end();
-        ++weightAndEventIterator
-    )
-    {
-        weightAndEventIterator->second->notify(this->getStep());
+        vector<Actor *>::iterator actorIterator = _actors.begin();
+        actorIterator != _actors.end();
+        ++actorIterator
+    ) {
+        (*actorIterator)->notify(_step);
     }
 }
 
@@ -31,7 +30,7 @@ void Stepper::increment()
  */
 void Stepper::reset()
 {
-    step = 0;
+    _step = 0;
 }
 
 /**
@@ -39,13 +38,21 @@ void Stepper::reset()
  */
 unsigned int Stepper::getStep()
 {
-    return step;
+    return _step;
 }
 
 /**
  * Attach an event
  */
-void Stepper::attach(Event & event, int weight)
+void Stepper::attach(Actor & actor)
 {
-    eventsByWeight.insert(pair<int, Event *>(weight, &event));
+    _actors.push_back(&actor);
+}
+
+/**
+ * Detach an event
+ */
+void Stepper::detach(Actor & actor)
+{
+    _actors.erase(remove(_actors.begin(), _actors.end(), &actor), _actors.end());
 }
