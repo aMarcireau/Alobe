@@ -4,26 +4,26 @@
 #include "Tile.h"
 #include<memory>
 #include <vector>
+#include "actor.h"
 using namespace std;
 
-class Being
+class Being : public Actor
 {
 private:
 	string name;
-	map< int, unique_ptr<Chromosome> > chromosomes;
-	vector< shared_ptr<Being>> parents;
-	vector< shared_ptr<Being>> children;
+	map< string, shared_ptr<Chromosome> > chromosomes;
+	vector< Being *> parents;
+	vector< Being *> children;
 
 public:
-	Being(string name, map< int, unique_ptr<Chromosome> > chromosomes);
+	Being(string name, map< string, shared_ptr<Chromosome> > chromosomes);
 	string getName() const;
-	vector< shared_ptr<Being>> getParents() const;
-	vector< shared_ptr<Being>> getChildren() const;
-	map< int, unique_ptr<Chromosome> > getChromosomes() const;
-	Tile* getPosition();
+	vector< Being *> getParents() const;
+	vector< Being *> getChildren() const;
+	map< string, shared_ptr<Chromosome> > getChromosomes() const;
 
-	void addChromosome(Chromosome &Chromsome);
-	void removeChromosome(Chromosome &Chromsome);
+	void addChromosome(shared_ptr<Chromosome> newChromsome);
+	void removeChromosome(shared_ptr<Chromosome> myChromsome);
 
 	void addSickness();
 	void removeSickness();
