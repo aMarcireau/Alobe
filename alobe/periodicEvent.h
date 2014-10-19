@@ -3,8 +3,6 @@
 
 #include "event.h"
 
-//using namespace std;
-
 /**
  * <<Abstract>> PeriodicEvent
  * Inherits Event
