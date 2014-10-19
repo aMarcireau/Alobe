@@ -3,8 +3,6 @@
 #include "actor.h"
 #include "Land.h"
 #include "Tile.h"
-#include <iostream>
-#include <memory>
 
 using namespace std;
 

@@ -79,6 +79,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="actor.cpp" />
+    <ClCompile Include="Chromosome.cpp" />
     <ClCompile Include="event.cpp" />
     <ClCompile Include="Land.cpp" />
     <ClCompile Include="main.cpp" />
@@ -89,6 +90,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="actor.h" />
+    <ClInclude Include="Being.h" />
+    <ClInclude Include="Chromosome.h" />
     <ClInclude Include="event.h" />
     <ClInclude Include="Land.h" />
     <ClInclude Include="periodicEvent.h" />
