@@ -36,7 +36,7 @@ void Actor::detach(Event & event)
 /**
  * Notification called by a Stepper object
  */
- void Actor::notify(unsigned int step)
+void Actor::notify(unsigned int step)
 {
     for (
         vector<shared_ptr<Event> >::iterator eventIterator = events.begin();
