@@ -47,5 +47,4 @@ void Being::move()
 {}
 
 
-shared_ptr<Being> Being::mate(Being &partner, string name)4
-{}
+//shared_ptr<Being> Being::mate(Being &partner, string name){}

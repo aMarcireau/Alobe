@@ -30,5 +30,5 @@ public:
 
 	void move();
 
-	shared_ptr<Being> mate(Being &partner, string name);
+	//shared_ptr<Being> mate(Being &partner, string name);
 };
