@@ -1,9 +1,5 @@
 #include "Land.h"
-#include <iostream>
-#include<vector>
-#include <map>
 #include "Tile.h"
-#include <memory>
 
 using namespace std;
 
