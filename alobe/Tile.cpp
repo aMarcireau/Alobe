@@ -1,25 +1,35 @@
-#include "Tile.h"
+#include "tile.h"
 
-using namespace std;
-
-
-Tile::Tile(int x, int y) : x(x), y(y)
-{}
-
-
-int Tile::getX() const
+/**
+ * Constructor
+ */
+Tile::Tile(unsigned int x, unsigned int y):
+    Actor(),
+    _x(x),
+    _y(y)
 {
-	return x;
 }
 
-
-int Tile::getY() const
+/**
+ * X coordinate getter
+ */
+unsigned int Tile::getX() const
 {
-	return y;
+	return _x;
 }
 
-string Tile::confirm()
+/**
+ * Y coordinate getter
+ */
+unsigned int Tile::getY() const
 {
-	string str("on est sur la tile : ");
-	return  str+to_string(this->getX())+" - "+to_string(this->getY());
+	return _y;
+}
+
+/**
+ * Get a string of data about the tile
+ */
+string Tile::toString()
+{
+	return  "Tile coordinates: " + to_string(_x) + ", " + to_string(_y);
 };

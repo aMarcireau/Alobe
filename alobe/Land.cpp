@@ -1,41 +1,60 @@
-#include "Land.h"
-#include "Tile.h"
+#include "land.h"
 
-using namespace std;
-
-Land::Land(int w, int h) : width(w), height(h)
-{	
-	//Verifier que w et h sont non nuls
+/**
+ * Constructor
+ */
+Land::Land(unsigned int width, unsigned int height):
+    Actor(),
+    _width(width),
+    _height(height),
+    _tiles(vector<vector<unique_ptr<Tile> > >())
+{
 }
 
+/**
+ * Getter for the land width (number of tiles)
+ */
+unsigned int Land::getWidth() const
+{
+    return _width;
+}
 
-//ok
- int Land::getWidth() const
- {
-	 return width;
- }
+/**
+ * Getter for the land height (number of tiles)
+ */
+unsigned int Land::getHeight() const
+{
+    return _height;
+}
 
-//ok
- int Land::getHeight() const
- {
-	 return height;
- }
+/**
+ * Get tile by position
+ */
+Tile * Land::getTile(unsigned int x, unsigned int y) const
+{
+    return _tiles[x][y].get();
+}
 
-//ok
- int Land::getTilesNumber() const
- {
-	 return height * width;
- }
+/**
+ * Get the number of tiles
+ */
+unsigned int Land::getTilesNumber() const
+{
+    return _width * _height;
+}
 
- void Land::generate()
- {
-	 for (int y = 0; y < height; y++){
-		 for (int x = 0; x < width; x++){
-			 
-			 vector<int> coordinates;
-			 coordinates.push_back(x);
-			 coordinates.push_back(y);
-			 tileLand.insert(pair <vector<int>, unique_ptr<Tile> >(coordinates, make_unique<Tile>(x, y)));
-		 }
-	 }
- }
+/**
+ * Generate the land tiles
+ */
+void Land::generate()
+{
+    for (unsigned int y = 0; y < _height; ++y) {
+        vector<unique_ptr<Tile> > column;
+
+        for (unsigned int x = 0; x < _width; ++x) {
+            column.push_back(make_unique<Tile>(x, y));
+        }
+
+        _tiles.push_back(move(column));
+    }
+}
