@@ -3,18 +3,20 @@
 /**
  * Constructor
  */
-Simulation::Simulation(unique_ptr<Stepper> stepper):
+Simulation::Simulation(unique_ptr<Stepper> stepper, unique_ptr<Land> land):
     _stepper(move(stepper)),
-    _actors(vector<shared_ptr<Actor> >())
+    _land(move(land)),
+    _beings(vector<shared_ptr<Being> >())
 {
+    _land->generate();
 }
 
 /**
  * Add an actor
  */
-void Simulation::add(shared_ptr<Actor> actor)
+void Simulation::add(shared_ptr<Being> being)
 {
-    _actors.push_back(actor);
+    _beings.push_back(being);
 }
 
 /**
@@ -34,6 +36,22 @@ void Simulation::nextStep()
 {
     _stepper->increment();
     nextStepCallback();
+}
+
+/**
+ * Getter for the stepper
+ */
+Stepper * Simulation::getStepper() const
+{
+    return _stepper.get();
+}
+
+/**
+ * Getter for the land
+ */
+Land * Simulation::getLand() const
+{
+    return _land.get();
 }
 
 /**
