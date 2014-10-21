@@ -18,7 +18,7 @@ class Simulation
 {
     public:
         Simulation(unique_ptr<Stepper> stepper, unique_ptr<Land> land);
-        void add(shared_ptr<Being> being);                              // Add a being
+        void addBeing(shared_ptr<Being> being);                         // Add a being
         void toStep(unsigned int step);                                 // Calculate simulation steps until reaching 'step'
         void nextStep();                                                // Calculate the simulation next step
         Stepper * getStepper() const;                                   // Getter for the stepper

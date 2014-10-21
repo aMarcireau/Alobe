@@ -13,9 +13,9 @@ Simulation::Simulation(unique_ptr<Stepper> stepper, unique_ptr<Land> land):
 }
 
 /**
- * Add an actor
+ * Add a being
  */
-void Simulation::add(shared_ptr<Being> being)
+void Simulation::addBeing(shared_ptr<Being> being)
 {
     my_beings.push_back(being);
     this->my_stepper->attach(*being);
