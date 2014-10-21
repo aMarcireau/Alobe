@@ -36,8 +36,22 @@ int main()
     for (unsigned int y = 0; y < simulation->getLand()->getHeight(); ++y) {
         for (unsigned int x = 0; x < simulation->getLand()->getWidth(); ++x) {
 
-            cout << "    " << simulation->getLand()->getTile(x, y)->toString() << "\n";
+            cout << "    " << simulation->getLand()->getTile(x, y)->toString() << endl;
         }
+    }
+
+    simulation->randomBeing();
+    simulation->randomBeing();
+    simulation->randomBeing("Joe");
+
+    cout << "Created beings:" << endl;
+
+    for (
+        vector<shared_ptr<Being> >::iterator beingIterator = simulation->getBeings().begin();
+        beingIterator != simulation->getBeings().end();
+        ++ beingIterator
+    ) {
+        cout << "    " << (*beingIterator)->getName() << endl;
     }
 
 	simulation->toStep(10);
