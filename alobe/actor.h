@@ -20,6 +20,7 @@ class Actor
         void attach(shared_ptr<Event> event); // Attach an event
         void detach(Event & event);           // Detach an event
         void notify(unsigned int step);       // Notification called by a Stepper object
+        virtual bool isDead() = 0;            // Is the actor dead ?
 
     private:
         vector<shared_ptr<Event> > events;

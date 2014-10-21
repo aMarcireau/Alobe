@@ -17,11 +17,15 @@ void Stepper::increment()
     _step += 1;
 
     for (
-        vector<Actor *>::iterator actorIterator = _actors.begin();
-        actorIterator != _actors.end();
-        ++actorIterator
+        vector<Actor *>::iterator actorIterator = my_actors.begin();
+        actorIterator != my_actors.end();
     ) {
-        (*actorIterator)->notify(_step);
+        if ((*actorIterator)->isDead()) {
+            this->detach((*(*actorIterator)));
+        } else {
+            (*actorIterator)->notify(my_step);
+            ++actorIterator;
+        }
     }
 }
 
