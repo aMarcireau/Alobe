@@ -13,12 +13,12 @@ using namespace std;
 class Chromosome
 {
     public:
-        Chromosome(string name, string gene);
-        string getName() const;               // Getter fot the pair identifier
+        Chromosome(string id, string gene);
+        string getId() const;                 // Getter fot the pair identifier
         string getGene() const;               // Getter for the main gene
 
     private:
-        string my_name;
+        string my_id;
         string my_gene;
 };
 
