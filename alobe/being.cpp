@@ -4,8 +4,8 @@
  * Constructor
  */
 Being::Being(string name, map< string, shared_ptr<Chromosome> > chromosomes) :
-    _name(name),
-    _chromosomes(chromosomes)
+    my_name(name),
+    my_chromosomes(chromosomes)
 {
 }
 
@@ -14,7 +14,7 @@ Being::Being(string name, map< string, shared_ptr<Chromosome> > chromosomes) :
  */
 string Being::getName() const
 {
-	return _name;
+	return my_name;
 }
 
 /**
@@ -22,7 +22,7 @@ string Being::getName() const
  */
 vector<Being *> Being::getChildren() const
 {
-	return _children;
+	return my_children;
 }
 
 /**
@@ -30,7 +30,7 @@ vector<Being *> Being::getChildren() const
  */
 vector<Being *> Being::getParents() const
 {
-	return _parents;
+	return my_parents;
 }
 
 /**
@@ -38,7 +38,7 @@ vector<Being *> Being::getParents() const
  */
 map<string, shared_ptr<Chromosome> > Being::getChromosomes() const
 {
-	return _chromosomes;
+	return my_chromosomes;
 }
 
 /**
@@ -46,7 +46,7 @@ map<string, shared_ptr<Chromosome> > Being::getChromosomes() const
  */
 void Being::addChromosome(shared_ptr<Chromosome> chromosome)
 {
-	_chromosomes.insert(pair<string, shared_ptr<Chromosome> >((*chromosome).getName(), chromosome));
+	my_chromosomes.insert(pair<string, shared_ptr<Chromosome> >((*chromosome).getName(), chromosome));
 }
 
 /**
@@ -54,7 +54,7 @@ void Being::addChromosome(shared_ptr<Chromosome> chromosome)
  */
 void Being::removeChromosome(shared_ptr<Chromosome> myChromsome)
 {
-	_chromosomes.erase((*myChromsome).getName());
+	my_chromosomes.erase((*myChromsome).getName());
 }
 
 /**

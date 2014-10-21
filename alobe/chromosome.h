@@ -15,6 +15,6 @@ class Chromosome
         string getGene() const;               // Getter for the main gene
 
     private:
-        string _name;
-        string _gene;
+        string my_name;
+        string my_gene;
 };

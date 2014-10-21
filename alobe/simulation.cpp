@@ -4,9 +4,9 @@
  * Constructor
  */
 Simulation::Simulation(unique_ptr<Stepper> stepper, unique_ptr<Land> land):
-    _stepper(move(stepper)),
-    _land(move(land)),
-    _beings(vector<shared_ptr<Being> >())
+    my_stepper(move(stepper)),
+    my_land(move(land)),
+    my_beings(vector<shared_ptr<Being> >())
 {
     my_land->generate(*this->my_stepper.get());
     this->my_stepper->attach(*my_land.get());
@@ -26,7 +26,7 @@ void Simulation::add(shared_ptr<Being> being)
  */
 void Simulation::toStep(unsigned int step)
 {
-    while (_stepper->getStep() < step) {
+    while (my_stepper->getStep() < step) {
         nextStep();
     }
 }
@@ -36,7 +36,7 @@ void Simulation::toStep(unsigned int step)
  */
 void Simulation::nextStep()
 {
-    _stepper->increment();
+    my_stepper->increment();
     nextStepCallback();
 }
 
@@ -45,7 +45,7 @@ void Simulation::nextStep()
  */
 Stepper * Simulation::getStepper() const
 {
-    return _stepper.get();
+    return my_stepper.get();
 }
 
 /**
@@ -53,7 +53,7 @@ Stepper * Simulation::getStepper() const
  */
 Land * Simulation::getLand() const
 {
-    return _land.get();
+    return my_land.get();
 }
 
 /**
@@ -61,5 +61,5 @@ Land * Simulation::getLand() const
  */
 void Simulation::nextStepCallback()
 {
-    std::cout << "Step: "<< _stepper->getStep() << std::endl;
+    std::cout << "Step: "<< my_stepper->getStep() << std::endl;
 }

@@ -4,8 +4,8 @@
  * Constructor
  */
 Chromosome::Chromosome(string name, string gene):
-    _name(name),
-    _gene(gene)
+    my_name(name),
+    my_gene(gene)
 {
 }
 
@@ -14,7 +14,7 @@ Chromosome::Chromosome(string name, string gene):
  */
 string Chromosome::getName() const
 {
-	return _name;
+	return my_name;
 }
 
 /**
@@ -22,5 +22,5 @@ string Chromosome::getName() const
  */
 string Chromosome::getGene() const
 {
-	return _gene;
+	return my_gene;
 }

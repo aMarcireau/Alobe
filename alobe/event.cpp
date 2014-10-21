@@ -12,7 +12,7 @@ Event::Event(unsigned int step)
  */
 void Event::action(Actor & actor, unsigned int step)
 {
-    if (step == triggerStep) {
+    if (step == my_triggerStep) {
         this->filteredAction(actor);
     }
 }

@@ -5,8 +5,8 @@
  */
 Tile::Tile(unsigned int x, unsigned int y):
     Actor(),
-    _x(x),
-    _y(y)
+    my_x(x),
+    my_y(y)
 {
 }
 
@@ -15,7 +15,7 @@ Tile::Tile(unsigned int x, unsigned int y):
  */
 unsigned int Tile::getX() const
 {
-	return _x;
+	return my_x;
 }
 
 /**
@@ -23,7 +23,7 @@ unsigned int Tile::getX() const
  */
 unsigned int Tile::getY() const
 {
-	return _y;
+	return my_y;
 }
 
 /**
@@ -31,5 +31,5 @@ unsigned int Tile::getY() const
  */
 string Tile::toString()
 {
-	return  "Tile coordinates: " + to_string(_x) + ", " + to_string(_y);
+	return  "Tile coordinates: " + to_string(my_x) + ", " + to_string(my_y);
 };

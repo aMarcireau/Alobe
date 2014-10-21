@@ -28,9 +28,9 @@ class Simulation
         void nextStepCallback();                                        // Called at the end of the nextStep method
 
     private:
-        unique_ptr<Stepper> _stepper;
-        unique_ptr<Land> _land;
-        vector<shared_ptr<Being> > _beings;
+        unique_ptr<Stepper> my_stepper;
+        unique_ptr<Land> my_land;
+        vector<shared_ptr<Being> > my_beings;
 };
 
 #endif // __ALOBE__SIMULATION__

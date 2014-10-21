@@ -5,7 +5,7 @@
  */
 PeriodicEvent::PeriodicEvent(unsigned int step, unsigned int period):
     Event(step),
-    triggerPeriod(period)
+    my_triggerPeriod(period)
 {
 }
 
@@ -14,7 +14,7 @@ PeriodicEvent::PeriodicEvent(unsigned int step, unsigned int period):
  */
 void PeriodicEvent::action(Actor & actor, unsigned int step)
 {
-    if (step >= triggerStep & (step - triggerStep) % triggerPeriod == 0) {
+    if (step >= my_triggerStep & (step - my_triggerStep) % my_triggerPeriod == 0) {
         this->filteredAction(actor);
     }
 }

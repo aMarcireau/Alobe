@@ -30,10 +30,10 @@ class Being : public Actor
         void move();                                                           // Ask the being to move
 
     private:
-        string _name;
-        map<string, shared_ptr<Chromosome> > _chromosomes;
-        vector<Being *> _parents;
-        vector<Being *> _children;
+        string my_name;
+        map<string, shared_ptr<Chromosome> > my_chromosomes;
+        vector<Being *> my_parents;
+        vector<Being *> my_children;
 
 	//shared_ptr<Being> mate(Being &partner, string name);
 };

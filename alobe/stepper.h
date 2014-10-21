@@ -24,8 +24,8 @@ class Stepper
         void detach(Actor & actor); // Detach an actor
 
     private:
-        unsigned int _step;
-        vector<Actor *> _actors;
+        unsigned int my_step;
+        vector<Actor *> my_actors;
 };
 
 #endif // __ALOBE__STEPPER__

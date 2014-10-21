@@ -4,7 +4,7 @@
  * Constructor
  */
 Actor::Actor():
-    events(vector<shared_ptr<Event> >())
+    my_events(vector<shared_ptr<Event> >())
 {
 }
 
@@ -13,7 +13,7 @@ Actor::Actor():
  */
 void Actor::attach(shared_ptr<Event> event)
 {
-    events.push_back(event);
+    my_events.push_back(event);
 }
 
 /**
@@ -22,11 +22,11 @@ void Actor::attach(shared_ptr<Event> event)
 void Actor::detach(Event & event)
 {
     for (
-        vector<shared_ptr<Event> >::iterator eventIterator = events.begin();
-        eventIterator != events.end();
+        vector<shared_ptr<Event> >::iterator eventIterator = my_events.begin();
+        eventIterator != my_events.end();
     ) {
         if ((*eventIterator).get() == &event) {
-            events.erase(eventIterator);
+            my_events.erase(eventIterator);
         } else {
             ++eventIterator;
         }
@@ -39,8 +39,8 @@ void Actor::detach(Event & event)
 void Actor::notify(unsigned int step)
 {
     for (
-        vector<shared_ptr<Event> >::iterator eventIterator = events.begin();
-        eventIterator != events.end();
+        vector<shared_ptr<Event> >::iterator eventIterator = my_events.begin();
+        eventIterator != my_events.end();
     ) {
         (*eventIterator)->action(*this, step);
     }

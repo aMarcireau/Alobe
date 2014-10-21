@@ -23,7 +23,7 @@ class Actor
         virtual bool isDead() = 0;            // Is the actor dead ?
 
     private:
-        vector<shared_ptr<Event> > events;
+        vector<shared_ptr<Event> > my_events;
 };
 
 #endif // __ALOBE__ACTOR__

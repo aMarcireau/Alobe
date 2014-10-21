@@ -7,6 +7,7 @@
 
 #include "actor.h"
 #include "tile.h"
+#include "stepper.h"
 
 using namespace std;
 
@@ -16,7 +17,7 @@ using namespace std;
  *
  * Land of the simulation
  */
-class Land: Actor
+class Land: public Actor
 {
     public:
         Land(unsigned int width, unsigned int height);
@@ -28,8 +29,8 @@ class Land: Actor
 
 
     private:
-        unsigned int _width, _height;
-        vector<vector<unique_ptr<Tile> > > _tiles;
+        unsigned int my_width, my_height;
+        vector<vector<unique_ptr<Tile> > > my_tiles;
 };
 
 #endif // __ALOBE__LAND__
