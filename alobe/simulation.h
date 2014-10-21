@@ -5,8 +5,7 @@
 
 #include "stepper.h"
 #include "land.h"
-
-class Being; // Pre-declared Bing. TODO: replace with #include "being.h" when created
+#include "being.h"
 
 using namespace std;
 
