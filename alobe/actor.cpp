@@ -45,3 +45,11 @@ void Actor::notify(unsigned int step)
         (*eventIterator)->action(*this, step);
     }
 }
+
+/**
+ * Is the actor dead?
+ */
+bool Actor::isDead()
+{
+    return false;
+}

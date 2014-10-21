@@ -78,6 +78,14 @@ void Being::move()
 {
 }
 
+/**
+ * Is the being dead?
+ */
+bool Being::isDead()
+{
+    return false;
+}
+
 ///**
 // * Ask the being to move
 // */

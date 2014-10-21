@@ -28,6 +28,7 @@ class Being : public Actor
         void addSickness();                                                    // Add a sickness
         void removeSickness();                                                 // Remove a sickness
         void move();                                                           // Ask the being to move
+        bool isDead();                                                         // Is the being dead?
 
     private:
         string my_name;

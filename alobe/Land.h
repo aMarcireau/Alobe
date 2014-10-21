@@ -27,7 +27,6 @@ class Land: public Actor
         unsigned int getTilesNumber() const;                  // Get the number of tiles
         void generate(Stepper & stepper);                     // Generate the land tiles
 
-
     private:
         unsigned int my_width, my_height;
         vector<vector<unique_ptr<Tile> > > my_tiles;
