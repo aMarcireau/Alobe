@@ -46,13 +46,14 @@ unsigned int Land::getTilesNumber() const
 /**
  * Generate the land tiles
  */
-void Land::generate()
+void Land::generate(Stepper & stepper)
 {
     for (unsigned int y = 0; y < _height; ++y) {
         vector<unique_ptr<Tile> > column;
 
         for (unsigned int x = 0; x < _width; ++x) {
             column.push_back(make_unique<Tile>(x, y));
+            stepper.attach(*(column.back().get()));
         }
 
         _tiles.push_back(move(column));

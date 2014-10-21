@@ -8,7 +8,8 @@ Simulation::Simulation(unique_ptr<Stepper> stepper, unique_ptr<Land> land):
     _land(move(land)),
     _beings(vector<shared_ptr<Being> >())
 {
-    _land->generate();
+    my_land->generate(*this->my_stepper.get());
+    this->my_stepper->attach(*my_land.get());
 }
 
 /**
@@ -16,7 +17,8 @@ Simulation::Simulation(unique_ptr<Stepper> stepper, unique_ptr<Land> land):
  */
 void Simulation::add(shared_ptr<Being> being)
 {
-    _beings.push_back(being);
+    my_beings.push_back(being);
+    this->my_stepper->attach(*being);
 }
 
 /**

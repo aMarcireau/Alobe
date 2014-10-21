@@ -24,7 +24,7 @@ class Land: Actor
         unsigned int getHeight() const;                       // Getter for the land height (number of tiles)
         Tile * getTile(unsigned int x, unsigned int y) const; // Get tile by position
         unsigned int getTilesNumber() const;                  // Get the number of tiles
-        void generate();                                      // Generate the land tiles
+        void generate(Stepper & stepper);                     // Generate the land tiles
 
 
     private:
