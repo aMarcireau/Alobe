@@ -1,3 +1,6 @@
+#ifndef __ALOBE__CHROMOSOME__
+#define __ALOBE__CHROMOSOME__
+
 #include <string>
 
 using namespace std;
@@ -18,3 +21,5 @@ class Chromosome
         string my_name;
         string my_gene;
 };
+
+#endif // __ALOBE__CHROMOSOME__

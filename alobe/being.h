@@ -1,3 +1,6 @@
+#ifndef __ALOBE__BEING__
+#define __ALOBE__BEING__
+
 #include <string>
 #include <map>
 #include <memory>
@@ -38,3 +41,5 @@ class Being : public Actor
 
 	//shared_ptr<Being> mate(Being &partner, string name);
 };
+
+#endif // __ALOBE__BEING__
