@@ -22,7 +22,7 @@ using namespace std;
 class Being : public Actor
 {
     public:
-        Being(string name, map< string, shared_ptr<Chromosome> > chromosomes);
+        Being(string name, map<string, shared_ptr<Chromosome> > chromosomes);
         string getName() const;                                                // Getter for the being name
         vector<Being *> getParents() const;                                    // Getter for the being parents
         vector<Being *> getChildren() const;                                   // Getter for the being children

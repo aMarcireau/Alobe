@@ -3,7 +3,7 @@
 /**
  * Constructor
  */
-Being::Being(string name, map< string, shared_ptr<Chromosome> > chromosomes) :
+Being::Being(string name, map<string, shared_ptr<Chromosome> > chromosomes):
     my_name(name),
     my_chromosomes(chromosomes)
 {
