@@ -4,8 +4,8 @@
  * Constructor
  */
 Stepper::Stepper():
-    _step(0),
-    _actors(vector<Actor *>())
+    my_step(0),
+    my_actors(vector<Actor *>())
 {
 }
 
@@ -14,14 +14,18 @@ Stepper::Stepper():
  */
 void Stepper::increment()
 {
-    _step += 1;
+    my_step += 1;
 
     for (
-        vector<Actor *>::iterator actorIterator = _actors.begin();
-        actorIterator != _actors.end();
-        ++actorIterator
+        vector<Actor *>::iterator actorIterator = my_actors.begin();
+        actorIterator != my_actors.end();
     ) {
-        (*actorIterator)->notify(_step);
+        if ((*actorIterator)->isDead()) {
+            this->detach((*(*actorIterator)));
+        } else {
+            (*actorIterator)->notify(my_step);
+            ++actorIterator;
+        }
     }
 }
 
@@ -30,7 +34,7 @@ void Stepper::increment()
  */
 void Stepper::reset()
 {
-    _step = 0;
+    my_step = 0;
 }
 
 /**
@@ -38,7 +42,7 @@ void Stepper::reset()
  */
 unsigned int Stepper::getStep()
 {
-    return _step;
+    return my_step;
 }
 
 /**
@@ -46,7 +50,7 @@ unsigned int Stepper::getStep()
  */
 void Stepper::attach(Actor & actor)
 {
-    _actors.push_back(&actor);
+    my_actors.push_back(&actor);
 }
 
 /**
@@ -54,5 +58,5 @@ void Stepper::attach(Actor & actor)
  */
 void Stepper::detach(Actor & actor)
 {
-    _actors.erase(std::remove(_actors.begin(), _actors.end(), &actor), _actors.end());
+    my_actors.erase(std::remove(my_actors.begin(), my_actors.end(), &actor), my_actors.end());
 }

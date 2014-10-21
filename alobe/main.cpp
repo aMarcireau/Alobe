@@ -5,6 +5,7 @@
 #include "simulation.h"
 #include "stepper.h"
 #include "land.h"
+#include "being.h"
 
 using namespace std;
 

@@ -15,7 +15,7 @@ using namespace std;
  *
  * Tile in the simulation
  */
-class Tile: Actor
+class Tile: public Actor
 {
     public:
         Tile(unsigned int x, unsigned int y);
@@ -24,7 +24,7 @@ class Tile: Actor
         string toString();                    // Get a string of data about the tile
 
     private:
-        unsigned int _x, _y;
+        unsigned int my_x, my_y;
 };
 
 #endif // __ALOBE__TILE__

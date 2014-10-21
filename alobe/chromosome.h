@@ -1,3 +1,6 @@
+#ifndef __ALOBE__CHROMOSOME__
+#define __ALOBE__CHROMOSOME__
+
 #include <string>
 
 using namespace std;
@@ -15,6 +18,8 @@ class Chromosome
         string getGene() const;               // Getter for the main gene
 
     private:
-        string _name;
-        string _gene;
+        string my_name;
+        string my_gene;
 };
+
+#endif // __ALOBE__CHROMOSOME__

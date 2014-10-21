@@ -20,9 +20,10 @@ class Actor
         void attach(shared_ptr<Event> event); // Attach an event
         void detach(Event & event);           // Detach an event
         void notify(unsigned int step);       // Notification called by a Stepper object
+        bool isDead();                        // Is the actor dead?
 
     private:
-        vector<shared_ptr<Event> > events;
+        vector<shared_ptr<Event> > my_events;
 };
 
 #endif // __ALOBE__ACTOR__

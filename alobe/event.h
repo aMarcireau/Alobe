@@ -21,7 +21,7 @@ class Event
                                                         // This method is protected so that it can be called
                                                         // from abstract inherited classes
     protected:
-        unsigned int triggerStep;                       // This property is protected so that it can be called
+        unsigned int my_triggerStep;                    // This property is protected so that it can be called
                                                         // from abstract inherited classes
 };
 

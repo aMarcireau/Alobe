@@ -5,8 +5,7 @@
 
 #include "stepper.h"
 #include "land.h"
-
-class Being; // Pre-declared Bing. TODO: replace with #include "being.h" when created
+#include "being.h"
 
 using namespace std;
 
@@ -29,9 +28,9 @@ class Simulation
         void nextStepCallback();                                        // Called at the end of the nextStep method
 
     private:
-        unique_ptr<Stepper> _stepper;
-        unique_ptr<Land> _land;
-        vector<shared_ptr<Being> > _beings;
+        unique_ptr<Stepper> my_stepper;
+        unique_ptr<Land> my_land;
+        vector<shared_ptr<Being> > my_beings;
 };
 
 #endif // __ALOBE__SIMULATION__

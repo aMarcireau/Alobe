@@ -5,9 +5,9 @@
  */
 Land::Land(unsigned int width, unsigned int height):
     Actor(),
-    _width(width),
-    _height(height),
-    _tiles(vector<vector<unique_ptr<Tile> > >())
+    my_width(width),
+    my_height(height),
+    my_tiles(vector<vector<unique_ptr<Tile> > >())
 {
 }
 
@@ -16,7 +16,7 @@ Land::Land(unsigned int width, unsigned int height):
  */
 unsigned int Land::getWidth() const
 {
-    return _width;
+    return my_width;
 }
 
 /**
@@ -24,7 +24,7 @@ unsigned int Land::getWidth() const
  */
 unsigned int Land::getHeight() const
 {
-    return _height;
+    return my_height;
 }
 
 /**
@@ -32,7 +32,7 @@ unsigned int Land::getHeight() const
  */
 Tile * Land::getTile(unsigned int x, unsigned int y) const
 {
-    return _tiles[x][y].get();
+    return my_tiles[x][y].get();
 }
 
 /**
@@ -40,21 +40,22 @@ Tile * Land::getTile(unsigned int x, unsigned int y) const
  */
 unsigned int Land::getTilesNumber() const
 {
-    return _width * _height;
+    return my_width * my_height;
 }
 
 /**
  * Generate the land tiles
  */
-void Land::generate()
+void Land::generate(Stepper & stepper)
 {
-    for (unsigned int y = 0; y < _height; ++y) {
+    for (unsigned int y = 0; y < my_height; ++y) {
         vector<unique_ptr<Tile> > column;
 
-        for (unsigned int x = 0; x < _width; ++x) {
+        for (unsigned int x = 0; x < my_width; ++x) {
             column.push_back(make_unique<Tile>(x, y));
+            stepper.attach(*(column.back().get()));
         }
 
-        _tiles.push_back(move(column));
+        my_tiles.push_back(move(column));
     }
 }
