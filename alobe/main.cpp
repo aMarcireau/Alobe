@@ -11,7 +11,7 @@ using namespace std;
 
 int main()
 {
-    unsigned int width, height;
+    unsigned long width, height;
 
     cout << "Enter a height for your land: " << endl;
 	cin >> height;
@@ -30,15 +30,8 @@ int main()
         << simulation->getLand()->getWidth()
         << " land. ("
         << simulation->getLand()->getTilesNumber()
-        << " tiles):"
+        << " tiles)"
     << endl;
-
-    for (unsigned int y = 0; y < simulation->getLand()->getHeight(); ++y) {
-        for (unsigned int x = 0; x < simulation->getLand()->getWidth(); ++x) {
-
-            cout << "    " << simulation->getLand()->getTile(x, y)->toString() << endl;
-        }
-    }
 
     simulation->randomBeing();
     simulation->randomBeing();

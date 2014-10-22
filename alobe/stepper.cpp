@@ -40,7 +40,7 @@ void Stepper::reset()
 /**
  * Get the current step
  */
-unsigned int Stepper::getStep()
+unsigned long Stepper::getStep()
 {
     return my_step;
 }

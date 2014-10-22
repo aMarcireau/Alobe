@@ -11,7 +11,7 @@ Actor::Actor():
 /**
  * Attach an event
  */
-void Actor::attach(shared_ptr<Event> event)
+void Actor::attachEvent(shared_ptr<Event> event)
 {
     my_events.push_back(event);
 }
@@ -19,7 +19,7 @@ void Actor::attach(shared_ptr<Event> event)
 /**
  * Detach an event
  */
-void Actor::detach(Event & event)
+void Actor::detachEvent(Event & event)
 {
     for (
         vector<shared_ptr<Event> >::iterator eventIterator = my_events.begin();
@@ -36,7 +36,7 @@ void Actor::detach(Event & event)
 /**
  * Notification called by a Stepper object
  */
-void Actor::notify(unsigned int step)
+void Actor::notify(unsigned long step)
 {
     for (
         vector<shared_ptr<Event> >::iterator eventIterator = my_events.begin();

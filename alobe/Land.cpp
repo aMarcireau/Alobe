@@ -3,7 +3,7 @@
 /**
  * Constructor
  */
-Land::Land(unsigned int width, unsigned int height):
+Land::Land(unsigned long width, unsigned long height):
     Actor(),
     my_width(width),
     my_height(height),
@@ -14,7 +14,7 @@ Land::Land(unsigned int width, unsigned int height):
 /**
  * Getter for the land width (number of tiles)
  */
-unsigned int Land::getWidth() const
+unsigned long Land::getWidth() const
 {
     return my_width;
 }
@@ -22,7 +22,7 @@ unsigned int Land::getWidth() const
 /**
  * Getter for the land height (number of tiles)
  */
-unsigned int Land::getHeight() const
+unsigned long Land::getHeight() const
 {
     return my_height;
 }
@@ -30,7 +30,7 @@ unsigned int Land::getHeight() const
 /**
  * Get tile by position
  */
-Tile * Land::getTile(unsigned int x, unsigned int y) const
+Tile * Land::getTile(unsigned long x, unsigned long y) const
 {
     return my_tiles[x][y].get();
 }
@@ -38,7 +38,7 @@ Tile * Land::getTile(unsigned int x, unsigned int y) const
 /**
  * Get the number of tiles
  */
-unsigned int Land::getTilesNumber() const
+unsigned long Land::getTilesNumber() const
 {
     return my_width * my_height;
 }
@@ -48,14 +48,57 @@ unsigned int Land::getTilesNumber() const
  */
 void Land::generate(Stepper & stepper)
 {
-    for (unsigned int y = 0; y < my_height; ++y) {
+    for (unsigned long y = 0; y < my_height; ++y) {
         vector<unique_ptr<Tile> > column;
 
-        for (unsigned int x = 0; x < my_width; ++x) {
-            column.push_back(make_unique<Tile>(x, y));
+        for (unsigned long x = 0; x < my_width; ++x) {
+            column.push_back(make_unique<Tile>());
             stepper.attach(*(column.back().get()));
         }
 
         my_tiles.push_back(move(column));
+    }
+}
+
+/**
+ * Generate the land beings migration
+ */
+void Land::migrate()
+{
+    for (unsigned long y = 0; y < my_height; ++y) {
+        for (unsigned long x = 0; x < my_width; ++x) {
+
+            this->getTile(x, y)->migrate(this->getTileNeighbors(x, y));
+        }
+    }
+}
+
+/**
+ * Retrieve a tile neighboring tiles
+ */
+map<string, Tile *> Land::getTileNeighbors(unsigned long x, unsigned long y) const
+{
+    map<string, Tile *> neighboringTiles;
+
+    unsigned long xEast  = ((x == my_width - 1)  ? 0         : x + 1);
+    unsigned long xWest  = ((x == 0)             ? my_width  : x - 1);
+    unsigned long yNorth = ((y == my_height - 1) ? 0         : y + 1);
+    unsigned long ySouth = ((y == 0)             ? my_height : y + 1);
+
+    neighboringTiles.insert(pair<string, Tile *>("East",  this->getTile(xEast, y)));
+    neighboringTiles.insert(pair<string, Tile *>("West",  this->getTile(xWest, y)));
+    neighboringTiles.insert(pair<string, Tile *>("North", this->getTile(x, yNorth)));
+    neighboringTiles.insert(pair<string, Tile *>("South", this->getTile(x, ySouth)));
+
+    return neighboringTiles;
+}
+
+void Land::applyChanges()
+{
+    for (unsigned long y = 0; y < my_height; ++y) {
+        for (unsigned long x = 0; x < my_width; ++x) {
+
+            this->getTile(x, y)->applyChanges();
+        }
     }
 }

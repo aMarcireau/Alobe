@@ -6,6 +6,7 @@
 #include <string>
 
 #include "actor.h"
+#include "being.h"
 
 using namespace std;
 
@@ -18,13 +19,19 @@ using namespace std;
 class Tile: public Actor
 {
     public:
-        Tile(unsigned int x, unsigned int y);
-        unsigned int getX() const;            // X coordinate getter
-        unsigned int getY() const;            // Y coordinate getter
-        string toString();                    // Get a string of data about the tile
+        Tile();
+        vector<shared_ptr<Being> > getBeings() const;     // Getter for the beings
+        unsigned long getBeingsNumber() const;            // Retrieve the number of beings
+        void attachBeing(shared_ptr<Being> being);        // Attach a being
+        void detachBeing(Being & being);                  // Detach a being
+        void applyChanges();                              // Apply changes after a step
+        void migrate(map<string, Tile *> neighborsTiles); // Generate the tile beings migration
+                                                          // 4 neighboring tiles are expected,
+                                                          // with keys 'north', 'south', 'east' and 'west'
 
     private:
-        unsigned int my_x, my_y;
+        vector<shared_ptr<Being> > my_beings;
+        vector<shared_ptr<Being> > mod_beings;
 };
 
 #endif // __ALOBE__TILE__

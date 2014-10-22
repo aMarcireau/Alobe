@@ -17,10 +17,11 @@ class Actor
 {
     public:
         Actor();
-        void attach(shared_ptr<Event> event); // Attach an event
-        void detach(Event & event);           // Detach an event
-        void notify(unsigned int step);       // Notification called by a Stepper object
-        bool isDead();                        // Is the actor dead?
+        void attachEvent(shared_ptr<Event> event); // Attach an event
+        void detachEvent(Event & event);           // Detach an event
+        void notify(unsigned long step);           // Notification called by a Stepper object
+        bool isDead();                             // Is the actor dead?
+        virtual void applyChanges() = 0;           // Apply changes after a step
 
     private:
         vector<shared_ptr<Event> > my_events;
