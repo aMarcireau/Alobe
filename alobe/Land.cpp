@@ -48,10 +48,10 @@ unsigned long Land::getTilesNumber() const
  */
 void Land::generate(Stepper & stepper)
 {
-    for (unsigned long y = 0; y < my_height; ++y) {
+    for (unsigned long x = 0; x < my_width; ++x) {
         vector<unique_ptr<Tile> > column;
 
-        for (unsigned long x = 0; x < my_width; ++x) {
+        for (unsigned long y = 0; y < my_height; ++y) {
             column.push_back(make_unique<Tile>());
             stepper.attach(*(column.back().get()));
         }

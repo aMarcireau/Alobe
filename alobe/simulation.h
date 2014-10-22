@@ -7,6 +7,7 @@
 #include "land.h"
 #include "being.h"
 #include "state.h"
+#include <time.h>
 
 using namespace std;
 
