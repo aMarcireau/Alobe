@@ -27,7 +27,7 @@ int main()
         << "Created a "
         << simulation->getLand()->getWidth()
         << " by "
-        << simulation->getLand()->getWidth()
+        << simulation->getLand()->getHeight()
         << " land. ("
         << simulation->getLand()->getTilesNumber()
         << " tiles)"
@@ -38,13 +38,13 @@ int main()
     simulation->randomBeing("Joe");
 
     cout << "Created beings:" << endl;
-
+	vector<shared_ptr<Being> > beings = simulation->getBeings();
     for (
-        vector<shared_ptr<Being> >::iterator beingIterator = simulation->getBeings().begin();
-        beingIterator != simulation->getBeings().end();
-        ++ beingIterator
+        vector<shared_ptr<Being> >::iterator beingIterator = beings.begin();
+        beingIterator != beings.end();
+        ++beingIterator
     ) {
-        cout << "    " << (*beingIterator)->getName() << endl;
+       cout << "    " << (*beingIterator)->getName() << endl;
     }
 
 	simulation->toStep(10);
