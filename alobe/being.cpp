@@ -50,22 +50,6 @@ void Being::addChromosome(shared_ptr<Chromosome> chromosome)
 }
 
 /**
- * Remove a chromosome by reference
- */
-void Being::removeChromosome(Chromosome & chromsome)
-{
-	my_chromosomes.erase(chromsome.getId());
-}
-
-/**
- * Remove a chromosome by id
- */
-void Being::removeChromosome(string chromsomeId)
-{
-	my_chromosomes.erase(chromsomeId);
-}
-
-/**
  * Add a state
  */
 void Being::addState(unique_ptr<State> state)
@@ -90,16 +74,24 @@ void Being::removeState(string stateId)
 }
 
 /**
- * Generate the being migration
- */
-void Being::migrate()
-{
-}
-
-/**
  * Is the being dead?
  */
 bool Being::isDead()
 {
     return false;
+}
+
+/**
+ * Apply changes after a step
+ */
+void Being::applyChanges()
+{
+}
+
+/**
+ * Generate the being migration
+ */
+string Being::migrate(map<string, unsigned long> neighborsBeingNumbers)
+{
+    return "east";
 }

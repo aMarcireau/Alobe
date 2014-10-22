@@ -3,33 +3,94 @@
 /**
  * Constructor
  */
-Tile::Tile(unsigned int x, unsigned int y):
-    Actor(),
-    my_x(x),
-    my_y(y)
+Tile::Tile():
+    Actor()
 {
 }
 
 /**
- * X coordinate getter
+ * Getter for the beings
  */
-unsigned int Tile::getX() const
+vector<shared_ptr<Being> > Tile::getBeings() const
 {
-	return my_x;
+    return my_beings;
 }
 
 /**
- * Y coordinate getter
+ * Retrieve the number of beings
  */
-unsigned int Tile::getY() const
+unsigned long Tile::getBeingsNumber() const
 {
-	return my_y;
+    return my_beings.size();
 }
 
 /**
- * Get a string of data about the tile
+ * Attach a being
  */
-string Tile::toString()
+void Tile::attachBeing(shared_ptr<Being> being)
 {
-	return  "Tile coordinates: " + to_string(my_x) + ", " + to_string(my_y);
-};
+    mod_beings.push_back(being);
+}
+
+/**
+ * Detach a being
+ */
+void Tile::detachBeing(Being & being)
+{
+    for (
+        vector<shared_ptr<Being> >::iterator beingIterator = mod_beings.begin();
+        beingIterator != mod_beings.end();
+    ) {
+        if ((*beingIterator).get() == &being) {
+            mod_beings.erase(beingIterator);
+        } else {
+            ++beingIterator;
+        }
+    }
+}
+
+/**
+ * Apply changes after a step
+ */
+void Tile::applyChanges()
+{
+    my_beings = mod_beings;
+}
+
+/**
+ * Generate the tile beings migration
+ * 4 neighboring tiles are expected,
+ * with keys 'N', 'S', 'E' and 'W'
+ */
+void Tile::migrate(map<string, Tile *> neighborsTiles)
+{
+    map<string, unsigned long> neighborsBeingNumbers;
+    neighborsBeingNumbers.insert(pair<string, unsigned long>("here", this->getBeingsNumber()));
+    for (
+        map<string, Tile *>::iterator neighborsTilesIterator = neighborsTiles.begin();
+        neighborsTilesIterator != neighborsTiles.end();
+        ++neighborsTilesIterator
+    ) {
+        neighborsBeingNumbers.insert(pair<string, unsigned long>(
+            neighborsTilesIterator->first,
+            neighborsTilesIterator->second->getBeingsNumber()
+        ));
+    }
+
+    for (
+        vector<shared_ptr<Being> >::iterator beingIterator = mod_beings.begin();
+        beingIterator != mod_beings.end();
+    ) {
+        if ((*beingIterator).get()->isDead()) {
+            mod_beings.erase(beingIterator);
+        } else {
+            string direction = (*beingIterator)->migrate(neighborsBeingNumbers);
+            if (direction != "Here") {
+                neighborsTiles[direction]->attachBeing((*beingIterator));
+                this->detachBeing(*(*beingIterator));
+            }
+
+            ++beingIterator;
+        }
+    }
+}
