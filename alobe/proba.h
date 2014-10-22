@@ -10,7 +10,7 @@
 /* proba
  * uses normal_distribution
  * 
- * defines the probability for an event to occur
+ * manages the proba. Not very clean !
  */
 
 
