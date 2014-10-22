@@ -19,12 +19,12 @@ class Stepper
         Stepper();
         void increment();           // Increment the stepper value and notify the attached actors
         void reset();               // Reset the stepper value
-        unsigned int getStep();     // Get the current step
+        unsigned long getStep();    // Get the current step
         void attach(Actor & actor); // Attach an actor
         void detach(Actor & actor); // Detach an actor
 
     private:
-        unsigned int my_step;
+        unsigned long my_step;
         vector<Actor *> my_actors;
 };
 

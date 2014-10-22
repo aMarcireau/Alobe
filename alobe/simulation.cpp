@@ -17,7 +17,7 @@ Simulation::Simulation(unique_ptr<Stepper> stepper, unique_ptr<Land> land):
 /**
  * Add a being
  */
-void Simulation::addBeing(shared_ptr<Being> being, unsigned int x, unsigned int y)
+void Simulation::addBeing(shared_ptr<Being> being, unsigned long x, unsigned long y)
 {
     my_beings.push_back(being);
     this->my_stepper->attach(*being);
@@ -32,7 +32,7 @@ void Simulation::randomBeing(string name)
         name = to_string(rand());
     }
     shared_ptr<Being> being(make_shared<Being>(name, map<string, shared_ptr<Chromosome> >()));
-    being->addState(make_unique<State>("life"));
+    being->addState(make_unique<State>("life", 100));
 
     this->addBeing(being, rand() % this->my_land->getWidth(), rand() % this->my_land->getHeight());
 }
@@ -40,7 +40,7 @@ void Simulation::randomBeing(string name)
 /**
  * Calculate simulation steps until reaching 'step'
  */
-void Simulation::toStep(unsigned int step)
+void Simulation::toStep(unsigned long step)
 {
     while (my_stepper->getStep() < step) {
         nextStep();
