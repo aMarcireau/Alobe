@@ -82,5 +82,15 @@ vector<shared_ptr<Being> > Simulation::getBeings() const
  */
 void Simulation::nextStepCallback()
 {
+    my_land->applyChanges();
+
+    for (
+        vector<shared_ptr<Being> >::iterator beingIterator = my_beings.begin();
+        beingIterator != my_beings.end();
+        ++beingIterator
+    ) {
+        (*beingIterator)->applyChanges();
+    }
+
     std::cout << "Step: "<< my_stepper->getStep() << std::endl;
 }
