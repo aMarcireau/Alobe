@@ -1,6 +1,8 @@
 #include "proba.h"
+#include "iostream"
 #include "normal_law.h"
 #include <map>
+#include <string>
 
 using namespace std;
 
@@ -9,7 +11,7 @@ using namespace std;
  */
 Proba::Proba()
 {
-    
+    map<int, unsigned long> distrib;
 }
 
 // function that calculates the surface beneath the distribution
@@ -25,18 +27,28 @@ unsigned long Proba::rectangle_area()
 
 float Proba::generate_rdm_value()
 {
+    cout << "Warning ! Use of a virtual method";
     return 0;
 };
 
 
 map<int, unsigned long> Proba::sample(unsigned long sampling)
 {
-    map<int, unsigned long> distrib;
+    
     for(int iterator=0; iterator < sampling; ++iterator)
     {
-        ++distrib[round(generate_rdm_value())];
+        ++distrib[round(this->generate_rdm_value())];
     }
     return distrib;
+};
+
+string Proba::map_to_string()
+{
+    string str;
+    for(auto p : distrib) {
+        str +=  to_string(p.first)+ " " + to_string(p.second) + '\n';
+    };
+    return str;
 };
 
 

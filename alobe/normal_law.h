@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <random>
 #include "proba.h"
+#include <iostream>
 
 using namespace std;
 
@@ -19,6 +20,7 @@ class Normal_law : public Proba
 public:
     Normal_law(float mean, float std_deviation);
     float generate_rdm_value();
+
 private:
     normal_distribution<> normal_law_distribution;
 };
