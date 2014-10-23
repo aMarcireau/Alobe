@@ -28,6 +28,7 @@ float Proba::generate_rdm_value()
     return 0;
 };
 
+
 map<int, unsigned long> Proba::sample(unsigned long sampling)
 {
     map<int, unsigned long> distrib;
