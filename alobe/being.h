@@ -10,6 +10,8 @@
 #include "chromosome.h"
 #include "state.h"
 
+class Tile;
+
 using namespace std;
 
 /**
@@ -32,8 +34,8 @@ class Being : public Actor
         void removeState(string stateId);                                      // Remove a state by id
         bool isDead();                                                         // Is the being dead?
         void applyChanges();                                                   // Apply changes after a step
-        string migrate(map<string, unsigned long> neighborsBeingNumbers);      // Generate the being migration
-                                                                               // 5 neighboring being numbers are expected,
+        string migrate(map<string, Tile *> neighboringTiles);                  // Generate the being migration
+                                                                               // 5 neighboring tiles are expected,
                                                                                // with keys "north", "south", "east", "west" and "here"
     private:
         string my_name;

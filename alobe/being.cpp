@@ -62,7 +62,7 @@ void Being::addState(unique_ptr<State> state)
  */
 void Being::removeState(State & state)
 {
-	my_chromosomes.erase(state.getId());
+	my_states.erase(state.getId());
 }
 
 /**
@@ -70,7 +70,7 @@ void Being::removeState(State & state)
  */
 void Being::removeState(string stateId)
 {
-	my_chromosomes.erase(stateId);
+	my_states.erase(stateId);
 }
 
 /**
@@ -91,7 +91,7 @@ void Being::applyChanges()
 /**
  * Generate the being migration
  */
-string Being::migrate(map<string, unsigned long> neighborsBeingNumbers)
+string Being::migrate(map<string, Tile *> neighboringTiles)
 {
     return "east";
 }

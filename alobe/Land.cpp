@@ -60,23 +60,11 @@ void Land::generate(Stepper & stepper)
     }
 }
 
-/**
- * Generate the land beings migration
- */
-void Land::migrate()
-{
-    for (unsigned long y = 0; y < my_height; ++y) {
-        for (unsigned long x = 0; x < my_width; ++x) {
-
-            this->getTile(x, y)->migrate(this->getTileNeighbors(x, y));
-        }
-    }
-}
 
 /**
  * Retrieve a tile neighboring tiles
  */
-map<string, Tile *> Land::getTileNeighbors(unsigned long x, unsigned long y) const
+map<string, Tile *> Land::getNeighboringTiles(unsigned long x, unsigned long y) const
 {
     map<string, Tile *> neighboringTiles;
 
@@ -85,10 +73,11 @@ map<string, Tile *> Land::getTileNeighbors(unsigned long x, unsigned long y) con
     unsigned long yNorth = ((y == my_height - 1) ? 0         : y + 1);
     unsigned long ySouth = ((y == 0)             ? my_height : y + 1);
 
-    neighboringTiles.insert(pair<string, Tile *>("East",  this->getTile(xEast, y)));
-    neighboringTiles.insert(pair<string, Tile *>("West",  this->getTile(xWest, y)));
-    neighboringTiles.insert(pair<string, Tile *>("North", this->getTile(x, yNorth)));
-    neighboringTiles.insert(pair<string, Tile *>("South", this->getTile(x, ySouth)));
+    neighboringTiles.insert(pair<string, Tile *>("here",  this->getTile(x, y)));
+    neighboringTiles.insert(pair<string, Tile *>("east",  this->getTile(xEast, y)));
+    neighboringTiles.insert(pair<string, Tile *>("west",  this->getTile(xWest, y)));
+    neighboringTiles.insert(pair<string, Tile *>("north", this->getTile(x, yNorth)));
+    neighboringTiles.insert(pair<string, Tile *>("south", this->getTile(x, ySouth)));
 
     return neighboringTiles;
 }

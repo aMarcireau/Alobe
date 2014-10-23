@@ -10,7 +10,9 @@ Simulation::Simulation(unique_ptr<Stepper> stepper, unique_ptr<Land> land):
 {
     srand(static_cast<unsigned int>(time(NULL)));
 
-    my_land->generate(*this->my_stepper.get());
+    my_land->generate(*(this->my_stepper.get()));
+    my_land->attachEvent(make_shared<MigrationEvent>());
+
     this->my_stepper->attach(*my_land.get());
 }
 

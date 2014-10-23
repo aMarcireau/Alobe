@@ -20,14 +20,11 @@ class Tile: public Actor
 {
     public:
         Tile();
-        vector<shared_ptr<Being> > getBeings() const;     // Getter for the beings
-        unsigned long getBeingsNumber() const;            // Retrieve the number of beings
-        void attachBeing(shared_ptr<Being> being);        // Attach a being
-        void detachBeing(Being & being);                  // Detach a being
-        void applyChanges();                              // Apply changes after a step
-        void migrate(map<string, Tile *> neighborsTiles); // Generate the tile beings migration
-                                                          // 4 neighboring tiles are expected,
-                                                          // with keys 'north', 'south', 'east' and 'west'
+        vector<shared_ptr<Being> > getBeings() const;       // Getter for the beings
+        unsigned long getBeingsNumber() const;              // Retrieve the number of beings
+        void attachBeing(shared_ptr<Being> being);          // Attach a being
+        void detachBeing(Being & being);                    // Detach a being
+        void applyChanges();                                // Apply changes after a step
 
     private:
         vector<shared_ptr<Being> > my_beings;
