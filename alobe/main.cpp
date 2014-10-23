@@ -6,11 +6,18 @@
 #include "stepper.h"
 #include "land.h"
 #include "being.h"
+#include "normal_law.h"
 
 using namespace std;
 
 int main()
 {
+    
+    // normal law test
+    Normal_law norm(5.0, 2.0);
+    norm.sample(1000);
+    cout << norm.map_to_string();
+    
     unsigned long width, height;
 
     cout << "Enter a height for your land: " << endl;

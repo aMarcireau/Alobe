@@ -24,13 +24,15 @@ class Proba
 {
 public:
     Proba();
-    float generate_rdm_value();
+    virtual float generate_rdm_value();
     unsigned long get_proba(unsigned long variable);
+    string map_to_string();
+    map<int, unsigned long> sample(unsigned long sampling); // sample the distribution
     
 private:
+    map<int, unsigned long> distrib;
     unsigned long integrate(unsigned long variable); // integrate the sampled distribution
     unsigned long rectangle_area(); // calculate the rectangle area
-    map<int, unsigned long> sample(unsigned long sampling); // sample the distribution
 };
 
 #endif /* defined(__alobe__proba__) */
