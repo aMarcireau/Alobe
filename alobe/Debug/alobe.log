@@ -1,2 +1,11 @@
-﻿  Chromosome.cpp
+﻿  state.cpp
+  proba.cpp
+c:\users\clement\desktop\projet\alobe\alobe\proba.cpp(38): warning C4018: '<' : incompatibilité signed/unsigned
+c:\users\clement\desktop\projet\alobe\alobe\proba.cpp(40): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
+  normal_law.cpp
+c:\users\clement\desktop\projet\alobe\alobe\normal_law.cpp(18): warning C4244: 'return' : conversion de 'double' en 'float', perte possible de données
+  chromosome.cpp
+  being.cpp
+  Génération de code en cours...
+  LINK : C:\Users\Clement\Desktop\Projet\Alobe\Debug\alobe.exe introuvable ou non généré par la dernière édition de liens incrémentielle ; édition de liens complète en cours
   alobe.vcxproj -> C:\Users\Clement\Desktop\Projet\Alobe\Debug\alobe.exe
