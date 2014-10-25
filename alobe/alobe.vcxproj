@@ -79,23 +79,30 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="actor.cpp" />
-    <ClCompile Include="Chromosome.cpp" />
+    <ClCompile Include="being.cpp" />
+    <ClCompile Include="chromosome.cpp" />
     <ClCompile Include="event.cpp" />
     <ClCompile Include="Land.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="normal_law.cpp" />
     <ClCompile Include="periodicEvent.cpp" />
+    <ClCompile Include="proba.cpp" />
     <ClCompile Include="simulation.cpp" />
+    <ClCompile Include="state.cpp" />
     <ClCompile Include="stepper.cpp" />
     <ClCompile Include="Tile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="actor.h" />
-    <ClInclude Include="Being.h" />
-    <ClInclude Include="Chromosome.h" />
+    <ClInclude Include="being.h" />
+    <ClInclude Include="chromosome.h" />
     <ClInclude Include="event.h" />
     <ClInclude Include="Land.h" />
+    <ClInclude Include="normal_law.h" />
     <ClInclude Include="periodicEvent.h" />
+    <ClInclude Include="proba.h" />
     <ClInclude Include="simulation.h" />
+    <ClInclude Include="state.h" />
     <ClInclude Include="stepper.h" />
     <ClInclude Include="Tile.h" />
   </ItemGroup>
