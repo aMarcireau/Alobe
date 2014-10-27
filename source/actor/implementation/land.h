@@ -7,8 +7,8 @@
 #include <map>
 
 #include "actor.h"
-#include "tile.h"
 #include "stepper.h"
+#include "tile.h"
 
 using namespace std;
 

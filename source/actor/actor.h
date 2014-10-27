@@ -6,6 +6,8 @@
 
 #include "event.h"
 
+class Stepper;
+
 using namespace std;
 
 /**
