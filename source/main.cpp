@@ -7,6 +7,7 @@
 #include "land.h"
 #include "being.h"
 #include "normal_law.h"
+#include "migrationEvent.h"
 
 using namespace std;
 
@@ -35,7 +36,69 @@ int main()
     simulation->getPopulation()->randomBeing(*(simulation->getStepper()));
     simulation->getPopulation()->randomBeing(*(simulation->getStepper()));
 
+    // migrationEvent test
+    simulation->getLand()->attachEvent(make_shared<MigrationEvent>());
+
+    // apply changes before start (should be called in a larger "init simulation" method
+    // will be implemented with conf file reader
+    simulation->getLand()->applyChanges();
+    simulation->getPopulation()->applyChanges();
+
+    // Print beings positions before simulation
+    for (unsigned long x = 0; x < simulation->getLand()->getWidth(); ++x) {
+        for (unsigned long y = 0; y < simulation->getLand()->getHeight(); ++y) {
+
+            unsigned long beingsNumber = simulation->getLand()->getTile(x, y)->getBeingsNumber();
+
+            if (beingsNumber > 0) {
+
+                string designator = "being";
+                if (beingsNumber > 1) {
+                    designator = "beings";
+                }
+
+                cout
+                    << beingsNumber
+                    << " "
+                    << designator
+                    << " on tile ("
+                    << x
+                    << ", "
+                    << y
+                    << ")"
+                << endl;
+            }
+        }
+    }
+
 	simulation->toStep(10);
-    
+
+    // Print beings positions after simulation
+    for (unsigned long x = 0; x < simulation->getLand()->getWidth(); ++x) {
+        for (unsigned long y = 0; y < simulation->getLand()->getHeight(); ++y) {
+
+            unsigned long beingsNumber = simulation->getLand()->getTile(x, y)->getBeingsNumber();
+
+            if (beingsNumber > 0) {
+
+                string designator = "being";
+                if (beingsNumber > 1) {
+                    designator = "beings";
+                }
+
+                cout
+                    << beingsNumber
+                    << " "
+                    << designator
+                    << " on tile ("
+                    << x
+                    << ", "
+                    << y
+                    << ")"
+                << endl;
+            }
+        }
+    }
+
 	return 0;
 }
