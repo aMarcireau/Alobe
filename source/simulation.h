@@ -21,9 +21,9 @@ class Simulation
         Simulation();
         void toStep(unsigned long step);      // Calculate simulation steps until reaching 'step'
         void nextStep();                      // Calculate the simulation next step
-        Stepper * getStepper();               // Getter for the stepper
-        Land * getLand();                     // Getter for the land
-        Population * getPopulation();         // Getter for the population
+        Stepper * getStepper() const;         // Getter for the stepper
+        Land * getLand() const;               // Getter for the land
+        Population * getPopulation() const;   // Getter for the population
 
     private:
         void nextStepCallback();              // Called at the end of the nextStep method
