@@ -20,15 +20,15 @@ class Tile: public Actor
 {
     public:
         Tile();
-        vector<shared_ptr<Being> > getBeings() const;       // Getter for the beings
-        unsigned long getBeingsNumber() const;              // Retrieve the number of beings
-        void attachBeing(shared_ptr<Being> being);          // Attach a being
-        void detachBeing(Being & being);                    // Detach a being
-        void applyChanges();                                // Apply changes after a step
+        vector<Being *> getBeings() const;     // Getter for the beings
+        unsigned long getBeingsNumber() const; // Retrieve the number of beings
+        void attachBeing(Being & being);       // Attach a being
+        void detachBeing(Being & being);       // Detach a being
+        void applyChanges();                   // Apply changes after a step
 
     private:
-        vector<shared_ptr<Being> > my_beings;
-        vector<shared_ptr<Being> > mod_beings;
+        vector<Being *> my_beings;
+        vector<Being *> mod_beings;
 };
 
 #endif // __ALOBE__TILE__

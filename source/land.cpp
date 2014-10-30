@@ -82,6 +82,9 @@ map<string, Tile *> Land::getNeighboringTiles(unsigned long x, unsigned long y) 
     return neighboringTiles;
 }
 
+/**
+ * Apply changes after a step
+ */
 void Land::applyChanges()
 {
     for (unsigned long y = 0; y < my_height; ++y) {

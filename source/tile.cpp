@@ -11,7 +11,7 @@ Tile::Tile():
 /**
  * Getter for the beings
  */
-vector<shared_ptr<Being> > Tile::getBeings() const
+vector<Being *> Tile::getBeings() const
 {
     return my_beings;
 }
@@ -27,9 +27,9 @@ unsigned long Tile::getBeingsNumber() const
 /**
  * Attach a being
  */
-void Tile::attachBeing(shared_ptr<Being> being)
+void Tile::attachBeing(Being & being)
 {
-    mod_beings.push_back(being);
+    mod_beings.push_back(&being);
 }
 
 /**
@@ -38,10 +38,10 @@ void Tile::attachBeing(shared_ptr<Being> being)
 void Tile::detachBeing(Being & being)
 {
     for (
-        vector<shared_ptr<Being> >::iterator beingIterator = mod_beings.begin();
+        vector<Being *>::iterator beingIterator = mod_beings.begin();
         beingIterator != mod_beings.end();
     ) {
-        if ((*beingIterator).get() == &being) {
+        if (*beingIterator == &being) {
             mod_beings.erase(beingIterator);
         } else {
             ++beingIterator;

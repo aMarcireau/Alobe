@@ -41,6 +41,7 @@ void Actor::notify(unsigned long step)
     for (
         vector<shared_ptr<Event> >::iterator eventIterator = my_events.begin();
         eventIterator != my_events.end();
+        ++eventIterator
     ) {
         (*eventIterator)->action(*this, step);
     }

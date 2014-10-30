@@ -3,40 +3,15 @@
 /**
  * Constructor
  */
-Simulation::Simulation(unique_ptr<Stepper> stepper, unique_ptr<Land> land):
-    my_stepper(move(stepper)),
-    my_land(move(land)),
-    my_beings(vector<shared_ptr<Being> >())
+Simulation::Simulation():
+    my_stepper(make_unique<Stepper>()),
+    my_land(make_unique<Land>(20, 20))
 {
-    srand(static_cast<unsigned int>(time(NULL)));
-
+    my_stepper->attach(*(my_land.get()));
     my_land->generate(*(this->my_stepper.get()));
-    my_land->attachEvent(make_shared<MigrationEvent>());
 
-    this->my_stepper->attach(*my_land.get());
-}
-
-/**
- * Add a being
- */
-void Simulation::addBeing(shared_ptr<Being> being, unsigned long x, unsigned long y)
-{
-    my_beings.push_back(being);
-    this->my_stepper->attach(*being);
-}
-
-/**
- * Generate a random being
- */
-void Simulation::randomBeing(string name)
-{
-    if (name == "") {
-        name = to_string(rand());
-    }
-    shared_ptr<Being> being(make_shared<Being>(name, map<string, shared_ptr<Chromosome> >()));
-    being->addState(make_unique<State>("life", 100));
-
-    this->addBeing(being, rand() % this->my_land->getWidth(), rand() % this->my_land->getHeight());
+    my_population = make_unique<Population>(*(my_land.get()));
+    my_stepper->attach(*(my_population.get()));
 }
 
 /**
@@ -61,7 +36,7 @@ void Simulation::nextStep()
 /**
  * Getter for the stepper
  */
-Stepper * Simulation::getStepper() const
+Stepper * Simulation::getStepper()
 {
     return my_stepper.get();
 }
@@ -69,14 +44,16 @@ Stepper * Simulation::getStepper() const
 /**
  * Getter for the land
  */
-Land * Simulation::getLand() const
+Land * Simulation::getLand()
 {
     return my_land.get();
 }
-
-vector<shared_ptr<Being> > Simulation::getBeings() const
+/**
+ * Getter for the population
+ */
+Population * Simulation::getPopulation()
 {
-    return my_beings;
+    return my_population.get();
 }
 
 /**
@@ -85,14 +62,7 @@ vector<shared_ptr<Being> > Simulation::getBeings() const
 void Simulation::nextStepCallback()
 {
     my_land->applyChanges();
-
-    for (
-        vector<shared_ptr<Being> >::iterator beingIterator = my_beings.begin();
-        beingIterator != my_beings.end();
-        ++beingIterator
-    ) {
-        (*beingIterator)->applyChanges();
-    }
+    my_population->applyChanges();
 
     std::cout << "Step: "<< my_stepper->getStep() << std::endl;
 }

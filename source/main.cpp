@@ -17,19 +17,9 @@ int main()
     Normal_law norm(5.0, 2.0);
     norm.sample(1000);
     cout << norm.map_to_string();
-    
-    unsigned long width, height;
 
-    cout << "Enter a height for your land: " << endl;
-	cin >> height;
-	cout << "Enter a width for your land: " << endl;
-	cin >> width;
-
-    unique_ptr<Simulation> simulation = make_unique<Simulation>(
-        make_unique<Stepper>(),
-        make_unique<Land>(width, height)
-    );
-
+    // Test simulation, stepper, actors
+    unique_ptr<Simulation> simulation = make_unique<Simulation>();
     cout
         << "Created a "
         << simulation->getLand()->getWidth()
@@ -40,19 +30,10 @@ int main()
         << " tiles)"
     << endl;
 
-    simulation->randomBeing();
-    simulation->randomBeing();
-    simulation->randomBeing("Joe");
-
-    cout << "Created beings:" << endl;
-	vector<shared_ptr<Being> > beings = simulation->getBeings();
-    for (
-        vector<shared_ptr<Being> >::iterator beingIterator = beings.begin();
-        beingIterator != beings.end();
-        ++beingIterator
-    ) {
-       cout << "    " << (*beingIterator)->getName() << endl;
-    }
+    simulation->getPopulation()->randomBeing(*(simulation->getStepper()));
+    simulation->getPopulation()->randomBeing(*(simulation->getStepper()));
+    simulation->getPopulation()->randomBeing(*(simulation->getStepper()));
+    simulation->getPopulation()->randomBeing(*(simulation->getStepper()));
 
 	simulation->toStep(10);
     

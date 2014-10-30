@@ -6,9 +6,7 @@
 
 #include "stepper.h"
 #include "land.h"
-#include "being.h"
-#include "state.h"
-#include "migrationEvent.h"
+#include "population.h"
 
 using namespace std;
 
@@ -20,22 +18,20 @@ using namespace std;
 class Simulation
 {
     public:
-        Simulation(unique_ptr<Stepper> stepper, unique_ptr<Land> land);
-        void addBeing(shared_ptr<Being> being, unsigned long x, unsigned long y); // Add a being
-        void randomBeing(string name = "");                                       // Generate a random being
-        void toStep(unsigned long step);                                          // Calculate simulation steps until reaching 'step'
-        void nextStep();                                                          // Calculate the simulation next step
-        Stepper * getStepper() const;                                             // Getter for the stepper
-        Land * getLand() const;                                                   // Getter for the land
-        vector<shared_ptr<Being> > getBeings() const;                             // Getter for the beings
+        Simulation();
+        void toStep(unsigned long step);      // Calculate simulation steps until reaching 'step'
+        void nextStep();                      // Calculate the simulation next step
+        Stepper * getStepper();               // Getter for the stepper
+        Land * getLand();                     // Getter for the land
+        Population * getPopulation();         // Getter for the population
 
     private:
-        void nextStepCallback();                                                  // Called at the end of the nextStep method
+        void nextStepCallback();              // Called at the end of the nextStep method
 
     private:
         unique_ptr<Stepper> my_stepper;
         unique_ptr<Land> my_land;
-        vector<shared_ptr<Being> > my_beings;
+        unique_ptr<Population> my_population;
 };
 
 #endif // __ALOBE__SIMULATION__
