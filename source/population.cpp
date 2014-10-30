@@ -16,6 +16,7 @@ Population::Population(Land & land):
 void Population::addBeing(unique_ptr<Being> being, unsigned long x, unsigned long y, Stepper & stepper)
 {
     my_beings.push_back(move(being));
+    my_land->getTile(x, y)->attachBeing(*(my_beings.back().get()));
     stepper.attach(*(my_beings.back().get()));
 }
 
