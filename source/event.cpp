@@ -3,7 +3,8 @@
 /**
  * Constructor
  */
-Event::Event(unsigned long step)
+Event::Event(unsigned long step):
+    my_step(step)
 {
 }
 
@@ -12,7 +13,7 @@ Event::Event(unsigned long step)
  */
 void Event::action(Actor & actor, unsigned long step)
 {
-    if (step == my_triggerStep) {
+    if (step == my_step) {
         this->filteredAction(actor);
     }
 }
