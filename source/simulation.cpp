@@ -6,8 +6,7 @@
 Simulation::Simulation(string jsonPath):
     my_stepper(make_unique<Stepper>())
 {
-    json11::Json jsonData = parseJson(jsonPath);
-    initialize(jsonData);
+    initialize();
 }
 
 /**
@@ -66,19 +65,16 @@ void Simulation::nextStepCallback()
 /**
  * Initialize the simulation from json data
  */
-void Simulation::initialize(json11::Json & jsonData)
+void Simulation::initialize()
 {
-    my_land = make_unique<Land>(
-        static_cast<unsigned int>(jsonData["land"]["width"].number_value()),
-        static_cast<unsigned int>(jsonData["land"]["height"].number_value())
-    );
+    my_land = make_unique<Land>(6, 6);
     my_land->applyChanges(*getStepper()); // Apply changes in order to generate the tiles
     my_land->attachEvent(make_shared<MigrationEvent>());
 
     my_population = make_unique<Population>(*getLand());
     for (
         unsigned long beingsIndex = 0;
-        beingsIndex < jsonData["beings"]["number"].number_value();
+        beingsIndex < 20;
         ++beingsIndex
     ) {
         my_population->randomBeing();
@@ -88,27 +84,4 @@ void Simulation::initialize(json11::Json & jsonData)
 
     my_stepper->attach(*getLand());
     my_stepper->attach(*getPopulation());
-}
-
-/**
- * Parse a json file
- */
-json11::Json Simulation::parseJson(string jsonPath)
-{
-    json11::Json jsonData;
-    string parseError = "";
-
-    ifstream ifs(jsonPath);
-    string jsonContent(
-        (istreambuf_iterator<char>(ifs)),
-        (istreambuf_iterator<char>())
-    );
-
-    jsonData = jsonData.parse(jsonContent, parseError);
-
-    if (parseError != "") {
-        throw runtime_error("Error occurred while parsing json: " + parseError);
-    }
-
-    return jsonData;
 }

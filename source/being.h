@@ -24,21 +24,21 @@ class Being : public Actor
 {
     public:
         Being(string name, map<string, shared_ptr<Chromosome> > chromosomes);
-        string getName() const;                                                // Getter for the being name
-        vector<Being *> getParents() const;                                    // Getter for the being parents
-        vector<Being *> getChildren() const;                                   // Getter for the being children
-        map<string, shared_ptr<Chromosome> > getChromosomes() const;           // Getter for the being chromosomes
-        void addChromosome(shared_ptr<Chromosome> chromsome);                  // Add a chromosome
-        void addState(unique_ptr<State> state);                                // Add a state
-        void removeState(State & state);                                       // Remove a state by reference
-        void removeState(string stateId);                                      // Remove a state by id
-        bool isDead();                                                         // Is the being dead?
-        void applyChanges(Stepper & stepper);                                  // Apply changes after a step
-        string migrate(map<string, Tile *> neighboringTiles);                  // Generate the being migration
-                                                                               // 5 neighboring tiles are expected,
-                                                                               // with keys "north", "south", "east", "west" and "here"
-		map< string, shared_ptr<Chromosome> > Being::setChildChromosome(Being & mate); // Create a genome for a potential child
-		bool isReadyToMate(Being & mate);	// Test if being will mate with an other being
+        string getName() const;                                                 // Getter for the being name
+        vector<Being *> getParents() const;                                     // Getter for the being parents
+        vector<Being *> getChildren() const;                                    // Getter for the being children
+        map<string, shared_ptr<Chromosome> > getChromosomes() const;            // Getter for the being chromosomes
+        void addChromosome(shared_ptr<Chromosome> chromsome);                   // Add a chromosome
+        void addState(unique_ptr<State> state);                                 // Add a state
+        void removeState(State & state);                                        // Remove a state by reference
+        void removeState(string stateId);                                       // Remove a state by id
+        bool isDead();                                                          // Is the being dead?
+        void applyChanges(Stepper & stepper);                                   // Apply changes after a step
+        string migrate(map<string, Tile *> neighboringTiles);                   // Generate the being migration
+                                                                                // 5 neighboring tiles are expected,
+                                                                                // with keys "north", "south", "east", "west" and "here"
+		map< string, shared_ptr<Chromosome> > setChildChromosome(Being & mate); // Create a genome for a potential child
+		bool isReadyToMate(Being & mate);                                       // Test if being will mate with an other being
 
     private:
         string my_name;

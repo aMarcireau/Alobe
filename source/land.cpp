@@ -87,21 +87,25 @@ map<string, Tile *> Land::getNeighboringTiles(unsigned long x, unsigned long y) 
  */
 void Land::applyChanges(Stepper & stepper)
 {
-    for (
-        vector<vector<unique_ptr<Tile> > >::iterator columnIterator = mod_tiles.begin();
-        columnIterator != mod_tiles.end();
-    ) {
+    if (!mod_tiles.empty()) {
 
         for (
-            vector<unique_ptr<Tile> >::iterator tileIterator = columnIterator->begin();
-            tileIterator != columnIterator->end();
-            ++tileIterator
+            vector<vector<unique_ptr<Tile> > >::iterator columnIterator = mod_tiles.begin();
+            columnIterator != mod_tiles.end();
+            ++columnIterator
         ) {
-            stepper.attach(*((*tileIterator).get()));
+
+            for (
+                vector<unique_ptr<Tile> >::iterator tileIterator = columnIterator->begin();
+                tileIterator != columnIterator->end();
+                ++tileIterator
+            ) {
+                stepper.attach(*((*tileIterator).get()));
+            }
         }
 
-        my_tiles.push_back(move(*(columnIterator)));
-        mod_tiles.erase(columnIterator);
+        my_tiles = move(mod_tiles);
+        mod_tiles = vector<vector<unique_ptr<Tile> > >();
     }
 
     for (unsigned long x = 0; x < my_width; ++x) {

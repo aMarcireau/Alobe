@@ -45,15 +45,17 @@ void Population::randomBeing()
  */
 void Population::applyChanges(Stepper & stepper)
 {
+    unsigned int modBeingsLength = static_cast<unsigned int>(mod_beings.size());
     for (
-        vector<unique_ptr<Being> >::iterator beingIterator = mod_beings.begin();
-        beingIterator != mod_beings.end();
+        unsigned int index = 0;
+        index < modBeingsLength;
+        ++index
     ) {
-        stepper.attach(*((*beingIterator).get()));
-
-        my_beings.push_back(move(*beingIterator));
-        mod_beings.erase(beingIterator);
+        stepper.attach(*(mod_beings[index].get()));
+        my_beings.push_back(move(mod_beings[index]));
     }
+
+    mod_beings = vector<unique_ptr<Being> >();
 
     for (
         vector<unique_ptr<Being> >::iterator beingIterator = my_beings.begin();
