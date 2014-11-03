@@ -79,6 +79,9 @@ void Simulation::initialize()
     ) {
         my_population->randomBeing();
     }
+
+	my_population->attachEvent(make_shared<MatingEvent>());
+
     my_population->applyChanges(*getStepper());
     my_land->applyChanges(*getStepper()); // Apply changes in order to place the beings on the tiles
 

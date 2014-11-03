@@ -9,6 +9,7 @@
 #include "land.h"
 #include "population.h"
 #include "migrationEvent.h"
+#include "matingEvent.h"
 
 using namespace std;
 
