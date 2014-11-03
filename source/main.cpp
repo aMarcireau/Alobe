@@ -13,6 +13,9 @@ using namespace std;
 
 int main()
 {
+    // Set seed for random methods
+    // Should be added to proba somehow
+    srand(static_cast<unsigned int>(time(NULL)));
     
     // normal law test
     Normal_law norm(5.0, 2.0);
