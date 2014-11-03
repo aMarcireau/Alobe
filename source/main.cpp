@@ -7,7 +7,6 @@
 #include "land.h"
 #include "being.h"
 #include "normal_law.h"
-#include "migrationEvent.h"
 
 using namespace std;
 
@@ -23,7 +22,7 @@ int main()
     cout << norm.map_to_string();
 
     // Test simulation, stepper, actors
-    unique_ptr<Simulation> simulation = make_unique<Simulation>();
+    unique_ptr<Simulation> simulation = make_unique<Simulation>("configuration.json");
     cout
         << "Created a "
         << simulation->getLand()->getWidth()
@@ -33,19 +32,6 @@ int main()
         << simulation->getLand()->getTilesNumber()
         << " tiles)"
     << endl;
-
-    simulation->getPopulation()->randomBeing();
-    simulation->getPopulation()->randomBeing();
-    simulation->getPopulation()->randomBeing();
-    simulation->getPopulation()->randomBeing();
-
-    // migrationEvent test
-    simulation->getLand()->attachEvent(make_shared<MigrationEvent>());
-
-    // apply changes before start (should be called in a larger "init simulation" method
-    // will be implemented with conf file reader
-    simulation->getPopulation()->applyChanges(*(simulation->getStepper()));
-    simulation->getLand()->applyChanges(*(simulation->getStepper()));
 
     // Print beings positions before simulation
     for (unsigned long x = 0; x < simulation->getLand()->getWidth(); ++x) {

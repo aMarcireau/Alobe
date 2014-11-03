@@ -10,6 +10,15 @@ Land::Land(unsigned long width, unsigned long height):
     my_tiles(vector<vector<unique_ptr<Tile> > >()),
     mod_tiles(vector<vector<unique_ptr<Tile> > >())
 {
+    for (unsigned long x = 0; x < my_width; ++x) {
+        vector<unique_ptr<Tile> > column;
+
+        for (unsigned long y = 0; y < my_height; ++y) {
+            column.push_back(make_unique<Tile>());
+        }
+
+        mod_tiles.push_back(move(column));
+    }
 }
 
 /**
@@ -34,11 +43,11 @@ unsigned long Land::getHeight() const
 Tile * Land::getTile(unsigned long x, unsigned long y) const
 {
     if (x >= my_width) {
-        throw std::out_of_range("x");
+        throw out_of_range("x");
     }
 
     if (y >= my_height) {
-        throw std::out_of_range("y");
+        throw out_of_range("y");
     }
 
     return my_tiles[x][y].get();
@@ -51,23 +60,6 @@ unsigned long Land::getTilesNumber() const
 {
     return my_width * my_height;
 }
-
-/**
- * Generate the land tiles
- */
-void Land::generate()
-{
-    for (unsigned long x = 0; x < my_width; ++x) {
-        vector<unique_ptr<Tile> > column;
-
-        for (unsigned long y = 0; y < my_height; ++y) {
-            column.push_back(make_unique<Tile>());
-        }
-
-        mod_tiles.push_back(move(column));
-    }
-}
-
 
 /**
  * Retrieve a tile neighboring tiles

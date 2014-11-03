@@ -1,0 +1,9 @@
+{
+    "land": {
+        "width": 5,
+        "height": 5
+    },
+    "beings": {
+        "number": 30
+    }
+}
