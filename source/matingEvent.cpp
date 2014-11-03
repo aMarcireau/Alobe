@@ -4,7 +4,7 @@
 * Constructor
 */
 MatingEvent::MatingEvent() :
-PeriodicEvent()
+	PeriodicEvent()
 {
 }
 
