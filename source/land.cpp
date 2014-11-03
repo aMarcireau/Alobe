@@ -90,6 +90,7 @@ void Land::applyChanges(Stepper & stepper)
     for (
         vector<vector<unique_ptr<Tile> > >::iterator columnIterator = mod_tiles.begin();
         columnIterator != mod_tiles.end();
+        ++columnIterator
     ) {
 
         for (
@@ -101,8 +102,9 @@ void Land::applyChanges(Stepper & stepper)
         }
 
         my_tiles.push_back(move(*(columnIterator)));
-        mod_tiles.erase(columnIterator);
     }
+
+    mod_tiles = vector<vector<unique_ptr<Tile> > >();
 
     for (unsigned long x = 0; x < my_width; ++x) {
         for (unsigned long y = 0; y < my_height; ++y) {
