@@ -33,7 +33,7 @@ class Being : public Actor
         void removeState(State & state);                                       // Remove a state by reference
         void removeState(string stateId);                                      // Remove a state by id
         bool isDead();                                                         // Is the being dead?
-        void applyChanges();                                                   // Apply changes after a step
+        void applyChanges(Stepper & stepper);                                  // Apply changes after a step
         string migrate(map<string, Tile *> neighboringTiles);                  // Generate the being migration
                                                                                // 5 neighboring tiles are expected,
                                                                                // with keys "north", "south", "east", "west" and "here"

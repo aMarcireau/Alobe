@@ -7,7 +7,8 @@ Land::Land(unsigned long width, unsigned long height):
     Actor(),
     my_width(width),
     my_height(height),
-    my_tiles(vector<vector<unique_ptr<Tile> > >())
+    my_tiles(vector<vector<unique_ptr<Tile> > >()),
+    mod_tiles(vector<vector<unique_ptr<Tile> > >())
 {
 }
 
@@ -54,17 +55,16 @@ unsigned long Land::getTilesNumber() const
 /**
  * Generate the land tiles
  */
-void Land::generate(Stepper & stepper)
+void Land::generate()
 {
     for (unsigned long x = 0; x < my_width; ++x) {
         vector<unique_ptr<Tile> > column;
 
         for (unsigned long y = 0; y < my_height; ++y) {
             column.push_back(make_unique<Tile>());
-            stepper.attach(*(column.back().get()));
         }
 
-        my_tiles.push_back(move(column));
+        mod_tiles.push_back(move(column));
     }
 }
 
@@ -93,12 +93,29 @@ map<string, Tile *> Land::getNeighboringTiles(unsigned long x, unsigned long y) 
 /**
  * Apply changes after a step
  */
-void Land::applyChanges()
+void Land::applyChanges(Stepper & stepper)
 {
+    for (
+        vector<vector<unique_ptr<Tile> > >::iterator columnIterator = mod_tiles.begin();
+        columnIterator != mod_tiles.end();
+    ) {
+
+        for (
+            vector<unique_ptr<Tile> >::iterator tileIterator = columnIterator->begin();
+            tileIterator != columnIterator->end();
+            ++tileIterator
+        ) {
+            stepper.attach(*((*tileIterator).get()));
+        }
+
+        my_tiles.push_back(move(*(columnIterator)));
+        mod_tiles.erase(columnIterator);
+    }
+
     for (unsigned long x = 0; x < my_width; ++x) {
         for (unsigned long y = 0; y < my_height; ++y) {
 
-            this->getTile(x, y)->applyChanges();
+            this->getTile(x, y)->applyChanges(stepper);
         }
     }
 }

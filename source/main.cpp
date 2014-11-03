@@ -31,18 +31,18 @@ int main()
         << " tiles)"
     << endl;
 
-    simulation->getPopulation()->randomBeing(*(simulation->getStepper()));
-    simulation->getPopulation()->randomBeing(*(simulation->getStepper()));
-    simulation->getPopulation()->randomBeing(*(simulation->getStepper()));
-    simulation->getPopulation()->randomBeing(*(simulation->getStepper()));
+    simulation->getPopulation()->randomBeing();
+    simulation->getPopulation()->randomBeing();
+    simulation->getPopulation()->randomBeing();
+    simulation->getPopulation()->randomBeing();
 
     // migrationEvent test
     simulation->getLand()->attachEvent(make_shared<MigrationEvent>());
 
     // apply changes before start (should be called in a larger "init simulation" method
     // will be implemented with conf file reader
-    simulation->getLand()->applyChanges();
-    simulation->getPopulation()->applyChanges();
+    simulation->getPopulation()->applyChanges(*(simulation->getStepper()));
+    simulation->getLand()->applyChanges(*(simulation->getStepper()));
 
     // Print beings positions before simulation
     for (unsigned long x = 0; x < simulation->getLand()->getWidth(); ++x) {
