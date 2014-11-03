@@ -98,7 +98,7 @@ string Being::migrate(map<string, Tile *> neighboringTiles)
 }
 
 /**
-*Generate potential child chromosome
+* Generate potential child chromosome
 */
 map< string, shared_ptr<Chromosome> > Being::setChildChromosome(Being & mate)
 {
@@ -113,7 +113,9 @@ map< string, shared_ptr<Chromosome> > Being::setChildChromosome(Being & mate)
 }
 
 
-
+/**
+* Test if the current being will mate with an other specified being
+*/
 bool Being::isReadyToMate(Being & mate)
 {
 	//To be changed to use proba

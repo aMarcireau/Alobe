@@ -11,6 +11,9 @@ Population::Population(Land & land):
 {
 }
 
+/**
+* Getter for the land
+*/
 Land * Population::getLand()
 {
 	return my_land;
