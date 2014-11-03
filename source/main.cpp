@@ -34,6 +34,7 @@ int main()
     << endl;
 
     // Print beings positions before simulation
+	int beingTotalNumberIni = 0;
     for (unsigned long x = 0; x < simulation->getLand()->getWidth(); ++x) {
         for (unsigned long y = 0; y < simulation->getLand()->getHeight(); ++y) {
 
@@ -42,6 +43,8 @@ int main()
             if (beingsNumber > 0) {
 
                 string designator = "being";
+				beingTotalNumberIni += beingsNumber;
+
                 if (beingsNumber > 1) {
                     designator = "beings";
                 }
@@ -59,10 +62,12 @@ int main()
             }
         }
     }
+	cout << "There are " << beingTotalNumberIni << " beings" << endl;
 
 	simulation->toStep(10);
 
     // Print beings positions after simulation
+	int beingTotalNumber = 0;
     for (unsigned long x = 0; x < simulation->getLand()->getWidth(); ++x) {
         for (unsigned long y = 0; y < simulation->getLand()->getHeight(); ++y) {
 
@@ -71,6 +76,8 @@ int main()
             if (beingsNumber > 0) {
 
                 string designator = "being";
+				beingTotalNumber += beingsNumber;
+				
                 if (beingsNumber > 1) {
                     designator = "beings";
                 }
@@ -88,6 +95,8 @@ int main()
             }
         }
     }
+
+	cout << "There are " << beingTotalNumber << " beings" << endl;
 
 	return 0;
 }
