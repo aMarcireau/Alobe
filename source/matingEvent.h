@@ -22,7 +22,7 @@ class MatingEvent : public PeriodicEvent
 
 	private:
 		void filteredAction(Actor & actor); // Get all the nearest beings to meet and optionnaly mate
-		// Actor must be a Population
+                                            // Actor must be a Population
 };
 
 #endif // __ALOBE__MATING_EVENT__
