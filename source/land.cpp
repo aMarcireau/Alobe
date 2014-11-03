@@ -32,6 +32,14 @@ unsigned long Land::getHeight() const
  */
 Tile * Land::getTile(unsigned long x, unsigned long y) const
 {
+    if (x >= my_width) {
+        throw std::out_of_range("x");
+    }
+
+    if (y >= my_height) {
+        throw std::out_of_range("y");
+    }
+
     return my_tiles[x][y].get();
 }
 
@@ -68,10 +76,10 @@ map<string, Tile *> Land::getNeighboringTiles(unsigned long x, unsigned long y) 
 {
     map<string, Tile *> neighboringTiles;
 
-    unsigned long xEast  = ((x == my_width - 1)  ? 0         : x + 1);
-    unsigned long xWest  = ((x == 0)             ? my_width  : x - 1);
-    unsigned long yNorth = ((y == my_height - 1) ? 0         : y + 1);
-    unsigned long ySouth = ((y == 0)             ? my_height : y + 1);
+    unsigned long xEast  = ((x == my_width - 1)  ? 0             : x + 1);
+    unsigned long xWest  = ((x == 0)             ? my_width - 1  : x - 1);
+    unsigned long yNorth = ((y == my_height - 1) ? 0             : y + 1);
+    unsigned long ySouth = ((y == 0)             ? my_height - 1 : y - 1);
 
     neighboringTiles.insert(pair<string, Tile *>("here",  this->getTile(x, y)));
     neighboringTiles.insert(pair<string, Tile *>("east",  this->getTile(xEast, y)));
@@ -87,8 +95,8 @@ map<string, Tile *> Land::getNeighboringTiles(unsigned long x, unsigned long y) 
  */
 void Land::applyChanges()
 {
-    for (unsigned long y = 0; y < my_height; ++y) {
-        for (unsigned long x = 0; x < my_width; ++x) {
+    for (unsigned long x = 0; x < my_width; ++x) {
+        for (unsigned long y = 0; y < my_height; ++y) {
 
             this->getTile(x, y)->applyChanges();
         }

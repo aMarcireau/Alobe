@@ -36,7 +36,7 @@ void Simulation::nextStep()
 /**
  * Getter for the stepper
  */
-Stepper * Simulation::getStepper()
+Stepper * Simulation::getStepper() const
 {
     return my_stepper.get();
 }
@@ -44,14 +44,14 @@ Stepper * Simulation::getStepper()
 /**
  * Getter for the land
  */
-Land * Simulation::getLand()
+Land * Simulation::getLand() const
 {
     return my_land.get();
 }
 /**
  * Getter for the population
  */
-Population * Simulation::getPopulation()
+Population * Simulation::getPopulation() const
 {
     return my_population.get();
 }

@@ -20,7 +20,8 @@ class MigrationEvent: public PeriodicEvent
         MigrationEvent();
 
     private:
-        void filteredAction(Land & land) ; // Get all the beings on the land to migrate
+        void filteredAction(Actor & actor) ; // Get all the beings on the land to migrate
+                                             // Actor must be a Land
 };
 
 #endif // __ALOBE__MIGRATION_EVENT__

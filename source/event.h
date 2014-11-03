@@ -14,7 +14,7 @@ class Event
 {
     public:
         Event(unsigned long step = 0);
-        void action(Actor & actor, unsigned long step); // Trigger event action on an actor with a given step
+        virtual void action(Actor & actor, unsigned long step); // Trigger event action on an actor with a given step
 
     protected:
         virtual void filteredAction(Actor & actor) = 0; // Filtered action is called only if step == triggerStep

@@ -11,8 +11,10 @@ MigrationEvent::MigrationEvent():
 /**
  * Get all the beings on the land to migrate
  */
-void MigrationEvent::filteredAction(Land & land)
+void MigrationEvent::filteredAction(Actor & actor)
 {
+    Land & land(dynamic_cast<Land &>(actor));
+
     for (unsigned long x = 0; x < land.getWidth(); ++x) {
         for (unsigned long y = 0; y < land.getHeight(); ++y) {
             map<string, Tile *> neighboringTiles = land.getNeighboringTiles(x, y);
@@ -21,18 +23,12 @@ void MigrationEvent::filteredAction(Land & land)
             for (
                 vector<Being *>::iterator beingIterator = beings.begin();
                 beingIterator != beings.end();
+                ++beingIterator
             ) {
-                if ((*beingIterator)->isDead()) {
+                string direction = (*beingIterator)->migrate(neighboringTiles);
+                if (direction != "here") {
+                    neighboringTiles[direction]->attachBeing(*(*beingIterator));
                     neighboringTiles["here"]->detachBeing(*(*beingIterator));
-                } else {
-
-                    string direction = (*beingIterator)->migrate(neighboringTiles);
-                    if (direction != "here") {
-                        neighboringTiles[direction]->attachBeing(*(*beingIterator));
-                        neighboringTiles["here"]->detachBeing(*(*beingIterator));
-                    }
-
-                    ++beingIterator;
                 }
             }
         }
