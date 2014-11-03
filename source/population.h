@@ -21,6 +21,7 @@ class Population : public Actor
 {
     public:
         Population(Land & land);
+		Land * getLand();
         void addBeing(
             unique_ptr<Being> being,
             unsigned long x,

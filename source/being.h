@@ -37,6 +37,9 @@ class Being : public Actor
         string migrate(map<string, Tile *> neighboringTiles);                  // Generate the being migration
                                                                                // 5 neighboring tiles are expected,
                                                                                // with keys "north", "south", "east", "west" and "here"
+		map< string, shared_ptr<Chromosome> > Being::setChildChromosome(Being & mate);
+		bool isReadyToMate(Being & mate);
+
     private:
         string my_name;
         map<string, shared_ptr<Chromosome> > my_chromosomes;

@@ -11,6 +11,11 @@ Population::Population(Land & land):
 {
 }
 
+Land * Population::getLand()
+{
+	return my_land;
+}
+
 /**
  * Add a being
  */
