@@ -96,3 +96,28 @@ string Being::migrate(map<string, Tile *> neighboringTiles)
 {
     return "east";
 }
+
+/**
+* Generate potential child chromosome
+*/
+map< string, shared_ptr<Chromosome> > Being::setChildChromosome(Being & mate)
+{
+	map< string, shared_ptr<Chromosome> > childChromosome;
+	for (
+		map < string, shared_ptr<Chromosome> >::iterator chromosomesIterator = this->getChromosomes().begin();
+		chromosomesIterator != this->getChromosomes().end();
+		++chromosomesIterator
+		){
+	}
+		return childChromosome;
+}
+
+
+/**
+* Test if the current being will mate with an other specified being
+*/
+bool Being::isReadyToMate(Being & mate)
+{
+	//To be changed to use proba
+	return true;
+}

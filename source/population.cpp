@@ -12,6 +12,14 @@ Population::Population(Land & land):
 }
 
 /**
+* Getter for the land
+*/
+Land * Population::getLand()
+{
+	return my_land;
+}
+
+/**
  * Add a being
  */
 void Population::addBeing(unique_ptr<Being> being, unsigned long x, unsigned long y)
