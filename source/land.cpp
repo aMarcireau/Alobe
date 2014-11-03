@@ -34,11 +34,11 @@ unsigned long Land::getHeight() const
 Tile * Land::getTile(unsigned long x, unsigned long y) const
 {
     if (x >= my_width) {
-        throw std::out_of_range("x");
+        throw out_of_range("x");
     }
 
     if (y >= my_height) {
-        throw std::out_of_range("y");
+        throw out_of_range("y");
     }
 
     return my_tiles[x][y].get();
