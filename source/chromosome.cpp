@@ -3,7 +3,7 @@
 /**
  * Constructor
  */
-Chromosome::Chromosome(string id, string gene):
+Chromosome::Chromosome(unsigned int id, string gene):
     my_id(id),
     my_gene(gene)
 {
@@ -12,7 +12,7 @@ Chromosome::Chromosome(string id, string gene):
 /**
  * Getter fot the pair identifier
  */
-string Chromosome::getId() const
+unsigned int Chromosome::getId() const
 {
 	return my_id;
 }
