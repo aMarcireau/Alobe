@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <vector>
+#include <stdlib.h>
 
 #include "actor.h"
 #include "stepper.h"

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <map>
 #include <memory>
+#include <stdlib.h>
 
 #include "simulation.h"
 #include "stepper.h"
