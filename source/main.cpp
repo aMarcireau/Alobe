@@ -13,6 +13,9 @@ using namespace std;
 
 int main()
 {
+    // Set seed for random methods
+    // Should be added to proba somehow
+    srand(static_cast<unsigned int>(time(NULL)));
     
     // normal law test
     Normal_law norm(5.0, 2.0);
@@ -31,18 +34,18 @@ int main()
         << " tiles)"
     << endl;
 
-    simulation->getPopulation()->randomBeing(*(simulation->getStepper()));
-    simulation->getPopulation()->randomBeing(*(simulation->getStepper()));
-    simulation->getPopulation()->randomBeing(*(simulation->getStepper()));
-    simulation->getPopulation()->randomBeing(*(simulation->getStepper()));
+    simulation->getPopulation()->randomBeing();
+    simulation->getPopulation()->randomBeing();
+    simulation->getPopulation()->randomBeing();
+    simulation->getPopulation()->randomBeing();
 
     // migrationEvent test
     simulation->getLand()->attachEvent(make_shared<MigrationEvent>());
 
     // apply changes before start (should be called in a larger "init simulation" method
     // will be implemented with conf file reader
-    simulation->getLand()->applyChanges();
-    simulation->getPopulation()->applyChanges();
+    simulation->getPopulation()->applyChanges(*(simulation->getStepper()));
+    simulation->getLand()->applyChanges(*(simulation->getStepper()));
 
     // Print beings positions before simulation
     for (unsigned long x = 0; x < simulation->getLand()->getWidth(); ++x) {

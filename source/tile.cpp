@@ -52,7 +52,7 @@ void Tile::detachBeing(Being & being)
 /**
  * Apply changes after a step
  */
-void Tile::applyChanges()
+void Tile::applyChanges(Stepper & stepper)
 {
     my_beings = mod_beings;
 }

@@ -85,7 +85,7 @@ bool Being::isDead()
 /**
  * Apply changes after a step
  */
-void Being::applyChanges()
+void Being::applyChanges(Stepper & stepper)
 {
 }
 

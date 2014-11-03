@@ -24,15 +24,15 @@ class Population : public Actor
         void addBeing(
             unique_ptr<Being> being,
             unsigned long x,
-            unsigned long y,
-            Stepper & stepper
-        );                                   // Add a being
-        void randomBeing(Stepper & stepper); // Generate a random being
-        void applyChanges();                 // Apply changes after a step
+            unsigned long y
+        );                                    // Add a being
+        void randomBeing();                   // Generate a random being
+        void applyChanges(Stepper & stepper); // Apply changes after a step
 
     private:
         Land * my_land;
         vector<unique_ptr<Being> > my_beings;
+        vector<unique_ptr<Being> > mod_beings;
 };
 
 #endif //__ALOBE__POPULATION__

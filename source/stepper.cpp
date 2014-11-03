@@ -58,5 +58,5 @@ void Stepper::attach(Actor & actor)
  */
 void Stepper::detach(Actor & actor)
 {
-    my_actors.erase(std::remove(my_actors.begin(), my_actors.end(), &actor), my_actors.end());
+    my_actors.erase(remove(my_actors.begin(), my_actors.end(), &actor), my_actors.end());
 }

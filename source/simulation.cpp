@@ -7,11 +7,12 @@ Simulation::Simulation():
     my_stepper(make_unique<Stepper>()),
     my_land(make_unique<Land>(20, 20))
 {
-    my_stepper->attach(*(my_land.get()));
-    my_land->generate(*(this->my_stepper.get()));
+    my_land->generate();
+    my_stepper->attach(*getLand());
+    my_land->applyChanges(*getStepper());
 
-    my_population = make_unique<Population>(*(my_land.get()));
-    my_stepper->attach(*(my_population.get()));
+    my_population = make_unique<Population>(*getLand());
+    my_stepper->attach(*getPopulation());
 }
 
 /**
@@ -61,8 +62,8 @@ Population * Simulation::getPopulation() const
  */
 void Simulation::nextStepCallback()
 {
-    my_land->applyChanges();
-    my_population->applyChanges();
+    my_land->applyChanges(*getStepper());
+    my_population->applyChanges(*getStepper());
 
     std::cout << "Step: "<< my_stepper->getStep() << std::endl;
 }

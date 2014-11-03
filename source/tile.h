@@ -24,7 +24,7 @@ class Tile: public Actor
         unsigned long getBeingsNumber() const; // Retrieve the number of beings
         void attachBeing(Being & being);       // Attach a being
         void detachBeing(Being & being);       // Detach a being
-        void applyChanges();                   // Apply changes after a step
+        void applyChanges(Stepper & stepper);  // Apply changes after a step
 
     private:
         vector<Being *> my_beings;
