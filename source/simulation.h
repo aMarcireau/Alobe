@@ -5,8 +5,6 @@
 #include <fstream>
 #include <time.h>
 
-#include "json11.hpp"
-
 #include "stepper.h"
 #include "land.h"
 #include "population.h"
@@ -31,8 +29,7 @@ class Simulation
 
     private:
         void nextStepCallback();                  // Called at the end of the nextStep method
-        void initialize(json11::Json & jsonData); // Initialize the simulation from json data
-        json11::Json parseJson(string jsonPath);  // Parse a json file
+        void initialize();                        // Initialize the simulation
 
     private:
         unique_ptr<Stepper> my_stepper;
