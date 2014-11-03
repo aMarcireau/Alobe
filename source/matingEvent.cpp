@@ -36,7 +36,7 @@ void MatingEvent::filteredAction(Actor & actor)
 					if ((*beingIterator)->isReadyToMate(**otherBeingsIterator))
 						{
 							// Creation of the child chromosomes
-							map < string, shared_ptr<Chromosome> > childChromosomes = (*beingIterator)->setChildChromosome(**otherBeingsIterator);
+							auto childChromosomes = (*beingIterator)->setChildChromosomes(**otherBeingsIterator);
 							//Creation of the new being on the current tile
 							population.addBeing(make_unique<Being>(to_string(rand()), childChromosomes), x, y);
 						}

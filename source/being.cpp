@@ -3,7 +3,7 @@
 /**
  * Constructor
  */
-Being::Being(string name, map<string, shared_ptr<Chromosome> > chromosomes):
+Being::Being(string name, multimap<string, shared_ptr<Chromosome> > chromosomes):
     Actor(),
     my_name(name),
     my_chromosomes(chromosomes)
@@ -37,7 +37,7 @@ vector<Being *> Being::getParents() const
 /**
  * Getter for the being chromosomes
  */
-map<string, shared_ptr<Chromosome> > Being::getChromosomes() const
+multimap<string, shared_ptr<Chromosome> > Being::getChromosomes() const
 {
 	return my_chromosomes;
 }
@@ -100,16 +100,16 @@ string Being::migrate(map<string, Tile *> neighboringTiles)
 /**
 * Generate potential child chromosome
 */
-map< string, shared_ptr<Chromosome> > Being::setChildChromosome(Being & mate)
+multimap< string, shared_ptr<Chromosome> > Being::setChildChromosomes(Being & mate)
 {
-	map< string, shared_ptr<Chromosome> > childChromosome;
+	multimap< string, shared_ptr<Chromosome> > childChromosomes;
 	for (
-		map < string, shared_ptr<Chromosome> >::iterator chromosomesIterator = this->getChromosomes().begin();
+		multimap < string, shared_ptr<Chromosome> >::iterator chromosomesIterator = this->getChromosomes().begin();
 		chromosomesIterator != this->getChromosomes().end();
 		++chromosomesIterator
 		){
 	}
-		return childChromosome;
+		return childChromosomes;
 }
 
 
