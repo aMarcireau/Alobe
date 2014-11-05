@@ -20,6 +20,15 @@ Land * Population::getLand()
 }
 
 /**
+* Getter for the being number
+*/
+unsigned long Population::getBeingsNumber() const
+{
+	return my_beings.size();
+}
+
+
+/**
  * Add a being
  */
 void Population::addBeing(unique_ptr<Being> being, unsigned long x, unsigned long y)

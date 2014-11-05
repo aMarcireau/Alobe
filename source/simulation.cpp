@@ -60,6 +60,8 @@ void Simulation::nextStepCallback()
     my_population->applyChanges(*getStepper());
 
     std::cout << "Step: "<< my_stepper->getStep() << std::endl;
+	std::cout << std::endl;
+	std::cout << "Being count : " << my_population->getBeingsNumber() << " beings" << std::endl;
 }
 
 /**
