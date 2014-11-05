@@ -94,7 +94,14 @@ void Being::applyChanges(Stepper & stepper)
  */
 string Being::migrate(map<string, Tile *> neighboringTiles)
 {
-    return "east";
+	vector<string> direction; 
+	direction.push_back("east"); 
+	direction.push_back("north");
+	direction.push_back("west");
+	direction.push_back("south");
+	direction.push_back("here");
+	unsigned int randomNumber = rand() % 5;
+	return direction[randomNumber];
 }
 
 
