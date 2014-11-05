@@ -105,24 +105,21 @@ vector<shared_ptr<Chromosome> > Being::getBeingHalfChromosomes() const
 {
 	vector<shared_ptr<Chromosome> > BeingHalfChromosomes;
 
-	for (int i = 0; this->getChromosomes().size(); ++i)
-	{
-		for (
-			vector<shared_ptr<Chromosome> >::iterator chromosomesIterator = this->getChromosomes().begin();
-			chromosomesIterator != this->getChromosomes().end();
-		++chromosomesIterator
-			){
-			vector<shared_ptr<Chromosome> > localChromosome;
+	for (int i = 0; this->getChromosomes().size(); ++i){
+        vector<shared_ptr<Chromosome> > localChromosome;
 
-			if ((*chromosomesIterator)->getId() == i)
-			{
-				localChromosome.push_back(*chromosomesIterator);
-			}
+        for (
+			vector<shared_ptr<Chromosome> >::iterator chromosomesIterator = getChromosomes().begin();
+			chromosomesIterator != getChromosomes().end();
+		    ++chromosomesIterator
+        ){
+            if ((*chromosomesIterator)->getId() == i){
+                localChromosome.push_back(*chromosomesIterator);
+            }
+        }
 
-			int randomGene = rand() % 2 + 1;
-			BeingHalfChromosomes.push_back(localChromosome[randomGene]);
-		}
-	}
+        BeingHalfChromosomes.push_back(localChromosome[static_cast<int>(rand())]);
+    }
 
 	return BeingHalfChromosomes;
 }
@@ -133,16 +130,18 @@ vector<shared_ptr<Chromosome> > Being::getBeingHalfChromosomes() const
 */
 vector<shared_ptr<Chromosome> > Being::setChildChromosomes(Being & mate)
 {
-	vector<shared_ptr<Chromosome>> childChromosomes;
-	childChromosomes = this->getBeingHalfChromosomes();
+	vector<shared_ptr<Chromosome> > childChromosomes;
+
+    childChromosomes = getBeingHalfChromosomes();
 	for (
 		vector<shared_ptr<Chromosome> >::iterator chromosomesIterator = mate.getBeingHalfChromosomes().begin();
 		chromosomesIterator != mate.getBeingHalfChromosomes().end();
 		++chromosomesIterator
-		){
+    ){
 		childChromosomes.push_back(*chromosomesIterator);
 	}
-		return childChromosomes;
+
+    return childChromosomes;
 }
 
 

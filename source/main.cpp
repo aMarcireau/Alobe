@@ -65,7 +65,7 @@ int main()
     }
 	cout << "There are " << beingTotalNumberIni << " beings" << endl;
 
-	simulation->toStep(10);
+	simulation->toStep(5);
 
     // Print beings positions after simulation
 	int beingTotalNumber = 0;
