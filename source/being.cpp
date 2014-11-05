@@ -131,11 +131,11 @@ vector<shared_ptr<Chromosome> > Being::getBeingHalfChromosomes() const
 vector<shared_ptr<Chromosome> > Being::setChildChromosomes(Being & mate)
 {
 	vector<shared_ptr<Chromosome> > childChromosomes;
-
+	vector<shared_ptr<Chromosome> > mateHalfChromosomes = mate.getBeingHalfChromosomes();
     childChromosomes = getBeingHalfChromosomes();
 	for (
-		vector<shared_ptr<Chromosome> >::iterator chromosomesIterator = mate.getBeingHalfChromosomes().begin();
-		chromosomesIterator != mate.getBeingHalfChromosomes().end();
+		vector<shared_ptr<Chromosome> >::iterator chromosomesIterator = mateHalfChromosomes.begin();
+		chromosomesIterator != mateHalfChromosomes.end();
 		++chromosomesIterator
     ){
 		childChromosomes.push_back(*chromosomesIterator);
