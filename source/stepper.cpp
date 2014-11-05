@@ -16,17 +16,19 @@ void Stepper::increment()
 {
     my_step += 1;
 
+    vector<Actor*> aliveActors;
     for (
         vector<Actor *>::iterator actorIterator = my_actors.begin();
         actorIterator != my_actors.end();
+        ++actorIterator
     ) {
-        if ((*actorIterator)->isDead()) {
-            this->detach((*(*actorIterator)));
-        } else {
+        if (!(*actorIterator)->isDead()) {
             (*actorIterator)->notify(my_step);
-            ++actorIterator;
+            aliveActors.push_back(*actorIterator);
         }
     }
+
+    my_actors = aliveActors;
 }
 
 /**

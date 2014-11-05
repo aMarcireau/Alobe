@@ -16,7 +16,7 @@ class PeriodicEvent: public Event
         void action(Actor & actor, unsigned long step);                  // Change event filter rules (add periodicity)
 
     private:
-        unsigned long my_triggerPeriod;
+        unsigned long my_period;
 };
 
 #endif // __ALOBE__PERIODIC_EVENT__

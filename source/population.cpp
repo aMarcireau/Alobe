@@ -34,7 +34,7 @@ void Population::addBeing(unique_ptr<Being> being, unsigned long x, unsigned lon
 void Population::randomBeing()
 {
     addBeing(
-        make_unique<Being>(to_string(rand()), map<string, shared_ptr<Chromosome> >()),
+        make_unique<Being>(to_string(rand()), vector<shared_ptr<Chromosome> >()),
         rand() % my_land->getWidth(),
         rand() % my_land->getHeight()
     );

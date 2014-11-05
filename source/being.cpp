@@ -3,7 +3,7 @@
 /**
  * Constructor
  */
-Being::Being(string name, map<string, shared_ptr<Chromosome> > chromosomes):
+Being::Being(string name, vector<shared_ptr<Chromosome> > chromosomes):
     Actor(),
     my_name(name),
     my_chromosomes(chromosomes)
@@ -37,7 +37,7 @@ vector<Being *> Being::getParents() const
 /**
  * Getter for the being chromosomes
  */
-map<string, shared_ptr<Chromosome> > Being::getChromosomes() const
+vector<shared_ptr<Chromosome> > Being::getChromosomes() const
 {
 	return my_chromosomes;
 }
@@ -47,7 +47,7 @@ map<string, shared_ptr<Chromosome> > Being::getChromosomes() const
  */
 void Being::addChromosome(shared_ptr<Chromosome> chromosome)
 {
-	my_chromosomes.insert(pair<string, shared_ptr<Chromosome> >((*chromosome).getId(), chromosome));
+	my_chromosomes.push_back(chromosome);
 }
 
 /**
@@ -97,19 +97,51 @@ string Being::migrate(map<string, Tile *> neighboringTiles)
     return "east";
 }
 
+
 /**
-* Generate potential child chromosome
+* Generate being demi genome
 */
-map< string, shared_ptr<Chromosome> > Being::setChildChromosome(Being & mate)
+vector<shared_ptr<Chromosome> > Being::getBeingHalfChromosomes() const
 {
-	map< string, shared_ptr<Chromosome> > childChromosome;
+	vector<shared_ptr<Chromosome> > BeingHalfChromosomes;
+
+	for (int i = 0; this->getChromosomes().size(); ++i){
+        vector<shared_ptr<Chromosome> > localChromosome;
+
+        for (
+			vector<shared_ptr<Chromosome> >::iterator chromosomesIterator = getChromosomes().begin();
+			chromosomesIterator != getChromosomes().end();
+		    ++chromosomesIterator
+        ){
+            if ((*chromosomesIterator)->getId() == i){
+                localChromosome.push_back(*chromosomesIterator);
+            }
+        }
+
+        BeingHalfChromosomes.push_back(localChromosome[static_cast<int>(rand())]);
+    }
+
+	return BeingHalfChromosomes;
+}
+
+
+/**
+* Generate potential child chromosomes
+*/
+vector<shared_ptr<Chromosome> > Being::setChildChromosomes(Being & mate)
+{
+	vector<shared_ptr<Chromosome> > childChromosomes;
+	vector<shared_ptr<Chromosome> > mateHalfChromosomes = mate.getBeingHalfChromosomes();
+    childChromosomes = getBeingHalfChromosomes();
 	for (
-		map < string, shared_ptr<Chromosome> >::iterator chromosomesIterator = this->getChromosomes().begin();
-		chromosomesIterator != this->getChromosomes().end();
+		vector<shared_ptr<Chromosome> >::iterator chromosomesIterator = mateHalfChromosomes.begin();
+		chromosomesIterator != mateHalfChromosomes.end();
 		++chromosomesIterator
-		){
+    ){
+		childChromosomes.push_back(*chromosomesIterator);
 	}
-		return childChromosome;
+
+    return childChromosomes;
 }
 
 
@@ -121,3 +153,4 @@ bool Being::isReadyToMate(Being & mate)
 	//To be changed to use proba
 	return true;
 }
+
