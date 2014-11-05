@@ -150,7 +150,13 @@ vector<shared_ptr<Chromosome> > Being::setChildChromosomes(Being & mate)
 */
 bool Being::isReadyToMate(Being & mate)
 {
-	//To be changed to use proba
-	return true;
+	unsigned int proba = rand() % 100;
+	if (proba < 30){
+		return true;
+	}
+	else{
+		return false;
+	}
+		
 }
 
