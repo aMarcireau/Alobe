@@ -37,16 +37,18 @@ void Tile::attachBeing(Being & being)
  */
 void Tile::detachBeing(Being & being)
 {
+    vector<Being *> keptBeings;
     for (
         vector<Being *>::iterator beingIterator = mod_beings.begin();
         beingIterator != mod_beings.end();
+        ++beingIterator
     ) {
-        if (*beingIterator == &being) {
-            mod_beings.erase(beingIterator);
-        } else {
-            ++beingIterator;
+        if (*beingIterator != &being) {
+            keptBeings.push_back(*beingIterator);
         }
     }
+
+    mod_beings = keptBeings;
 }
 
 /**
