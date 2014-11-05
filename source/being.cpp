@@ -160,10 +160,8 @@ bool Being::isReadyToMate(Being & mate)
 	unsigned int proba = rand() % 100;
 	if (proba < 30){
 		return true;
-	}
-	else{
+	} else { 
 		return false;
-	}
-		
+	}	
 }
 
