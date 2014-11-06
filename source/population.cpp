@@ -20,13 +20,12 @@ Land * Population::getLand()
 }
 
 /**
-* Getter for the being number
+* Get beings number
 */
 unsigned long Population::getBeingsNumber() const
 {
 	return my_beings.size();
 }
-
 
 /**
  * Add a being

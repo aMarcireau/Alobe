@@ -22,15 +22,15 @@ class Population : public Actor
 {
     public:
         Population(Land & land);
-		Land * getLand();                     // Getter for the land
-		unsigned long getBeingsNumber() const;
+		Land * getLand();                      // Getter for the land
+		unsigned long getBeingsNumber() const; // Get the number of beings
         void addBeing(
             unique_ptr<Being> being,
             unsigned long x,
             unsigned long y
-        );                                    // Add a being
-        void randomBeing();                   // Generate a random being
-        void applyChanges(Stepper & stepper); // Apply changes after a step
+        );                                     // Add a being
+        void randomBeing();                    // Generate a random being
+        void applyChanges(Stepper & stepper);  // Apply changes after a step
 
     private:
         Land * my_land;
