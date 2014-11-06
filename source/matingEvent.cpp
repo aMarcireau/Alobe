@@ -3,7 +3,7 @@
 /**
 * Constructor
 */
-MatingEvent::MatingEvent() :
+MatingEvent::MatingEvent():
 	PeriodicEvent()
 {
 }
@@ -13,7 +13,11 @@ MatingEvent::MatingEvent() :
 */
 void MatingEvent::filteredAction(Actor & actor)
 {
+    /* TODO: REFACTOR WITH BEING BEHAVIOURS
+
 	Population & population(dynamic_cast<Population &>(actor));
+
+
 
 	for (unsigned long x = 0; x < population.getLand()->getWidth(); ++x) {
 		for (unsigned long y = 0; y < population.getLand()->getHeight(); ++y) {
@@ -30,7 +34,7 @@ void MatingEvent::filteredAction(Actor & actor)
 					vector<Being *>::iterator otherBeingsIterator = beingIterator + 1;
 					otherBeingsIterator != beings.end();
 					++otherBeingsIterator
-                ){
+                ) {
 					//Test if the being want to mate with an other being
 					if ((*beingIterator)->isReadyToMate(**otherBeingsIterator))
                     {
@@ -43,4 +47,5 @@ void MatingEvent::filteredAction(Actor & actor)
             }
         }
     }
+    */
 }

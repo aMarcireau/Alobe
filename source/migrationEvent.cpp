@@ -13,6 +13,9 @@ MigrationEvent::MigrationEvent():
  */
 void MigrationEvent::filteredAction(Actor & actor)
 {
+
+    /* TODO: REFACTOR WITH BEING BEHAVIOURS
+
     Land & land(dynamic_cast<Land &>(actor));
 
     for (unsigned long x = 0; x < land.getWidth(); ++x) {
@@ -33,4 +36,6 @@ void MigrationEvent::filteredAction(Actor & actor)
             }
         }
     }
+    
+    */
 }
