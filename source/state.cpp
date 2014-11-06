@@ -3,27 +3,18 @@
 /**
  * Constructor
  */
-State::State(string id, unsigned long property):
-    my_id(id),
-    my_property(property),
-    mod_property(property)
+State::State(unsigned long value):
+    my_value(value),
+    mod_value(value)
 {
 }
 
 /**
- * Getter fot the state identifier
+ * Getter fot the state value
  */
-string State::getId() const
+unsigned long State::getValue() const
 {
-	return my_id;
-}
-
-/**
- * Getter fot the state property
- */
-unsigned long State::getProperty() const
-{
-	return my_property;
+	return my_value;
 }
 
 /**
@@ -31,20 +22,20 @@ unsigned long State::getProperty() const
  */
 void State::applyChanges()
 {
-	my_property = mod_property;
+	my_value = mod_value;
 }
 
 /**
- * Decrement the state property. The property is set to 0
+ * Decrement the state value. The value is set to 0
  * if it reaches a negative value
  */
-void State::decrement(unsigned long value)
+void State::decrement(unsigned long amount)
 {
-    long long difference = mod_property - value;
+    long long difference = mod_value - amount;
 
     if (difference >= 0) {
-        mod_property = static_cast<unsigned long>(difference);
+        mod_value = static_cast<unsigned long>(difference);
     } else {
-        mod_property = 0;
+        mod_value = 0;
     }
 }
