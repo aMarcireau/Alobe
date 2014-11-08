@@ -111,6 +111,14 @@ void Being::addChild(Being & child)
 }
 
 /**
+ * Is the being willing to mathe with the given other being?
+ */
+bool Being::isWillingToMateWith(Being & mate)
+{
+    return (rand() > (0.3 * RAND_MAX));
+}
+
+/**
  * Apply changes after a step
  */
 void Being::applyChanges(Stepper & stepper)
@@ -126,6 +134,7 @@ void Being::applyChanges(Stepper & stepper)
 
 
 
+/**
 * Generate being demi genome
 
 vector<shared_ptr<Chromosome> > Being::getBeingHalfChromosomes() const
@@ -169,19 +178,5 @@ vector<shared_ptr<Chromosome> > Being::setChildChromosomes(Being & mate)
 	}
 
     return childChromosomes;
-}
-
-
-
-* Test if the current being will mate with an other specified being
-
-bool Being::isReadyToMate(Being & mate)
-{
-	unsigned int proba = rand() % 100;
-	if (proba < 30){
-		return true;
-	} else { 
-		return false;
-	}	
 }
 */

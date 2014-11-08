@@ -32,7 +32,7 @@ class Being : public Actor
         void kill();   // Kill the being
 
         State * getState(string stateName);                       // Getter for a state
-        bool hasState(string stateName) const;                    // Is the state defined for the being ?
+        bool hasState(string stateName) const;                    // Is the state defined for the being?
         void addState(string stateName, unique_ptr<State> state); // Add a state
         void removeState(string stateName);                       // Remove a state by id
 
@@ -41,6 +41,8 @@ class Being : public Actor
 
         vector<Being *> getChildren() const; // Getter for the being children
         void addChild(Being & child);        // Add a child
+
+        bool isWillingToMateWith(Being & mate); // Is the being willing to mathe with the given other being?
 
         void applyChanges(Stepper & stepper); // Apply changes after a step
 

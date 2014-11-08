@@ -3,9 +3,10 @@
 /**
  * Constructor
  */
-Population::Population(Land & land):
+Population::Population(Land & land, BeingFactory & beingFactory):
     Actor(),
     my_land(&land),
+    my_beingFactory(&beingFactory),
     my_beings(vector<unique_ptr<Being> >()),
     mod_beings(vector<unique_ptr<Being> >())
 {
@@ -14,9 +15,17 @@ Population::Population(Land & land):
 /**
 * Getter for the land
 */
-Land * Population::getLand()
+Land * Population::getLand() const
 {
 	return my_land;
+}
+
+/**
+* Getter for the being factory
+*/
+BeingFactory * Population::getBeingFactory() const
+{
+	return my_beingFactory;
 }
 
 /**

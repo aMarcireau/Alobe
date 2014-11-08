@@ -8,6 +8,7 @@
 #include "stepper.h"
 #include "land.h"
 #include "population.h"
+#include "beingFactory.h"
 #include "migrationEvent.h"
 #include "matingEvent.h"
 
@@ -22,19 +23,21 @@ class Simulation
 {
     public:
         Simulation(string jsonPath);
-        void toStep(unsigned long step);          // Calculate simulation steps until reaching 'step'
-        void nextStep();                          // Calculate the simulation next step
-        Stepper * getStepper() const;             // Getter for the stepper
-        Land * getLand() const;                   // Getter for the land
-        Population * getPopulation() const;       // Getter for the population
+        void toStep(unsigned long step);         // Calculate simulation steps until reaching 'step'
+        void nextStep();                         // Calculate the simulation next step
+        Stepper * getStepper() const;            // Getter for the stepper
+        Land * getLand() const;                  // Getter for the land
+        BeingFactory * getBeingfactory() const;  // Getter for the beingFactory
+        Population * getPopulation() const;      // Getter for the population
 
     private:
-        void nextStepCallback();                  // Called at the end of the nextStep method
-        void initialize();                        // Initialize the simulation
+        void nextStepCallback();                 // Called at the end of the nextStep method
+        void initialize();                       // Initialize the simulation
 
     private:
         unique_ptr<Stepper> my_stepper;
         unique_ptr<Land> my_land;
+        unique_ptr<BeingFactory> my_beingFactory;
         unique_ptr<Population> my_population;
 };
 
