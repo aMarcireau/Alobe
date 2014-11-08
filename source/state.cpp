@@ -4,9 +4,9 @@
  * Constructor
  */
 State::State(unsigned long value):
-    my_value(value),
     mod_value(value)
 {
+    applyChanges();
 }
 
 /**
