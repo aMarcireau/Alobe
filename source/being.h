@@ -44,6 +44,12 @@ class Being : public Actor
 
         void applyChanges(Stepper & stepper); // Apply changes after a step
 
+        virtual Tile * getMigration(
+            multimap<unsigned long, Tile *> & neighboringTilesBydistance
+        ) = 0;                                                           // Get the tile where the being is willing to migrate
+
+        virtual string getGender() = 0;                                  // Get the being gender
+
 		//vector<shared_ptr<Chromosome> > setChildChromosomes(Being & mate); // Create a genome for a potential child
 		//bool isReadyToMate(Being & mate);                                  // Test if being will mate with an other being
 		//vector<shared_ptr<Chromosome> > getBeingHalfChromosomes() const;	 // Getter for half of the genome

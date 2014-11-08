@@ -125,21 +125,6 @@ void Being::applyChanges(Stepper & stepper)
 }
 
 
-/**
- * Generate the being migration
-
-string Being::migrate(map<string, Tile *> neighboringTiles)
-{
-	vector<string> direction; 
-	direction.push_back("east"); 
-	direction.push_back("north");
-	direction.push_back("west");
-	direction.push_back("south");
-	direction.push_back("here");
-	unsigned int randomNumber = rand() % 5;
-	return direction[randomNumber];
-}
-
 
 * Generate being demi genome
 
