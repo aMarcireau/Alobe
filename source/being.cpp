@@ -8,7 +8,6 @@ Being::Being(string name, vector<shared_ptr<Chromosome> > chromosomes):
     my_name(name),
     my_chromosomes(chromosomes),
     my_dead(false),
-    my_behaviours(map<string, shared_ptr<Behaviour> >()),
     my_states(map<string, unique_ptr<State> >()),
     my_parents(vector<Being *>()),
     my_children(vector<Being *>())
@@ -45,26 +44,6 @@ bool Being::isDead()
 void Being::kill()
 {
     my_dead = true;
-}
-
-/**
- * Getter for a behaviour
- */
-shared_ptr<Behaviour> Being::getBehaviour(string behaviourName)
-{
-    if (my_behaviours.find(behaviourName) == my_behaviours.end()) {
-        throw logic_error("Behaviours map key not found");
-    }
-
-    return my_behaviours[behaviourName];
-}
-
-/**
- * Add a behaviour
- */
-void Being::addBehaviour(string behaviourName, shared_ptr<Behaviour> behaviour)
-{
-    my_behaviours[behaviourName] = behaviour;
 }
 
 /**

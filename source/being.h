@@ -10,7 +10,6 @@
 #include "actor.h"
 #include "chromosome.h"
 #include "state.h"
-#include "behaviour.h"
 
 class Tile;
 
@@ -31,9 +30,6 @@ class Being : public Actor
 
         bool isDead(); // Is the being dead?
         void kill();   // Kill the being
-
-        shared_ptr<Behaviour> getBehaviour(string behaviourName);                 // Getter for a behaviour
-        void addBehaviour(string behaviourName, shared_ptr<Behaviour> behaviour); // Add a behaviour
 
         State * getState(string stateName);                       // Getter for a state
         bool hasState(string stateName) const;                    // Is the state defined for the being ?
@@ -56,7 +52,6 @@ class Being : public Actor
         string my_name;
         vector<shared_ptr<Chromosome> > my_chromosomes;
         bool my_dead;
-        map<string, shared_ptr<Behaviour> > my_behaviours;
         map<string, unique_ptr<State> > my_states;
         vector<Being *> my_parents;
         vector<Being *> my_children;
