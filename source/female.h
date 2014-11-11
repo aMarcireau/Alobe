@@ -3,20 +3,21 @@
 
 #include <string>
 
-#include "being.h"
+#include "gender.h"
 
 using namespace std;
 
 /**
  * Female
- * Inherits Being
+ * Inherits Gender
  *
- * Represent a female being
+ * Represent a female gender
  */
-class Female: virtual public Being
+class Female: public Gender
 {
     public:
-        string getGender(); // Get the being gender
+        Female();
+        string get() const; // Get the being gender
 };
 
 #endif // __ALOBE__FEMALE__

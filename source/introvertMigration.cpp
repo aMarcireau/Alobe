@@ -1,9 +1,17 @@
-#include "introvert.h"
+#include "introvertMigration.h"
 
 /**
- * Get the tile where the being is willing to migrate
+ * Constructor
  */
-Tile * Introvert::getMigration(multimap<unsigned long, Tile *> neighboringTilesBydistance)
+IntrovertMigration::IntrovertMigration():
+    Migration()
+{
+}
+
+/**
+ * Choose the tile where the being is willing to migrate
+ */
+Tile * IntrovertMigration::chooseTile(multimap<unsigned long, Tile *> & neighboringTilesBydistance) const
 {
     vector<Tile *> leastPopulatedTiles;
     unsigned long minimalBeingsNumber = 0;

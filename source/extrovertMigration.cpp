@@ -1,9 +1,17 @@
-#include "extrovert.h"
+#include "extrovertMigration.h"
 
 /**
- * Get the tile where the being is willing to migrate
+ * Constructor
  */
-Tile * Extrovert::getMigration(multimap<unsigned long, Tile *> neighboringTilesBydistance)
+ExtrovertMigration::ExtrovertMigration():
+    Migration()
+{
+}
+
+/**
+ * Choose the tile where the being is willing to migrate
+ */
+Tile * ExtrovertMigration::chooseTile(multimap<unsigned long, Tile *> & neighboringTilesBydistance) const
 {
     vector<Tile *> mostPopulatedTiles;
     unsigned long maximalBeingsNumber = 0;
