@@ -3,7 +3,7 @@
 /**
  * Constructor
  */
-Being::Being(string name, vector<shared_ptr<Chromosome> > chromosomes):
+Being::Being(string name, map<string, vector<string> > chromosomes):
     Actor(),
     my_name(name),
     my_chromosomes(chromosomes),
@@ -25,7 +25,7 @@ string Being::getName() const
 /**
  * Getter for the being chromosomes
  */
-vector<shared_ptr<Chromosome> > Being::getChromosomes() const
+map<string, vector<string> > Being::getChromosomes() const
 {
 	return my_chromosomes;
 }
@@ -67,7 +67,15 @@ bool Being::hasState(string stateName) const
 }
 
 /**
- * Remove a state by id
+ * Add a state
+ */
+void Being::addState(string stateName, unique_ptr<State> state)
+{
+    my_states[stateName] = move(state);
+}
+
+/**
+ * Remove a state by name
  */
 void Being::removeState(string stateName)
 {
@@ -76,6 +84,46 @@ void Being::removeState(string stateName)
     }
 
 	my_states.erase(stateName);
+}
+
+/**
+ * Getter for a behavior
+ */
+Behavior * Being::getBehavior(string behaviorName)
+{
+    if (!hasBehavior(behaviorName)) {
+        throw logic_error("Behavior map key not found");
+    }
+
+    return my_behaviors[behaviorName].get();
+}
+
+/**
+ * Is the behavior defined for the being ?
+ */
+bool Being::hasBehavior(string behaviorName) const
+{
+    return (my_behaviors.find(behaviorName) == my_behaviors.end());
+}
+
+/**
+ * Add a behavior
+ */
+void Being::addBehavior(string behaviorName, unique_ptr<Behavior> behavior)
+{
+    my_behaviors[behaviorName] = move(behavior);
+}
+
+/**
+ * Remove a behavior by name
+ */
+void Being::removeBehavior(string behaviorName)
+{
+    if (!hasBehavior(behaviorName)) {
+        throw logic_error("Behavior map key not found");
+    }
+
+	my_behaviors.erase(behaviorName);
 }
 
 /**
@@ -131,52 +179,3 @@ void Being::applyChanges(Stepper & stepper)
         (idAndStateIterator->second)->applyChanges();
     }
 }
-
-
-
-/**
-* Generate being demi genome
-
-vector<shared_ptr<Chromosome> > Being::getBeingHalfChromosomes() const
-{
-	vector<shared_ptr<Chromosome> > BeingHalfChromosomes;
-
-	for (int i = 0; this->getChromosomes().size(); ++i){
-        vector<shared_ptr<Chromosome> > localChromosome;
-
-        for (
-			vector<shared_ptr<Chromosome> >::iterator chromosomesIterator = getChromosomes().begin();
-			chromosomesIterator != getChromosomes().end();
-		    ++chromosomesIterator
-        ){
-            if ((*chromosomesIterator)->getId() == i){
-                localChromosome.push_back(*chromosomesIterator);
-            }
-        }
-
-        BeingHalfChromosomes.push_back(localChromosome[static_cast<int>(rand())]);
-    }
-
-	return BeingHalfChromosomes;
-}
-
-
-
-* Generate potential child chromosomes
-
-vector<shared_ptr<Chromosome> > Being::setChildChromosomes(Being & mate)
-{
-	vector<shared_ptr<Chromosome> > childChromosomes;
-	vector<shared_ptr<Chromosome> > mateHalfChromosomes = mate.getBeingHalfChromosomes();
-    childChromosomes = getBeingHalfChromosomes();
-	for (
-		vector<shared_ptr<Chromosome> >::iterator chromosomesIterator = mateHalfChromosomes.begin();
-		chromosomesIterator != mateHalfChromosomes.end();
-		++chromosomesIterator
-    ){
-		childChromosomes.push_back(*chromosomesIterator);
-	}
-
-    return childChromosomes;
-}
-*/
