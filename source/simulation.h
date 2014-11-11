@@ -2,6 +2,7 @@
 #define __ALOBE__SIMULATION__
 
 #include <string>
+#include <memory>
 #include <fstream>
 #include <time.h>
 
@@ -27,7 +28,7 @@ class Simulation
         void nextStep();                         // Calculate the simulation next step
         Stepper * getStepper() const;            // Getter for the stepper
         Land * getLand() const;                  // Getter for the land
-        BeingFactory * getBeingfactory() const;  // Getter for the beingFactory
+        BeingFactory * getBeingFactory() const;  // Getter for the being factory
         Population * getPopulation() const;      // Getter for the population
 
     private:
