@@ -64,22 +64,42 @@ unsigned long Land::getTilesNumber() const
 /**
  * Retrieve a tile neighboring tiles
  */
-map<string, Tile *> Land::getNeighboringTiles(unsigned long x, unsigned long y) const
+multimap<unsigned long, Tile *> Land::getNeighboringTilesByDistance(unsigned long x, unsigned long y, unsigned long distance) const
 {
-    map<string, Tile *> neighboringTiles;
+    long long ll_x = static_cast<long long>(x);
+    long long ll_y = static_cast<long long>(y);
+    long long ll_distance = static_cast<long long>(distance);
+    long long ll_width = static_cast<long long>(my_width);
+    long long ll_height = static_cast<long long>(my_height);
 
-    unsigned long xEast  = ((x == my_width - 1)  ? 0             : x + 1);
-    unsigned long xWest  = ((x == 0)             ? my_width - 1  : x - 1);
-    unsigned long yNorth = ((y == my_height - 1) ? 0             : y + 1);
-    unsigned long ySouth = ((y == 0)             ? my_height - 1 : y - 1);
+    multimap<unsigned long, Tile *> neighboringTilesByDistance;
 
-    neighboringTiles.insert(pair<string, Tile *>("here",  this->getTile(x, y)));
-    neighboringTiles.insert(pair<string, Tile *>("east",  this->getTile(xEast, y)));
-    neighboringTiles.insert(pair<string, Tile *>("west",  this->getTile(xWest, y)));
-    neighboringTiles.insert(pair<string, Tile *>("north", this->getTile(x, yNorth)));
-    neighboringTiles.insert(pair<string, Tile *>("south", this->getTile(x, ySouth)));
+    for (long long ll_xDelta = 0; ll_xDelta <= ll_distance; ++ll_xDelta) {
+        for (long long ll_yDelta = 0; ll_yDelta <= (ll_distance - ll_xDelta); ++ll_yDelta) {
 
-    return neighboringTiles;
+            unsigned long deltaDistance = static_cast<unsigned long>(ll_xDelta + ll_yDelta);
+
+            neighboringTilesByDistance.insert(pair<unsigned long, Tile *>(
+                deltaDistance,
+                getTile(
+                    static_cast<unsigned long>(llModulo(ll_x - ll_xDelta, ll_width)),
+                    static_cast<unsigned long>(llModulo(ll_y - ll_yDelta, ll_height))
+                )
+            ));
+
+            if (ll_xDelta != 0 or ll_yDelta != 0) {
+                neighboringTilesByDistance.insert(pair<unsigned long, Tile *>(
+                    deltaDistance,
+                    getTile(
+                        static_cast<unsigned long>(llModulo(ll_x + ll_xDelta, ll_width)),
+                        static_cast<unsigned long>(llModulo(ll_y + ll_yDelta, ll_height))
+                    )
+                ));
+            }
+        }
+    }
+
+    return neighboringTilesByDistance;
 }
 
 /**

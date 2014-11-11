@@ -43,6 +43,15 @@ Land * Simulation::getLand() const
 {
     return my_land.get();
 }
+
+/**
+ * Getter for the being factory
+ */
+BeingFactory * Simulation::getBeingFactory() const
+{
+    return my_beingFactory.get();
+}
+
 /**
  * Getter for the population
  */
@@ -73,13 +82,15 @@ void Simulation::initialize()
     my_land->applyChanges(*getStepper()); // Apply changes in order to generate the tiles
     my_land->attachEvent(make_shared<MigrationEvent>());
 
-    my_population = make_unique<Population>(*getLand());
+    my_beingFactory = make_unique<BeingFactory>();
+
+    my_population = make_unique<Population>(*getLand(), *getBeingFactory());
     for (
         unsigned long beingsIndex = 0;
         beingsIndex < 20;
         ++beingsIndex
     ) {
-        my_population->randomBeing();
+        my_population->addBeing();
     }
 
 	my_population->attachEvent(make_shared<MatingEvent>());

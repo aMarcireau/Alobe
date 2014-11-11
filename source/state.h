@@ -8,22 +8,20 @@ using namespace std;
 /**
  * State
  *
- * Represent the state of a being (related to a given property, such as remaining lifetime)
+ * Represent a state of a being (related to a given value, such as remaining lifetime)
  */
 class State
 {
     public:
-        State(string id, unsigned long property);
-        string getId() const;                     // Getter fot the state identifier
-        unsigned long getProperty() const;        // Getter for the state property
+        State(unsigned long value);
+        unsigned long getValue() const;           // Getter for the state value
         void applyChanges();                      // Apply changes after a step
-        void decrement(unsigned long value = 1);  // Decrement the state property. The property is set to 0
+        void decrement(unsigned long amount = 1); // Decrement the state value. The value is set to 0
                                                   // if it reaches a negative value
 
     private:
-        string my_id;
-        unsigned long my_property;
-        unsigned long mod_property;
+        unsigned long my_value;
+        unsigned long mod_value;
 };
 
 #endif // __ALOBE__STATE__

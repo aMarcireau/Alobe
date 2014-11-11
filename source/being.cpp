@@ -3,10 +3,14 @@
 /**
  * Constructor
  */
-Being::Being(string name, vector<shared_ptr<Chromosome> > chromosomes):
+Being::Being(string name, map<string, vector<string> > chromosomes):
     Actor(),
     my_name(name),
-    my_chromosomes(chromosomes)
+    my_chromosomes(chromosomes),
+    my_dead(false),
+    my_states(map<string, unique_ptr<State> >()),
+    my_parents(vector<Being *>()),
+    my_children(vector<Being *>())
 {
 }
 
@@ -19,11 +23,107 @@ string Being::getName() const
 }
 
 /**
- * Getter for the being children
+ * Getter for the being chromosomes
  */
-vector<Being *> Being::getChildren() const
+map<string, vector<string> > Being::getChromosomes() const
 {
-	return my_children;
+	return my_chromosomes;
+}
+
+/**
+ * Is the being dead?
+ */
+bool Being::isDead()
+{
+    return my_dead;
+}
+
+/**
+ * Kill the being
+ */
+void Being::kill()
+{
+    my_dead = true;
+}
+
+/**
+ * Getter for a state
+ */
+State * Being::getState(string stateName)
+{
+    if (!hasState(stateName)) {
+        throw logic_error("State map key not found");
+    }
+
+    return my_states[stateName].get();
+}
+
+/**
+ * Is the state defined for the being ?
+ */
+bool Being::hasState(string stateName) const
+{
+    return (my_states.find(stateName) == my_states.end());
+}
+
+/**
+ * Add a state
+ */
+void Being::addState(string stateName, unique_ptr<State> state)
+{
+    my_states[stateName] = move(state);
+}
+
+/**
+ * Remove a state by name
+ */
+void Being::removeState(string stateName)
+{
+    if (!hasState(stateName)) {
+        throw logic_error("State map key not found");
+    }
+
+	my_states.erase(stateName);
+}
+
+/**
+ * Getter for a behavior
+ */
+Behavior * Being::getBehavior(string behaviorName)
+{
+    if (!hasBehavior(behaviorName)) {
+        throw logic_error("Behavior map key not found");
+    }
+
+    return my_behaviors[behaviorName].get();
+}
+
+/**
+ * Is the behavior defined for the being ?
+ */
+bool Being::hasBehavior(string behaviorName) const
+{
+    return (my_behaviors.find(behaviorName) == my_behaviors.end());
+}
+
+/**
+ * Add a behavior
+ */
+void Being::addBehavior(string behaviorName, unique_ptr<Behavior> behavior)
+{
+    my_behaviors[behaviorName] = move(behavior);
+}
+
+/**
+ * Remove a behavior by name
+ */
+void Being::removeBehavior(string behaviorName)
+{
+    if (!hasBehavior(behaviorName)) {
+        throw logic_error("Behavior map key not found");
+    }
+
+	my_behaviors.erase(behaviorName);
 }
 
 /**
@@ -35,51 +135,35 @@ vector<Being *> Being::getParents() const
 }
 
 /**
- * Getter for the being chromosomes
+ * Add a parent
  */
-vector<shared_ptr<Chromosome> > Being::getChromosomes() const
+void Being::addParent(Being & parent)
 {
-	return my_chromosomes;
+	my_parents.push_back(&parent);
 }
 
 /**
- * Add a chromosome
+ * Getter for the being children
  */
-void Being::addChromosome(shared_ptr<Chromosome> chromosome)
+vector<Being *> Being::getChildren() const
 {
-	my_chromosomes.push_back(chromosome);
+	return my_children;
 }
 
 /**
- * Add a state
+ * Add a child
  */
-void Being::addState(unique_ptr<State> state)
+void Being::addChild(Being & child)
 {
-	my_states.insert(pair<string, unique_ptr<State> >(state.get()->getId(), move(state)));
+	my_children.push_back(&child);
 }
 
 /**
- * Remove a state by reference
+ * Is the being willing to mathe with the given other being?
  */
-void Being::removeState(State & state)
+bool Being::isWillingToMateWith(Being & mate)
 {
-	my_states.erase(state.getId());
-}
-
-/**
- * Remove a state by id
- */
-void Being::removeState(string stateId)
-{
-	my_states.erase(stateId);
-}
-
-/**
- * Is the being dead?
- */
-bool Being::isDead()
-{
-    return false;
+    return (rand() > (0.3 * RAND_MAX));
 }
 
 /**
@@ -87,81 +171,11 @@ bool Being::isDead()
  */
 void Being::applyChanges(Stepper & stepper)
 {
-}
-
-/**
- * Generate the being migration
- */
-string Being::migrate(map<string, Tile *> neighboringTiles)
-{
-	vector<string> direction; 
-	direction.push_back("east"); 
-	direction.push_back("north");
-	direction.push_back("west");
-	direction.push_back("south");
-	direction.push_back("here");
-	unsigned int randomNumber = rand() % 5;
-	return direction[randomNumber];
-}
-
-
-/**
-* Generate being demi genome
-*/
-vector<shared_ptr<Chromosome> > Being::getBeingHalfChromosomes() const
-{
-	vector<shared_ptr<Chromosome> > BeingHalfChromosomes;
-
-	for (int i = 0; this->getChromosomes().size(); ++i){
-        vector<shared_ptr<Chromosome> > localChromosome;
-
-        for (
-			vector<shared_ptr<Chromosome> >::iterator chromosomesIterator = getChromosomes().begin();
-			chromosomesIterator != getChromosomes().end();
-		    ++chromosomesIterator
-        ){
-            if ((*chromosomesIterator)->getId() == i){
-                localChromosome.push_back(*chromosomesIterator);
-            }
-        }
-
-        BeingHalfChromosomes.push_back(localChromosome[static_cast<int>(rand())]);
+    for (
+        map<string, unique_ptr<State> >::iterator idAndStateIterator = my_states.begin();
+        idAndStateIterator != my_states.end();
+        ++idAndStateIterator
+    ) {
+        (idAndStateIterator->second)->applyChanges();
     }
-
-	return BeingHalfChromosomes;
 }
-
-
-/**
-* Generate potential child chromosomes
-*/
-vector<shared_ptr<Chromosome> > Being::setChildChromosomes(Being & mate)
-{
-	vector<shared_ptr<Chromosome> > childChromosomes;
-	vector<shared_ptr<Chromosome> > mateHalfChromosomes = mate.getBeingHalfChromosomes();
-    childChromosomes = getBeingHalfChromosomes();
-	for (
-		vector<shared_ptr<Chromosome> >::iterator chromosomesIterator = mateHalfChromosomes.begin();
-		chromosomesIterator != mateHalfChromosomes.end();
-		++chromosomesIterator
-    ){
-		childChromosomes.push_back(*chromosomesIterator);
-	}
-
-    return childChromosomes;
-}
-
-
-/**
-* Test if the current being will mate with an other specified being
-*/
-bool Being::isReadyToMate(Being & mate)
-{
-	unsigned int proba = rand() % 100;
-	if (proba < 30){
-		return true;
-	} else { 
-		return false;
-	}	
-}
-

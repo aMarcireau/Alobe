@@ -3,9 +3,10 @@
 /**
  * Constructor
  */
-Population::Population(Land & land):
+Population::Population(Land & land, BeingFactory & beingFactory):
     Actor(),
     my_land(&land),
+    my_beingFactory(&beingFactory),
     my_beings(vector<unique_ptr<Being> >()),
     mod_beings(vector<unique_ptr<Being> >())
 {
@@ -14,19 +15,38 @@ Population::Population(Land & land):
 /**
 * Getter for the land
 */
-Land * Population::getLand()
+Land * Population::getLand() const
 {
 	return my_land;
 }
 
 /**
-* Getter for the being number
+* Getter for the being factory
+*/
+BeingFactory * Population::getBeingFactory() const
+{
+	return my_beingFactory;
+}
+
+/**
+* Get beings number
 */
 unsigned long Population::getBeingsNumber() const
 {
 	return my_beings.size();
 }
 
+/**
+ * Generate a random being
+ */
+void Population::addBeing()
+{
+    addBeing(
+        move(my_beingFactory->generateBeing()),
+        rand() % my_land->getWidth(),
+        rand() % my_land->getHeight()
+    );
+}
 
 /**
  * Add a being
@@ -35,18 +55,6 @@ void Population::addBeing(unique_ptr<Being> being, unsigned long x, unsigned lon
 {
     mod_beings.push_back(move(being));
     my_land->getTile(x, y)->attachBeing(*(mod_beings.back().get()));
-}
-
-/**
- * Generate a random being
- */
-void Population::randomBeing()
-{
-    addBeing(
-        make_unique<Being>(to_string(rand()), vector<shared_ptr<Chromosome> >()),
-        rand() % my_land->getWidth(),
-        rand() % my_land->getHeight()
-    );
 }
 
 /**
