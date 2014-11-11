@@ -37,24 +37,24 @@ unsigned long Population::getBeingsNumber() const
 }
 
 /**
+ * Generate a random being
+ */
+void Population::addBeing()
+{
+    addBeing(
+        move(my_beingFactory->generateBeing()),
+        rand() % my_land->getWidth(),
+        rand() % my_land->getHeight()
+    );
+}
+
+/**
  * Add a being
  */
 void Population::addBeing(unique_ptr<Being> being, unsigned long x, unsigned long y)
 {
     mod_beings.push_back(move(being));
     my_land->getTile(x, y)->attachBeing(*(mod_beings.back().get()));
-}
-
-/**
- * Generate a random being
- */
-void Population::randomBeing()
-{
-    addBeing(
-        make_unique<Being>(to_string(rand()), vector<shared_ptr<Chromosome> >()),
-        rand() % my_land->getWidth(),
-        rand() % my_land->getHeight()
-    );
 }
 
 /**

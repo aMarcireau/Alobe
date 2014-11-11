@@ -26,12 +26,12 @@ class Population : public Actor
 		Land * getLand() const;                               // Getter for the land
         BeingFactory * getBeingFactory() const;               // Getter for the being factory
 		unsigned long getBeingsNumber() const;                // Get the number of beings
+        void addBeing();                                      // Generate a random being
         void addBeing(
             unique_ptr<Being> being,
             unsigned long x,
             unsigned long y
         );                                                    // Add a being
-        void randomBeing();                                   // Generate a random being
         void applyChanges(Stepper & stepper);                 // Apply changes after a step
 
     private:
