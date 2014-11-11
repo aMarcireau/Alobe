@@ -8,7 +8,7 @@ using namespace std;
 /**
  * State
  *
- * Represent the state of a being (related to a given value, such as remaining lifetime)
+ * Represent a state of a being (related to a given value, such as remaining lifetime)
  */
 class State
 {
