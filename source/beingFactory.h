@@ -46,7 +46,7 @@ class BeingFactory
         static const map<string, pair<vector<string>, map<unsigned long, string> > > behaviorsByChromosomes; // Map the behaviors to the chromosomes combinations
         map<string, vector<string> > my_chromosomes;
         map<string, unique_ptr<State> > my_states;
-        map<string, map<string, unique_ptr<Behavior> > > my_behaviors;
+        map<string, map<string, shared_ptr<Behavior> > > my_behaviors;
 };
 
 #endif // __ALOBE__BEING_FACTORY__

@@ -1,5 +1,7 @@
 #include "being.h"
 
+#include <iostream>
+
 /**
  * Constructor
  */
@@ -103,15 +105,15 @@ Behavior * Being::getBehavior(string behaviorName)
  */
 bool Being::hasBehavior(string behaviorName) const
 {
-    return (my_behaviors.find(behaviorName) == my_behaviors.end());
+    return (my_behaviors.find(behaviorName) != my_behaviors.end());
 }
 
 /**
  * Add a behavior
  */
-void Being::addBehavior(string behaviorName, unique_ptr<Behavior> behavior)
+void Being::addBehavior(string behaviorName, shared_ptr<Behavior> behavior)
 {
-    my_behaviors[behaviorName] = move(behavior);
+    my_behaviors[behaviorName] = behavior;
 }
 
 /**

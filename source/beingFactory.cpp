@@ -10,7 +10,7 @@ const map<string, pair<vector<string>, map<unsigned long, string> > > BeingFacto
             {20, "female"}
         }}
     },
-    {"migrate", {
+    {"migration", {
         {"extrovert", "introvert"}, {
             {02, "introvert"},
             {11, "neutral"},
@@ -25,7 +25,7 @@ const map<string, pair<vector<string>, map<unsigned long, string> > > BeingFacto
 BeingFactory::BeingFactory():
     my_chromosomes(map<string, vector<string> >()),
     my_states(map<string, unique_ptr<State> >()),
-    my_behaviors(map<string, map<string, unique_ptr<Behavior> > >())
+    my_behaviors(map<string, map<string, shared_ptr<Behavior> > >())
 {
     initialize();
 }
@@ -37,16 +37,16 @@ void BeingFactory::initialize()
 {
     my_chromosomes["gender"].push_back("X");
     my_chromosomes["gender"].push_back("Y");
-    my_chromosomes["migrate"].push_back("extrovert");
-    my_chromosomes["migrate"].push_back("introvert");
+    my_chromosomes["migration"].push_back("extrovert");
+    my_chromosomes["migration"].push_back("introvert");
 
     my_states["age"] =  make_unique<State>(100);
 
     my_behaviors["gender"]["female"] = make_unique<Female>();
     my_behaviors["gender"]["male"] = make_unique<Male>();
-    my_behaviors["migrate"]["extrovert"] = make_unique<ExtrovertMigration>();
-    my_behaviors["migrate"]["neutral"] = make_unique<NeutralMigration>();
-    my_behaviors["migrate"]["introvert"] = make_unique<IntrovertMigration>();
+    my_behaviors["migration"]["extrovert"] = make_shared<ExtrovertMigration>();
+    my_behaviors["migration"]["neutral"] = make_shared<NeutralMigration>();
+    my_behaviors["migration"]["introvert"] = make_shared<IntrovertMigration>();
 }
 
 /**
@@ -83,6 +83,10 @@ unique_ptr<Being> BeingFactory::generateBeing()
  */
 unique_ptr<Being> BeingFactory::generateBeing(Being & firstParent, Being & secondParent)
 {
+    if (dynamic_cast<Gender &>(*(firstParent.getBehavior("gender"))).get() == dynamic_cast<Gender &>(*(secondParent.getBehavior("gender"))).get()) {
+        throw logic_error("Parents share the same gender");
+    }
+
     map<string, vector<string> > mixedChromosomes = map<string, vector<string> >();
 
     for (
@@ -142,11 +146,9 @@ unique_ptr<Being> BeingFactory::generateBeing(map<string, vector<string> > chrom
             ) * pow(10, chromosomeIndex);
         }
 
-        being->addBehavior(chromosomeTypeIterator->first, make_unique<Behavior>(
-            *((my_behaviors[chromosomeTypeIterator->first][
-                ((behaviorsByChromosomes.at(chromosomeTypeIterator->first)).second).at(behaviorKey)
-            ]).get())
-        ));
+        being->addBehavior(chromosomeTypeIterator->first, my_behaviors[chromosomeTypeIterator->first][
+            ((behaviorsByChromosomes.at(chromosomeTypeIterator->first)).second).at(behaviorKey)
+        ]);
     }
 
     return being;

@@ -38,7 +38,7 @@ class Being : public Actor
 
         Behavior * getBehavior(string behaviorName);                          // Getter for a behavior
         bool hasBehavior(string behaviorName) const;                          // Is the behavior defined for the being?
-        void addBehavior(string behaviorName, unique_ptr<Behavior> behavior); // Add a behavior
+        void addBehavior(string behaviorName, shared_ptr<Behavior> behavior); // Add a behavior
         void removeBehavior(string behaviorName);                             // Remove a behavior by name
 
         vector<Being *> getParents() const; // Getter for the being parents
@@ -60,7 +60,7 @@ class Being : public Actor
         map<string, vector<string> > my_chromosomes;
         bool my_dead;
         map<string, unique_ptr<State> > my_states;
-        map<string, unique_ptr<Behavior> > my_behaviors;
+        map<string, shared_ptr<Behavior> > my_behaviors;
         vector<Being *> my_parents;
         vector<Being *> my_children;
 };
