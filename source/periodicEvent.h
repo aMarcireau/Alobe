@@ -12,7 +12,8 @@
 class PeriodicEvent: public Event
 {
     public:
-        PeriodicEvent(unsigned long step = 0, unsigned long period = 1); 
+        PeriodicEvent(unsigned long step = 0, unsigned long period = 1);
+        virtual ~PeriodicEvent() = 0;
         void action(Actor & actor, unsigned long step);                  // Change event filter rules (add periodicity)
 
     private:

@@ -9,6 +9,13 @@ Actor::Actor():
 }
 
 /**
+ * Pure virtual destructor
+ */
+Actor::~Actor()
+{
+}
+
+/**
  * Attach an event
  */
 void Actor::attachEvent(shared_ptr<Event> event)

@@ -16,6 +16,7 @@ class Migration: public Behavior
 {
     public:
         Migration();
+        virtual ~Migration() = 0;
         virtual Tile * chooseTile(multimap<unsigned long, Tile *> & neighboringTilesBydistance) const = 0; // Choose the tile where the being is willing to migrate
 };
 
