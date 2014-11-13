@@ -68,9 +68,8 @@ void Simulation::nextStepCallback()
     my_land->applyChanges(*getStepper());
     my_population->applyChanges(*getStepper());
 
-    std::cout << "Step: "<< my_stepper->getStep() << std::endl;
-	std::cout << std::endl;
-	std::cout << "Being count : " << my_population->getBeingsNumber() << " beings" << std::endl;
+    std::cout << "\n" << "Step "<< my_stepper->getStep() << std::endl;
+	std::cout << "There are " << my_population->getBeingsNumber() << " beings" << std::endl;
 }
 
 /**
@@ -92,10 +91,9 @@ void Simulation::initialize()
     ) {
         my_population->addBeing();
     }
-
 	my_population->attachEvent(make_shared<MatingEvent>());
-
     my_population->applyChanges(*getStepper());
+
     my_land->applyChanges(*getStepper()); // Apply changes in order to place the beings on the tiles
 
     my_stepper->attach(*getLand());
