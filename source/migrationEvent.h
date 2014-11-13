@@ -7,6 +7,7 @@
 #include "periodicEvent.h"
 #include "land.h"
 #include "tile.h"
+#include "migration.h"
 
 /**
  * MigrationEvent
