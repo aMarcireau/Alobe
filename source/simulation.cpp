@@ -71,6 +71,7 @@ void Simulation::nextStepCallback()
     cout << "\n" << "Step "<< my_stepper->getStep() << "\n"
         << "    Alive beings: " << my_population->getBeingsNumber() << "\n"
         << "    Dead beings: " << my_population->getDeadBeingsNumber() << "\n"
+		<< "    Sick beings: " << my_population->getSickBeingsNumber() << "\n"
         << std::endl;
 }
 
@@ -95,6 +96,12 @@ void Simulation::initialize()
     }
 	my_population->attachEvent(make_shared<MatingEvent>());
     my_population->attachEvent(make_shared<AgeEvent>());
+
+	for (unsigned long x = 0; x < my_land->getWidth(); ++x) {
+		for (unsigned long y = 0; y < my_land->getHeight(); ++y) {
+			my_land->getTile(x, y)->attachEvent(make_shared<DiseaseEvent>());
+		}
+	}
     my_population->applyChanges(*getStepper());
 
     my_land->applyChanges(*getStepper()); // Apply changes in order to place the beings on the tiles
@@ -102,3 +109,6 @@ void Simulation::initialize()
     my_stepper->attach(*getLand());
     my_stepper->attach(*getPopulation());
 }
+
+
+
