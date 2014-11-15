@@ -169,7 +169,7 @@ bool Being::isWillingToMateWith(Being & other)
         return false;
     }
 
-    return (rand() > (0.6 * RAND_MAX));
+    return (rand() < (0.2 * RAND_MAX));
 }
 
 /**
