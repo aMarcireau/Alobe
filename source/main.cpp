@@ -7,6 +7,7 @@
 #include "stepper.h"
 #include "land.h"
 #include "being.h"
+#include "gender.h"
 #include "normal_law.h"
 
 using namespace std;
@@ -23,7 +24,7 @@ int main()
     cout << norm.map_to_string();
 
     // Test simulation, stepper, actors
-    unique_ptr<Simulation> simulation = make_unique<Simulation>("configuration.json");
+    unique_ptr<Simulation> simulation = make_unique<Simulation>();
     cout
         << "\n"
         << "Created a "
@@ -42,23 +43,30 @@ int main()
         for (unsigned long y = 0; y < simulation->getLand()->getHeight(); ++y) {
 
             unsigned long beingsNumber = simulation->getLand()->getTile(x, y)->getBeingsNumber();
+            vector<Being *> beings = simulation->getLand()->getTile(x, y)->getBeings();
+
+            unsigned long maleNumber = 0;
+            unsigned long femaleNumber = 0;
 
             if (beingsNumber > 0) {
 
-                string designator = "being";
-                if (beingsNumber > 1) {
-                    designator = "beings";
+                for (
+                    vector<Being *>::iterator beingIterator = beings.begin();
+                    beingIterator != beings.end();
+                    ++beingIterator
+                ) {
+                    if (dynamic_cast<Gender &>(*((*(beingIterator))->getBehavior("gender"))).get() == "male") {
+                        ++maleNumber;
+                    } else {
+                        ++femaleNumber;
+                    }
                 }
 
                 cout
-                    << beingsNumber
-                    << " "
-                    << designator
-                    << " on tile ("
-                    << x
-                    << ", "
-                    << y
-                    << ")"
+                    << "Tile ("
+                    << x << ", " << y << "):\n"
+                    << "    Males: " << maleNumber << "\n"
+                    << "    Females: " << femaleNumber
                 << endl;
             }
         }
@@ -69,8 +77,8 @@ int main()
     // Print beings positions after simulation
     for (unsigned long x = 0; x < simulation->getLand()->getWidth(); ++x) {
         for (unsigned long y = 0; y < simulation->getLand()->getHeight(); ++y) {
-
             unsigned long beingsNumber = simulation->getLand()->getTile(x, y)->getBeingsNumber();
+
 
             if (beingsNumber > 0) {
                 string designator = "being";
