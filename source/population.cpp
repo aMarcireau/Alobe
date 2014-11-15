@@ -62,9 +62,9 @@ void Population::addBeing(unique_ptr<Being> being, unsigned long x, unsigned lon
  */
 void Population::applyChanges(Stepper & stepper)
 {
-    unsigned int modBeingsLength = static_cast<unsigned int>(mod_beings.size());
+    unsigned long modBeingsLength = mod_beings.size();
     for (
-        unsigned int index = 0;
+        unsigned long index = 0;
         index < modBeingsLength;
         ++index
     ) {
