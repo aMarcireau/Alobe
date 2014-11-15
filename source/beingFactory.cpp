@@ -140,10 +140,10 @@ unique_ptr<Being> BeingFactory::generateBeing(map<string, vector<string> > chrom
             ++chromosomeIndex
         ) {
             behaviorKey += count(
-                (chromosomeTypeIterator->second).begin(),
-                (chromosomeTypeIterator->second).end(),
+                (chromosomes[chromosomeTypeIterator->first]).begin(),
+                (chromosomes[chromosomeTypeIterator->first]).end(),
                 ((behaviorsByChromosomes.at(chromosomeTypeIterator->first)).first).at(chromosomeIndex)
-            ) * pow(10, chromosomeIndex);
+            ) * pow(10, mappedChromosomesSize - chromosomeIndex - 1);
         }
 
         being->addBehavior(chromosomeTypeIterator->first, my_behaviors[chromosomeTypeIterator->first][
