@@ -30,7 +30,7 @@ void MatingEvent::filteredAction(Actor & actor)
                     otherBeingIndex < beingsNumber;
                     ++otherBeingIndex
                 ) {
-					if (beings[beingIndex]->isWillingToMateWith(*beings[otherBeingIndex]) and beings[otherBeingIndex]->isWillingToMateWith(*beings[beingIndex])) {
+					if (beings[beingIndex]->isWillingToMateWith(*beings[otherBeingIndex]) && beings[otherBeingIndex]->isWillingToMateWith(*beings[beingIndex])) {
                         population.addBeing(
                             population.getBeingFactory()->generateBeing(*beings[beingIndex], *beings[otherBeingIndex]),
                             x, y
