@@ -130,8 +130,7 @@ void Land::applyChanges(Stepper & stepper)
 
     for (unsigned long x = 0; x < my_width; ++x) {
         for (unsigned long y = 0; y < my_height; ++y) {
-
-            this->getTile(x, y)->applyChanges(stepper);
+            getTile(x, y)->applyChanges(stepper);
         }
     }
 }

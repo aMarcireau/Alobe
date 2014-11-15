@@ -19,6 +19,7 @@ class Actor
 {
     public:
         Actor();
+        virtual ~Actor() = 0;
         void attachEvent(shared_ptr<Event> event);        // Attach an event
         void detachEvent(Event & event);                  // Detach an event
         void notify(unsigned long step);                  // Notification called by a Stepper object

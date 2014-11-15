@@ -25,6 +25,7 @@ int main()
     // Test simulation, stepper, actors
     unique_ptr<Simulation> simulation = make_unique<Simulation>("configuration.json");
     cout
+        << "\n"
         << "Created a "
         << simulation->getLand()->getWidth()
         << " by "
@@ -33,6 +34,8 @@ int main()
         << simulation->getLand()->getTilesNumber()
         << " tiles)"
     << endl;
+
+    cout << "There are " << simulation->getPopulation()->getBeingsNumber() << " beings" << endl;
 
     // Print beings positions before simulation
     for (unsigned long x = 0; x < simulation->getLand()->getWidth(); ++x) {
@@ -60,7 +63,6 @@ int main()
             }
         }
     }
-	cout << "There are " << simulation->getPopulation()->getBeingsNumber() << " beings" << endl;
 
 	simulation->toStep(5);
 
@@ -89,8 +91,6 @@ int main()
             }
         }
     }
-
-	cout << "There are " << simulation->getPopulation()->getBeingsNumber() << " beings" << endl;
 
 	return 0;
 }

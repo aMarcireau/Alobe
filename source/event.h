@@ -14,15 +14,16 @@ class Event
 {
     public:
         Event(unsigned long step = 0);
-        void action(Actor & actor, unsigned long step); // Trigger event action on an actor with a given step
+        virtual ~Event() = 0;
+        virtual void action(Actor & actor, unsigned long step); // Trigger event action on an actor with a given step
 
     protected:
-        virtual void filteredAction(Actor & actor) = 0; // Filtered action is called only if step == triggerStep
-                                                        // This method is protected so that it can be called
-                                                        // from abstract inherited classes
+        virtual void filteredAction(Actor & actor) = 0;         // Filtered action is called only if step == triggerStep
+                                                                // This method is protected so that it can be called
+                                                                // from abstract inherited classes
     protected:
-        unsigned long my_step;                          // This property is protected so that it can be called
-                                                        // from abstract inherited classes
+        unsigned long my_step;                                  // This property is protected so that it can be called
+                                                                // from abstract inherited classes
 };
 
 #endif // __ALOBE__EVENT__
