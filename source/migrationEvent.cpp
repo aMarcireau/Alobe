@@ -10,6 +10,7 @@ MigrationEvent::MigrationEvent():
 
 /**
  * Get all the beings on the land to migrate
+ * Actor must be a Land
  */
 void MigrationEvent::filteredAction(Actor & actor)
 {

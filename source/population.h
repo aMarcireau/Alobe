@@ -25,7 +25,9 @@ class Population : public Actor
         Population(Land & land, BeingFactory & beingFactory);
 		Land * getLand() const;                               // Getter for the land
         BeingFactory * getBeingFactory() const;               // Getter for the being factory
+        vector<Being *> getBeings();                          // Getter for the beings
 		unsigned long getBeingsNumber() const;                // Get the number of beings
+        unsigned long getDeadBeingsNumber() const;            // Get the number of dead beings
         void addBeing();                                      // Generate a random being
         void addBeing(
             unique_ptr<Being> being,
@@ -39,6 +41,7 @@ class Population : public Actor
         BeingFactory * my_beingFactory;
         vector<unique_ptr<Being> > my_beings;
         vector<unique_ptr<Being> > mod_beings;
+        vector<unique_ptr<Being> > dead_beings;
 };
 
 #endif //__ALOBE__POPULATION__

@@ -10,6 +10,7 @@ MatingEvent::MatingEvent():
 
 /**
 * Get all the beings on the land to maybe mate
+* Actor must be a Population
 */
 void MatingEvent::filteredAction(Actor & actor)
 {

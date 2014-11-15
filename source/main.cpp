@@ -72,7 +72,7 @@ int main()
         }
     }
 
-	simulation->toStep(5);
+	simulation->toStep(30);
 
     // Print beings positions after simulation
     for (unsigned long x = 0; x < simulation->getLand()->getWidth(); ++x) {
