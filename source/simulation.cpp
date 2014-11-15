@@ -3,7 +3,7 @@
 /**
  * Constructor
  */
-Simulation::Simulation(string jsonPath):
+Simulation::Simulation():
     my_stepper(make_unique<Stepper>())
 {
     initialize();
