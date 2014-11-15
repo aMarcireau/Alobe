@@ -65,7 +65,7 @@ State * Being::getState(string stateName)
  */
 bool Being::hasState(string stateName) const
 {
-    return (my_states.find(stateName) == my_states.end());
+    return (my_states.find(stateName) != my_states.end());
 }
 
 /**
