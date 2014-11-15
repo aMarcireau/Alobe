@@ -10,6 +10,7 @@
 #include "actor.h"
 #include "state.h"
 #include "behavior.h"
+#include "gender.h"
 
 class Tile;
 
@@ -47,7 +48,7 @@ class Being : public Actor
         vector<Being *> getChildren() const; // Getter for the being children
         void addChild(Being & child);        // Add a child
 
-        bool isWillingToMateWith(Being & mate); // Is the being willing to mathe with the given other being?
+        bool isWillingToMateWith(Being & other); // Is the being willing to mate with the given other being?
 
         void applyChanges(Stepper & stepper); // Apply changes after a step
 

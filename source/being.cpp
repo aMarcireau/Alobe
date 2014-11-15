@@ -163,9 +163,13 @@ void Being::addChild(Being & child)
 /**
  * Is the being willing to mathe with the given other being?
  */
-bool Being::isWillingToMateWith(Being & mate)
+bool Being::isWillingToMateWith(Being & other)
 {
-    return (rand() > (0.3 * RAND_MAX));
+    if (dynamic_cast<Gender &>(*(getBehavior("gender"))).get() == dynamic_cast<Gender &>(*(other.getBehavior("gender"))).get()) {
+        return false;
+    }
+
+    return (rand() > (0.6 * RAND_MAX));
 }
 
 /**
