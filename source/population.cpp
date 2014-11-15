@@ -63,6 +63,25 @@ unsigned long Population::getDeadBeingsNumber() const
 }
 
 /**
+* Get the number of sick beings
+*/
+unsigned long Population::getSickBeingsNumber()
+{
+	unsigned long sickBeingNumber = 0;
+	for (
+		vector<unique_ptr<Being> >::iterator beingIterator = my_beings.begin();
+		beingIterator != my_beings.end();
+		++beingIterator)
+	{
+		if ((*beingIterator)->hasState("alobe"))
+		{
+			++sickBeingNumber;
+		}
+	}
+		return sickBeingNumber;
+}
+
+/**
  * Generate a random being
  */
 void Population::addBeing()

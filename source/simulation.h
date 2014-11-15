@@ -13,6 +13,7 @@
 #include "migrationEvent.h"
 #include "matingEvent.h"
 #include "ageEvent.h"
+#include "diseaseEvent.h"
 
 using namespace std;
 

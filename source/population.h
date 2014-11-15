@@ -28,6 +28,7 @@ class Population : public Actor
         vector<Being *> getBeings();                          // Getter for the beings
 		unsigned long getBeingsNumber() const;                // Get the number of beings
         unsigned long getDeadBeingsNumber() const;            // Get the number of dead beings
+		unsigned long getSickBeingsNumber();            // Get the number of sick beings
         void addBeing();                                      // Generate a random being
         void addBeing(
             unique_ptr<Being> being,
