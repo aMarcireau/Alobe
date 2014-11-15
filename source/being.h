@@ -42,19 +42,14 @@ class Being : public Actor
         void addBehavior(string behaviorName, shared_ptr<Behavior> behavior); // Add a behavior
         void removeBehavior(string behaviorName);                             // Remove a behavior by name
 
-        vector<Being *> getParents() const; // Getter for the being parents
-        void addParent(Being & parent);     // Add a parent
-
-        vector<Being *> getChildren() const; // Getter for the being children
-        void addChild(Being & child);        // Add a child
+        vector<Being *> getParents() const;                     // Getter for the being parents
+        void addParent(Being & parent);                         // Add a parent
+        vector<Being *> getChildren() const;                    // Getter for the being children
+        void addChild(Being & child);                           // Add a child
 
         bool isWillingToMateWith(Being & other); // Is the being willing to mate with the given other being?
 
         void applyChanges(Stepper & stepper); // Apply changes after a step
-
-		//vector<shared_ptr<Chromosome> > setChildChromosomes(Being & mate); // Create a genome for a potential child
-		//bool isReadyToMate(Being & mate);                                  // Test if being will mate with an other being
-		//vector<shared_ptr<Chromosome> > getBeingHalfChromosomes() const;	 // Getter for half of the genome
 
     private:
         string my_name;
