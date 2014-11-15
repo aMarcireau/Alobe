@@ -9,7 +9,8 @@ PeriodicEvent()
 }
 
 /**
-* Get all the beings on the land to maybe share disease
+* For every being that have the state 'alobe', the event decrement the state counter. 
+* If multiple beings are on the same tile, the beings that have the state 'alobe' will transmit it to 10% other healthy beings. 
 */
 void DiseaseEvent::filteredAction(Actor & actor)
 {
@@ -38,7 +39,7 @@ void DiseaseEvent::filteredAction(Actor & actor)
 
 	for (
 		unsigned long beingIndex = 0;
-		beingIndex < healthyBeingsNumber;
+		beingIndex < ceil(healthyBeingsNumber * 0.1);
 		++beingIndex
 		){
 		healthyBeings[beingIndex]->addState("alobe", make_unique<State>(5));
