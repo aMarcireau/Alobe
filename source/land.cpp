@@ -87,7 +87,7 @@ multimap<unsigned long, Tile *> Land::getNeighboringTilesByDistance(unsigned lon
                 )
             ));
 
-            if (ll_xDelta != 0 or ll_yDelta != 0) {
+            if (ll_xDelta != 0 || ll_yDelta != 0) {
                 neighboringTilesByDistance.insert(pair<unsigned long, Tile *>(
                     deltaDistance,
                     getTile(
