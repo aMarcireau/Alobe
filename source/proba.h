@@ -30,9 +30,10 @@ public:
     map<int, unsigned long> sample(unsigned long sampling); // sample the distribution
     
 private:
-    map<int, unsigned long> distrib;
+    map<int, unsigned long> my_distrib;
     unsigned long integrate(unsigned long variable); // integrate the sampled distribution
     unsigned long rectangle_area(); // calculate the rectangle area
+    void normalized(); // normalized the law. Sets max value to 1
 };
 
 #endif /* defined(__alobe__proba__) */
