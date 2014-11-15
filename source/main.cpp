@@ -47,6 +47,7 @@ int main()
 
             unsigned long maleNumber = 0;
             unsigned long femaleNumber = 0;
+			unsigned long sickBeingNumber = 0;
 
             if (beingsNumber > 0) {
 
@@ -57,16 +58,22 @@ int main()
                 ) {
                     if (dynamic_cast<Gender &>(*((*(beingIterator))->getBehavior("gender"))).get() == "male") {
                         ++maleNumber;
-                    } else {
+					} 
+					if (dynamic_cast<Gender &>(*((*(beingIterator))->getBehavior("gender"))).get() == "female") {
                         ++femaleNumber;
                     }
+					if ((*beingIterator)->hasState("alobe") ) {
+						++sickBeingNumber;
+					}
                 }
+
 
                 cout
                     << "Tile ("
                     << x << ", " << y << "):\n"
                     << "    Males: " << maleNumber << "\n"
-                    << "    Females: " << femaleNumber
+					<< "    Females: " << femaleNumber << "\n"
+					<< "    Sick beings: " << sickBeingNumber
                 << endl;
             }
         }
