@@ -23,7 +23,7 @@ using namespace std;
 class Simulation
 {
     public:
-        Simulation(string jsonPath);
+        Simulation();
         void toStep(unsigned long step);         // Calculate simulation steps until reaching 'step'
         void nextStep();                         // Calculate the simulation next step
         Stepper * getStepper() const;            // Getter for the stepper

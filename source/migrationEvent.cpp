@@ -27,8 +27,8 @@ void MigrationEvent::filteredAction(Actor & actor)
             ) {
                 Tile * chosenTile = dynamic_cast<Migration &>(*((*beingIterator)->getBehavior("migration"))).chooseTile(neighboringTiles);
 
-                chosenTile->attachBeing(*(*beingIterator));
                 land.getTile(x, y)->detachBeing(*(*beingIterator));
+                chosenTile->attachBeing(*(*beingIterator));
             }
         }
     }
