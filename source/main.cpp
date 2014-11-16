@@ -20,8 +20,7 @@ int main()
     
     // normal law test
     Normal_law norm(5.0, 2.0);
-    norm.sample(1000);
-    cout << norm.map_to_string();
+    norm.roll_of_dice(35, 100);
 
     // Test simulation, stepper, actors
     unique_ptr<Simulation> simulation = make_unique<Simulation>();

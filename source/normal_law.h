@@ -19,10 +19,16 @@ class Normal_law : public Proba
 {
 public:
     Normal_law(float mean, float std_deviation);
-    float generate_rdm_value();
+    float generate_rdm_value(int iterator, unsigned long sampling);
 
 private:
     normal_distribution<> normal_law_distribution;
+    void populate_temporary_distrib();
+    void normalized();
+    float generate_law_values();
+    map<int, float> temporary_distrib;
+    float get_v(int pos);
+    unsigned int temp_distrib_size();
 };
 
 #endif /* defined(__alobe__normal_law__) */
