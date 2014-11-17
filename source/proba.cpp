@@ -1,6 +1,7 @@
 #include "proba.h"
 #include "iostream"
 #include "normal_law.h"
+#include "line_law.h"
 #include <map>
 #include <string>
 
@@ -11,47 +12,41 @@ using namespace std;
  */
 Proba::Proba()
 {
-    map<int, unsigned long> distrib;
+    map<int, float> my_distrib;
 }
 
-// function that calculates the surface beneath the distribution
-unsigned long Proba::integrate(unsigned long variable)
+// function that calculate a random value between 0 and 1
+bool Proba::roll_of_dice(int condition, unsigned long sampling)
 {
-    return 0;
+    
+    sample(sampling);
+    double dice = (double) rand()/RAND_MAX;
+    return (dice > my_distrib[condition]);
 };
 
-unsigned long Proba::rectangle_area()
-{
-    return 0;
-};
 
-float Proba::generate_rdm_value()
+float Proba::generate_rdm_value(int iterator, unsigned long sampling)
 {
     cout << "Warning ! Use of a virtual method";
     return 0;
 };
 
 
-map<int, unsigned long> Proba::sample(unsigned long sampling)
+void Proba::sample(unsigned long sampling)
 {
-    
-    for(int iterator=0; iterator < sampling; ++iterator)
+    for(int iterator =0; iterator < sampling; ++iterator)
     {
-        ++distrib[round(this->generate_rdm_value())];
+        my_distrib[iterator] = this->generate_rdm_value(iterator, sampling);
     }
-    return distrib;
 };
 
-string Proba::map_to_string()
+void Proba::print_my_distrib()
 {
-    string str;
-    for(auto p : distrib) {
-        str +=  to_string(p.first)+ " " + to_string(p.second) + '\n';
-    };
-    return str;
-};
+    for (auto p : my_distrib)
+    {
+        cout << p.first << " - " << p.second << '\n';
+    }
+}
 
 
-// function that calculate a random value between 0 and 1
 
-// function that return the value of proba (boolean)
