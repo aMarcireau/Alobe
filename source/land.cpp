@@ -3,8 +3,8 @@
 /**
  * Constructor
  */
-Land::Land(unsigned long width, unsigned long height):
-    Actor(),
+Land::Land(shared_ptr<GraphicsWindow> graphicsWindow, unsigned long width, unsigned long height):
+    Actor(graphicsWindow),
     my_width(width),
     my_height(height),
     my_tiles(vector<vector<unique_ptr<Tile> > >()),
@@ -131,6 +131,45 @@ void Land::applyChanges(Stepper & stepper)
     for (unsigned long x = 0; x < my_width; ++x) {
         for (unsigned long y = 0; y < my_height; ++y) {
             getTile(x, y)->applyChanges(stepper);
+        }
+    }
+}
+
+/**
+ * Trace the land
+ */
+void Land::trace()
+{
+    getGraphics()->drawStripes(
+        0, 0,
+        getGraphics()->getGraphicsWindow()->getWidth(), getGraphics()->getGraphicsWindow()->getHeight(),
+        "vertical",
+        my_width,
+        1
+    );
+    getGraphics()->drawStripes(
+        0, 0,
+        getGraphics()->getGraphicsWindow()->getWidth(), getGraphics()->getGraphicsWindow()->getHeight(),
+        "horizontal",
+        my_height,
+        1
+    );
+
+    for (unsigned long x = 0; x < my_width; ++x) {
+        for (unsigned long y = 0; y < my_height; ++y) {
+            getTile(x, y)->getGraphics()->setXOffset(intervalToCoordinate(
+                getGraphics()->getXOffset(),
+                getGraphics()->getGraphicsWindow()->getWidth(),
+                my_width,
+                x
+            ));
+            getTile(x, y)->getGraphics()->setXOffset(intervalToCoordinate(
+                getGraphics()->getYOffset(),
+                getGraphics()->getGraphicsWindow()->getHeight(),
+                my_height,
+                y
+            ));
+            getTile(x, y)->trace();
         }
     }
 }
