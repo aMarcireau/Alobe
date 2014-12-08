@@ -80,13 +80,15 @@ void Simulation::nextStepCallback()
  */
 void Simulation::initialize()
 {
-    my_land = make_unique<Land>(5, 5);
+    my_graphics = make_unique<Graphics>(make_shared<GraphicsWindow>(800, 800));
+
+    my_land = make_unique<Land>(my_graphics->getGraphicsWindow(), 5, 5);
     my_land->applyChanges(*getStepper()); // Apply changes in order to generate the tiles
     my_land->attachEvent(make_shared<MigrationEvent>());
 
     my_beingFactory = make_unique<BeingFactory>();
 
-    my_population = make_unique<Population>(*getLand(), *getBeingFactory());
+    my_population = make_unique<Population>(my_graphics->getGraphicsWindow(), *getLand(), *getBeingFactory());
     for (
         unsigned long beingsIndex = 0;
         beingsIndex < 20;

@@ -6,6 +6,7 @@
 #include <fstream>
 #include <time.h>
 
+#include "graphics.h"
 #include "stepper.h"
 #include "land.h"
 #include "population.h"
@@ -38,6 +39,7 @@ class Simulation
         void initialize();                       // Initialize the simulation
 
     private:
+        unique_ptr<Graphics> my_graphics;
         unique_ptr<Stepper> my_stepper;
         unique_ptr<Land> my_land;
         unique_ptr<BeingFactory> my_beingFactory;
