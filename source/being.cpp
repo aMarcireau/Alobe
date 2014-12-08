@@ -5,8 +5,8 @@
 /**
  * Constructor
  */
-Being::Being(string name, map<string, vector<string> > chromosomes):
-    Actor(),
+Being::Being(shared_ptr<GraphicsWindow> graphicsWindow, string name, map<string, vector<string> > chromosomes):
+    Actor(graphicsWindow),
     my_name(name),
     my_chromosomes(chromosomes),
     my_dead(false),
@@ -184,4 +184,11 @@ void Being::applyChanges(Stepper & stepper)
     ) {
         (idAndStateIterator->second)->applyChanges();
     }
+}
+
+/**
+ * Trace the being
+ */
+void Being::trace()
+{
 }

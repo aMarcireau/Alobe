@@ -3,8 +3,8 @@
 /**
  * Constructor
  */
-Population::Population(Land & land, BeingFactory & beingFactory):
-    Actor(),
+Population::Population(shared_ptr<GraphicsWindow> graphicsWindow, Land & land, BeingFactory & beingFactory):
+    Actor(graphicsWindow),
     my_land(&land),
     my_beingFactory(&beingFactory),
     my_beings(vector<unique_ptr<Being> >()),
@@ -135,4 +135,11 @@ void Population::applyChanges(Stepper & stepper)
             ++beingIterator;
         }
     }
+}
+
+/**
+ * Trace the population
+ */
+void Population::trace()
+{
 }

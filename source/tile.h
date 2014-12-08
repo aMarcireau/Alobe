@@ -19,12 +19,14 @@ using namespace std;
 class Tile: public Actor
 {
     public:
-        Tile();
+        Tile(shared_ptr<GraphicsWindow> graphicsWindow);
         vector<Being *> getBeings() const;     // Getter for the beings
         unsigned long getBeingsNumber() const; // Retrieve the number of beings
         void attachBeing(Being & being);       // Attach a being
         void detachBeing(Being & being);       // Detach a being
         void applyChanges(Stepper & stepper);  // Apply changes after a step
+        void trace();                          // Trace the tile
+
 
     private:
         vector<Being *> my_beings;
