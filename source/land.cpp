@@ -14,7 +14,7 @@ Land::Land(shared_ptr<GraphicsWindow> graphicsWindow, unsigned long width, unsig
         vector<unique_ptr<Tile> > column;
 
         for (unsigned long y = 0; y < my_height; ++y) {
-            column.push_back(make_unique<Tile>());
+            column.push_back(make_unique<Tile>(getGraphics()->getGraphicsWindow()));
         }
 
         mod_tiles.push_back(move(column));

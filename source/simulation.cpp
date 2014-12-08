@@ -86,7 +86,7 @@ void Simulation::initialize()
     my_land->applyChanges(*getStepper()); // Apply changes in order to generate the tiles
     my_land->attachEvent(make_shared<MigrationEvent>());
 
-    my_beingFactory = make_unique<BeingFactory>();
+    my_beingFactory = make_unique<BeingFactory>(my_graphics->getGraphicsWindow());
 
     my_population = make_unique<Population>(my_graphics->getGraphicsWindow(), *getLand(), *getBeingFactory());
     for (

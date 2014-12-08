@@ -22,7 +22,8 @@ const map<string, pair<vector<string>, map<unsigned long, string> > > BeingFacto
 /**
  * Constructor
  */
-BeingFactory::BeingFactory():
+BeingFactory::BeingFactory(shared_ptr<GraphicsWindow> graphicsWindow):
+    my_graphicsWindow(graphicsWindow),
     my_chromosomes(map<string, vector<string> >()),
     my_states(map<string, unique_ptr<State> >()),
     my_behaviors(map<string, map<string, shared_ptr<Behavior> > >())
@@ -102,7 +103,7 @@ unique_ptr<Being> BeingFactory::generateBeing(Being & firstParent, Being & secon
         );
     }
 
-    unique_ptr<Being> child =  move(generateBeing(mixedChromosomes));
+    unique_ptr<Being> child = move(generateBeing(mixedChromosomes));
 
     child->addParent(firstParent);
     child->addParent(secondParent);
@@ -117,7 +118,7 @@ unique_ptr<Being> BeingFactory::generateBeing(Being & firstParent, Being & secon
  */
 unique_ptr<Being> BeingFactory::generateBeing(map<string, vector<string> > chromosomes)
 {
-    unique_ptr<Being> being = make_unique<Being>(to_string(rand()), chromosomes);
+    unique_ptr<Being> being = make_unique<Being>(my_graphicsWindow, to_string(rand()), chromosomes);
 
     for (
         map<string, unique_ptr<State> >::iterator stateIterator = my_states.begin();
