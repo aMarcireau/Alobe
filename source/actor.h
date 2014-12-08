@@ -4,6 +4,8 @@
 #include <vector>
 #include <memory>
 
+#include "graphics.h"
+#include "graphicsWindow.h"
 #include "event.h"
 
 class Stepper;
@@ -18,15 +20,18 @@ using namespace std;
 class Actor
 {
     public:
-        Actor();
+        Actor(shared_ptr<GraphicsWindow> graphicsWindow);
         virtual ~Actor() = 0;
+        Graphics * getGraphics();                         // Getter for the Graphics
         void attachEvent(shared_ptr<Event> event);        // Attach an event
         void detachEvent(Event & event);                  // Detach an event
         void notify(unsigned long step);                  // Notification called by a Stepper object
         bool isDead();                                    // Is the actor dead?
         virtual void applyChanges(Stepper & stepper) = 0; // Apply changes after a step
+        virtual void trace() = 0;                         // Trace the actor
 
     private:
+        unique_ptr<Graphics> my_graphics;
         vector<shared_ptr<Event> > my_events;
 };
 
