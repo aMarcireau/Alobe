@@ -3,6 +3,8 @@
 #include <memory>
 #include <stdlib.h>
 
+#include <SFML/Graphics.hpp>
+
 #include "simulation.h"
 #include "stepper.h"
 #include "land.h"
