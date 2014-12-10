@@ -3,8 +3,8 @@
 /**
  * Constructor
  */
-Land::Land(unsigned long width, unsigned long height):
-    Actor(),
+Land::Land(unique_ptr<Graphics> graphics, unsigned long width, unsigned long height):
+    Actor(move(graphics)),
     my_width(width),
     my_height(height),
     my_tiles(vector<vector<unique_ptr<Tile> > >()),
@@ -14,7 +14,7 @@ Land::Land(unsigned long width, unsigned long height):
         vector<unique_ptr<Tile> > column;
 
         for (unsigned long y = 0; y < my_height; ++y) {
-            column.push_back(make_unique<Tile>());
+            column.push_back(make_unique<Tile>(getGraphics()->clone()));
         }
 
         mod_tiles.push_back(move(column));
@@ -131,6 +131,46 @@ void Land::applyChanges(Stepper & stepper)
     for (unsigned long x = 0; x < my_width; ++x) {
         for (unsigned long y = 0; y < my_height; ++y) {
             getTile(x, y)->applyChanges(stepper);
+        }
+    }
+}
+
+/**
+ * Trace the land
+ */
+void Land::trace()
+{
+    getGraphics()->drawStripes(
+        0, getGraphics()->getGraphicsWindow()->getWidth(),
+        0, getGraphics()->getGraphicsWindow()->getHeight(),
+        "horizontal",
+        my_height,
+        2,
+        0x808080
+    );
+    getGraphics()->drawStripes(
+        0, getGraphics()->getGraphicsWindow()->getWidth(),
+        0, getGraphics()->getGraphicsWindow()->getHeight(),
+        "vertical",
+        my_width,
+        2,
+        0x808080
+    );
+    for (unsigned long x = 0; x < my_width; ++x) {
+        for (unsigned long y = 0; y < my_height; ++y) {
+            getTile(x, y)->getGraphics()->setXOffset(intervalToCoordinate(
+                getGraphics()->getXOffset(),
+                getGraphics()->getGraphicsWindow()->getWidth(),
+                my_width,
+                x
+            ));
+            getTile(x, y)->getGraphics()->setYOffset(intervalToCoordinate(
+                getGraphics()->getYOffset(),
+                getGraphics()->getGraphicsWindow()->getHeight(),
+                my_height,
+                y
+            ));
+            getTile(x, y)->trace();
         }
     }
 }

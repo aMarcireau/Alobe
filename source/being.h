@@ -25,7 +25,7 @@ using namespace std;
 class Being : public Actor
 {
     public:
-        Being(string name, map<string, vector<string> > chromosomes);
+        Being(unique_ptr<Graphics> graphics, string name, map<string, vector<string> > chromosomes);
         string getName() const;                                       // Getter for the being name
         map<string, vector<string> > getChromosomes() const;	      // Getter for the being chromosomes
 
@@ -50,6 +50,7 @@ class Being : public Actor
         bool isWillingToMateWith(Being & other); // Is the being willing to mate with the given other being?
 
         void applyChanges(Stepper & stepper); // Apply changes after a step
+        void trace();                         // Trace the being
 
     private:
         string my_name;

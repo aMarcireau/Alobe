@@ -3,8 +3,8 @@
 /**
  * Constructor
  */
-Tile::Tile():
-    Actor()
+Tile::Tile(unique_ptr<Graphics> graphics):
+    Actor(move(graphics))
 {
 }
 
@@ -57,4 +57,11 @@ void Tile::detachBeing(Being & being)
 void Tile::applyChanges(Stepper & stepper)
 {
     my_beings = mod_beings;
+}
+
+/**
+ * Trace the tile
+ */
+void Tile::trace()
+{
 }

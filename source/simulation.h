@@ -6,6 +6,8 @@
 #include <fstream>
 #include <time.h>
 
+#include "sfmlGraphicsWindow.h"
+#include "sfmlGraphics.h"
 #include "stepper.h"
 #include "land.h"
 #include "population.h"
@@ -26,18 +28,21 @@ class Simulation
 {
     public:
         Simulation();
-        void toStep(unsigned long step);         // Calculate simulation steps until reaching 'step'
-        void nextStep();                         // Calculate the simulation next step
-        Stepper * getStepper() const;            // Getter for the stepper
-        Land * getLand() const;                  // Getter for the land
-        BeingFactory * getBeingFactory() const;  // Getter for the being factory
-        Population * getPopulation() const;      // Getter for the population
+        void toStep(unsigned long step);        // Calculate simulation steps until reaching 'step'
+        void nextStep();                        // Calculate the simulation next step
+        Stepper * getStepper() const;           // Getter for the stepper
+        Land * getLand() const;                 // Getter for the land
+        BeingFactory * getBeingFactory() const; // Getter for the being factory
+        Population * getPopulation() const;     // Getter for the population
+        Graphics * getRenderWindow() const;     // Getter for the render window
+        void trace();                           // Trace the current step
 
     private:
-        void nextStepCallback();                 // Called at the end of the nextStep method
-        void initialize();                       // Initialize the simulation
+        void nextStepCallback();                // Called at the end of the nextStep method
+        void initialize();                      // Initialize the simulation
 
     private:
+        unique_ptr<Graphics> my_graphics;
         unique_ptr<Stepper> my_stepper;
         unique_ptr<Land> my_land;
         unique_ptr<BeingFactory> my_beingFactory;

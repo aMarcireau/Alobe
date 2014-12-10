@@ -80,13 +80,16 @@ void Simulation::nextStepCallback()
  */
 void Simulation::initialize()
 {
-    my_land = make_unique<Land>(5, 5);
+    shared_ptr<SfmlGraphicsWindow> sfmlGraphicsWindow = make_shared<SfmlGraphicsWindow>(800, 800);
+    my_graphics = make_unique<SfmlGraphics>(sfmlGraphicsWindow);
+
+    my_land = make_unique<Land>(make_unique<SfmlGraphics>(sfmlGraphicsWindow), 5, 5);
     my_land->applyChanges(*getStepper()); // Apply changes in order to generate the tiles
     my_land->attachEvent(make_shared<MigrationEvent>());
 
-    my_beingFactory = make_unique<BeingFactory>();
+    my_beingFactory = make_unique<BeingFactory>(make_unique<SfmlGraphics>(sfmlGraphicsWindow));
 
-    my_population = make_unique<Population>(*getLand(), *getBeingFactory());
+    my_population = make_unique<Population>(make_unique<SfmlGraphics>(sfmlGraphicsWindow), *getLand(), *getBeingFactory());
     for (
         unsigned long beingsIndex = 0;
         beingsIndex < 20;
@@ -110,5 +113,18 @@ void Simulation::initialize()
     my_stepper->attach(*getPopulation());
 }
 
+/**
+ * Getter for the render window
+ */
+Graphics * Simulation::getRenderWindow() const
+{
+    return my_graphics.get();
+}
 
-
+/**
+ * Trace the current step
+ */
+void Simulation::trace()
+{
+    my_land->trace();
+}

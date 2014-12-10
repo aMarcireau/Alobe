@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <math.h>
 
+#include "graphics.h"
 #include "being.h"
 #include "state.h"
 #include "behavior.h"
@@ -34,7 +35,7 @@ using namespace std;
 class BeingFactory
 {
     public:
-        BeingFactory();
+        BeingFactory(unique_ptr<Graphics> graphics);
         unique_ptr<Being> generateBeing();                                                                   // Generate a random being
         unique_ptr<Being> generateBeing(Being & firstParent, Being & secondParent);                          // Generate a being from a couple
         unique_ptr<Being> generateBeing(map<string, vector<string> > chromosomes);                           // Generate a being from a set of chromosomes
@@ -43,6 +44,7 @@ class BeingFactory
         void initialize();                                                                                   // Initialize the being factory
 
     private:
+        unique_ptr<Graphics> my_graphics;
         static const map<string, pair<vector<string>, map<unsigned long, string> > > behaviorsByChromosomes; // Map the behaviors to the chromosomes combinations
         map<string, vector<string> > my_chromosomes;
         map<string, unique_ptr<State> > my_states;

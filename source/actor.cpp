@@ -3,7 +3,8 @@
 /**
  * Constructor
  */
-Actor::Actor():
+Actor::Actor(unique_ptr<Graphics> graphics):
+    my_graphics(move(graphics)),
     my_events(vector<shared_ptr<Event> >())
 {
 }
@@ -13,6 +14,14 @@ Actor::Actor():
  */
 Actor::~Actor()
 {
+}
+
+/**
+ * Getter for the Graphics
+ */
+Graphics * Actor::getGraphics()
+{
+    return my_graphics.get();
 }
 
 /**
