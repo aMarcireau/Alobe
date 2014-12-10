@@ -1,0 +1,16 @@
+#ifndef __ALOBE__CONFIGURATION__
+#define __ALOBE__CONFIGURATION__
+
+#define LAND_WIDTH 8
+#define LAND_HEIGHT 8
+#define INITIAL_BEING_NUMBER 20
+
+#define WINDOW_WIDTH 800
+#define WINDOW_HEIGHT 800
+
+#define MAX_STEP 20
+
+#define BACKGROUND_COLOR 0xffffff
+#define GRID_COLOR 0x808080
+
+#endif // __ALOBE__CONFIGURATION__

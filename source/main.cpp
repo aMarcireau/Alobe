@@ -1,16 +1,14 @@
 #include <iostream>
 #include <map>
+#include <vector>
 #include <memory>
 #include <stdlib.h>
 #include <SFML/Graphics.hpp>
 
+#include "configuration.h"
+#include "utilities.h"
 #include "sfmlGraphicsWindow.h"
 #include "simulation.h"
-#include "stepper.h"
-#include "land.h"
-#include "being.h"
-#include "gender.h"
-#include "normal_law.h"
 
 using namespace std;
 
@@ -21,9 +19,11 @@ int main()
     srand(static_cast<unsigned int>(time(NULL)));
 
     unique_ptr<Simulation> simulation = make_unique<Simulation>();
-    simulation->toStep(20);
+    simulation->toStep(MAX_STEP);
 
     sf::RenderWindow * renderWindow = (dynamic_cast<SfmlGraphicsWindow &>(*(simulation->getRenderWindow()->getGraphicsWindow()))).getRenderWindow();
+    vector<unsigned long> rgbBackgroundColor = hexadecimalToRGB(BACKGROUND_COLOR);
+    sf::Color backgroundColor(rgbBackgroundColor[0], rgbBackgroundColor[1], rgbBackgroundColor[2]);
     while (renderWindow->isOpen())
 	{
         sf::Event event;
@@ -33,7 +33,7 @@ int main()
                 renderWindow->close();
             }
 		}
-        renderWindow->clear(sf::Color::White);
+        renderWindow->clear(backgroundColor);
         simulation->trace();
         renderWindow->display();
     }

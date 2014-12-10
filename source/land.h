@@ -6,6 +6,7 @@
 #include <memory>
 #include <map>
 
+#include "configuration.h"
 #include "actor.h"
 #include "stepper.h"
 #include "tile.h"

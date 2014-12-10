@@ -80,10 +80,10 @@ void Simulation::nextStepCallback()
  */
 void Simulation::initialize()
 {
-    shared_ptr<SfmlGraphicsWindow> sfmlGraphicsWindow = make_shared<SfmlGraphicsWindow>(800, 800);
+    shared_ptr<SfmlGraphicsWindow> sfmlGraphicsWindow = make_shared<SfmlGraphicsWindow>(WINDOW_WIDTH, WINDOW_HEIGHT);
     my_graphics = make_unique<SfmlGraphics>(sfmlGraphicsWindow);
 
-    my_land = make_unique<Land>(make_unique<SfmlGraphics>(sfmlGraphicsWindow), 5, 5);
+    my_land = make_unique<Land>(make_unique<SfmlGraphics>(sfmlGraphicsWindow), LAND_WIDTH, LAND_HEIGHT);
     my_land->applyChanges(*getStepper()); // Apply changes in order to generate the tiles
     my_land->attachEvent(make_shared<MigrationEvent>());
 
@@ -92,7 +92,7 @@ void Simulation::initialize()
     my_population = make_unique<Population>(make_unique<SfmlGraphics>(sfmlGraphicsWindow), *getLand(), *getBeingFactory());
     for (
         unsigned long beingsIndex = 0;
-        beingsIndex < 20;
+        beingsIndex < INITIAL_BEING_NUMBER;
         ++beingsIndex
     ) {
         my_population->addBeing();
