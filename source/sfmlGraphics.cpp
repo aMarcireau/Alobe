@@ -78,11 +78,7 @@ void SfmlGraphics::drawCircle(unsigned long x, unsigned long y, unsigned long ra
  */
 sf::Color SfmlGraphics::hexadecimalToSfmlColor(unsigned long color)
 {
-    sf::Color sfmlColor(
-        color / 0x10000,
-        (color / 0x100) % 0x100,
-        color % 0x100
-    );
+    vector<unsigned long> rgbColor = hexadecimalToRGB(color);
 
-    return sfmlColor;
+    return sf::Color(rgbColor[0], rgbColor[1], rgbColor[2]);
 }
