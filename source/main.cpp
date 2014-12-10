@@ -2,9 +2,9 @@
 #include <map>
 #include <memory>
 #include <stdlib.h>
-
 #include <SFML/Graphics.hpp>
 
+#include "sfmlGraphicsWindow.h"
 #include "simulation.h"
 #include "stepper.h"
 #include "land.h"
@@ -15,6 +15,36 @@
 using namespace std;
 
 int main()
+{
+    // Set seed for random methods
+    // Should be added to proba somehow
+    srand(static_cast<unsigned int>(time(NULL)));
+
+    unique_ptr<Simulation> simulation = make_unique<Simulation>();
+    simulation->toStep(20);
+
+    sf::RenderWindow * renderWindow = (dynamic_cast<SfmlGraphicsWindow &>(*(simulation->getRenderWindow()->getGraphicsWindow()))).getRenderWindow();
+    while (renderWindow->isOpen())
+	{
+        sf::Event event;
+		while (renderWindow->pollEvent(event))
+		{
+            if (event.type == sf::Event::Closed) {
+                renderWindow->close();
+            }
+		}
+        renderWindow->clear(sf::Color::White);
+        simulation->trace();
+        renderWindow->display();
+    }
+
+    return 0;
+}
+
+
+
+/*
+void test()
 {
     // Set seed for random methods
     // Should be added to proba somehow
@@ -81,6 +111,7 @@ int main()
     }
 
 	simulation->toStep(30);
+    simulation->trace();
 
     // Print beings positions after simulation
     for (unsigned long x = 0; x < simulation->getLand()->getWidth(); ++x) {
@@ -107,6 +138,6 @@ int main()
             }
         }
     }
-
-	return 0;
 }
+
+*/

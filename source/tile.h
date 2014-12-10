@@ -19,7 +19,7 @@ using namespace std;
 class Tile: public Actor
 {
     public:
-        Tile(shared_ptr<GraphicsWindow> graphicsWindow);
+        Tile(unique_ptr<Graphics> graphics);
         vector<Being *> getBeings() const;     // Getter for the beings
         unsigned long getBeingsNumber() const; // Retrieve the number of beings
         void attachBeing(Being & being);       // Attach a being

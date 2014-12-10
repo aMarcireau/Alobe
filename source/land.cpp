@@ -141,20 +141,21 @@ void Land::applyChanges(Stepper & stepper)
 void Land::trace()
 {
     getGraphics()->drawStripes(
-        0, 0,
-        getGraphics()->getGraphicsWindow()->getWidth(), getGraphics()->getGraphicsWindow()->getHeight(),
-        "vertical",
-        my_width,
-        1
-    );
-    getGraphics()->drawStripes(
-        0, 0,
-        getGraphics()->getGraphicsWindow()->getWidth(), getGraphics()->getGraphicsWindow()->getHeight(),
+        0, getGraphics()->getGraphicsWindow()->getWidth(),
+        0, getGraphics()->getGraphicsWindow()->getHeight(),
         "horizontal",
         my_height,
-        1
+        2,
+        0x808080
     );
-
+    getGraphics()->drawStripes(
+        0, getGraphics()->getGraphicsWindow()->getWidth(),
+        0, getGraphics()->getGraphicsWindow()->getHeight(),
+        "vertical",
+        my_width,
+        2,
+        0x808080
+    );
     for (unsigned long x = 0; x < my_width; ++x) {
         for (unsigned long y = 0; y < my_height; ++y) {
             getTile(x, y)->getGraphics()->setXOffset(intervalToCoordinate(
@@ -163,7 +164,7 @@ void Land::trace()
                 my_width,
                 x
             ));
-            getTile(x, y)->getGraphics()->setXOffset(intervalToCoordinate(
+            getTile(x, y)->getGraphics()->setYOffset(intervalToCoordinate(
                 getGraphics()->getYOffset(),
                 getGraphics()->getGraphicsWindow()->getHeight(),
                 my_height,

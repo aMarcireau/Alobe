@@ -3,8 +3,8 @@
 /**
  * Constructor
  */
-Tile::Tile(shared_ptr<GraphicsWindow> graphicsWindow):
-    Actor(graphicsWindow)
+Tile::Tile(unique_ptr<Graphics> graphics):
+    Actor(move(graphics))
 {
 }
 
