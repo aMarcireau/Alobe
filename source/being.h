@@ -25,7 +25,7 @@ using namespace std;
 class Being : public Actor
 {
     public:
-        Being(shared_ptr<GraphicsWindow> graphicsWindow, string name, map<string, vector<string> > chromosomes);
+        Being(unique_ptr<Graphics> graphics, string name, map<string, vector<string> > chromosomes);
         string getName() const;                                       // Getter for the being name
         map<string, vector<string> > getChromosomes() const;	      // Getter for the being chromosomes
 

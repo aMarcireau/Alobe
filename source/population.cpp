@@ -3,8 +3,8 @@
 /**
  * Constructor
  */
-Population::Population(shared_ptr<GraphicsWindow> graphicsWindow, Land & land, BeingFactory & beingFactory):
-    Actor(graphicsWindow),
+Population::Population(unique_ptr<Graphics> graphics, Land & land, BeingFactory & beingFactory):
+    Actor(move(graphics)),
     my_land(&land),
     my_beingFactory(&beingFactory),
     my_beings(vector<unique_ptr<Being> >()),

@@ -5,8 +5,8 @@
 /**
  * Constructor
  */
-Being::Being(shared_ptr<GraphicsWindow> graphicsWindow, string name, map<string, vector<string> > chromosomes):
-    Actor(graphicsWindow),
+Being::Being(unique_ptr<Graphics> graphics, string name, map<string, vector<string> > chromosomes):
+    Actor(move(graphics)),
     my_name(name),
     my_chromosomes(chromosomes),
     my_dead(false),

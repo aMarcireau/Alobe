@@ -22,7 +22,7 @@ using namespace std;
 class Population : public Actor
 {
     public:
-        Population(shared_ptr<GraphicsWindow> graphicsWindow, Land & land, BeingFactory & beingFactory);
+        Population(unique_ptr<Graphics> graphics, Land & land, BeingFactory & beingFactory);
 		Land * getLand() const;                               // Getter for the land
         BeingFactory * getBeingFactory() const;               // Getter for the being factory
         vector<Being *> getBeings();                          // Getter for the beings

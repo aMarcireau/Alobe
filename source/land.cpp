@@ -3,8 +3,8 @@
 /**
  * Constructor
  */
-Land::Land(shared_ptr<GraphicsWindow> graphicsWindow, unsigned long width, unsigned long height):
-    Actor(graphicsWindow),
+Land::Land(unique_ptr<Graphics> graphics, unsigned long width, unsigned long height):
+    Actor(move(graphics)),
     my_width(width),
     my_height(height),
     my_tiles(vector<vector<unique_ptr<Tile> > >()),
@@ -14,7 +14,7 @@ Land::Land(shared_ptr<GraphicsWindow> graphicsWindow, unsigned long width, unsig
         vector<unique_ptr<Tile> > column;
 
         for (unsigned long y = 0; y < my_height; ++y) {
-            column.push_back(make_unique<Tile>(getGraphics()->getGraphicsWindow()));
+            column.push_back(make_unique<Tile>(getGraphics()->clone()));
         }
 
         mod_tiles.push_back(move(column));

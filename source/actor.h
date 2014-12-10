@@ -5,7 +5,6 @@
 #include <memory>
 
 #include "graphics.h"
-#include "graphicsWindow.h"
 #include "event.h"
 
 class Stepper;
@@ -20,7 +19,7 @@ using namespace std;
 class Actor
 {
     public:
-        Actor(shared_ptr<GraphicsWindow> graphicsWindow);
+        Actor(unique_ptr<Graphics> graphics);
         virtual ~Actor() = 0;
         Graphics * getGraphics();                         // Getter for the Graphics
         void attachEvent(shared_ptr<Event> event);        // Attach an event

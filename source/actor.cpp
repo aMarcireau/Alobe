@@ -3,8 +3,8 @@
 /**
  * Constructor
  */
-Actor::Actor(shared_ptr<GraphicsWindow> graphicsWindow):
-    my_graphics(make_unique<Graphics>(graphicsWindow)),
+Actor::Actor(unique_ptr<Graphics> graphics):
+    my_graphics(move(graphics)),
     my_events(vector<shared_ptr<Event> >())
 {
 }

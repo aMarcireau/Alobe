@@ -22,7 +22,7 @@ using namespace std;
 class Land: public Actor
 {
     public:
-        Land(shared_ptr<GraphicsWindow> graphicsWindow, unsigned long width, unsigned long height);
+        Land(unique_ptr<Graphics> graphics, unsigned long width, unsigned long height);
         unsigned long getWidth() const;                                // Getter for the land width (number of tiles)
         unsigned long getHeight() const;                               // Getter for the land height (number of tiles)
         Tile * getTile(unsigned long x, unsigned long y) const;        // Get tile by position
