@@ -6,6 +6,7 @@
 #include <fstream>
 #include <time.h>
 
+#include "configuration.h"
 #include "sfmlGraphicsWindow.h"
 #include "sfmlGraphics.h"
 #include "stepper.h"

@@ -22,3 +22,11 @@ unsigned long intervalToCoordinate(unsigned long minimum, unsigned long maximum,
 
     return minimum + (unsigned long)(((double)(maximum - minimum)) / total * position);
 }
+
+/**
+ * Convert hexadecimal color to RGB
+ */
+vector<unsigned long> hexadecimalToRGB(unsigned long color)
+{
+    return {color / 0x10000, (color / 0x100) % 0x100, color % 0x100};
+}

@@ -146,7 +146,7 @@ void Land::trace()
         "horizontal",
         my_height,
         2,
-        0x808080
+        GRID_COLOR
     );
     getGraphics()->drawStripes(
         0, getGraphics()->getGraphicsWindow()->getWidth(),
@@ -154,7 +154,7 @@ void Land::trace()
         "vertical",
         my_width,
         2,
-        0x808080
+        GRID_COLOR
     );
     for (unsigned long x = 0; x < my_width; ++x) {
         for (unsigned long y = 0; y < my_height; ++y) {

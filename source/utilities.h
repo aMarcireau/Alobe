@@ -2,6 +2,7 @@
 #define __ALOBE__UTILITIES__
 
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -9,12 +10,13 @@ using namespace std;
  * Collection of functions
  * used throughout the code
  */
-long long llModulo(long long dividend, long long divisor); // Calculate dividend mod(divisor) for long long numbers
+long long llModulo(long long dividend, long long divisor);   // Calculate dividend mod(divisor) for long long numbers
 unsigned long intervalToCoordinate(
     unsigned long minimum,
     unsigned long maximum,
     unsigned long total,
     unsigned long position
-);                                                         // Calculate the position of an element in a divided interval
+);                                                           // Calculate the position of an element in a divided interval
+vector<unsigned long> hexadecimalToRGB(unsigned long color); // Convert hexadecimal color to RGB
 
 #endif // __ALOBE__UTILITIES__
