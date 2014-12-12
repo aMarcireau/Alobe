@@ -4,8 +4,10 @@
  * Constructor
  */
 SfmlGraphics::SfmlGraphics(shared_ptr<GraphicsWindow> graphicsWindow):
-    Graphics(graphicsWindow)
+    Graphics(graphicsWindow),
+    my_font(sf::Font())
 {
+    my_font.loadFromFile(FONT_PATH);
 }
 
 /**
@@ -21,9 +23,9 @@ unique_ptr<Graphics> SfmlGraphics::clone()
  */
 void SfmlGraphics::drawStripes(
     unsigned long xLeft,
-    unsigned long xRight,
+    unsigned long width,
     unsigned long yTop,
-    unsigned long yBottom,
+    unsigned long height,
     string direction,
     unsigned long spacesNumber,
     unsigned long thickness,
@@ -33,14 +35,14 @@ void SfmlGraphics::drawStripes(
         *((dynamic_cast<SfmlGraphicsWindow &>(*(getGraphicsWindow().get()))).getRenderWindow())
     ));
 
-    float width;
-    float height;
+    float floatWidth;
+    float floatHeight;
     if (direction == "horizontal") {
-        width = (float)(xRight - xLeft);
-        height = (float)(thickness);
+        floatWidth = (float)(width);
+        floatHeight = (float)(thickness);
     } else if (direction == "vertical") {
-        width = (float)(thickness);
-        height = (float)(yBottom - yTop);
+        floatWidth = (float)(thickness);
+        floatHeight = (float)(height);
     } else {
         throw logic_error("Bad key for direction");
     }
@@ -50,15 +52,15 @@ void SfmlGraphics::drawStripes(
     for (unsigned long lineIndex = 0; lineIndex <= spacesNumber; ++lineIndex) {
         if (direction == "horizontal") {
             xPosition = (float)(xLeft);
-            yPosition = (float)intervalToCoordinate(yTop, yBottom, spacesNumber, lineIndex)  - float(thickness) / 2;
+            yPosition = (float)intervalToCoordinate(yTop, width - 1, spacesNumber, lineIndex)  - float(thickness) / 2;
         } else if (direction == "vertical") {
-            xPosition = (float)intervalToCoordinate(xLeft, xRight, spacesNumber, lineIndex) - (float)(thickness) / 2;
+            xPosition = (float)intervalToCoordinate(xLeft, height - 1, spacesNumber, lineIndex) - (float)(thickness) / 2;
             yPosition = (float)(yTop);
         } else {
             throw logic_error("Bad key for direction");
         }
 
-        sf::RectangleShape line(sf::Vector2f(width, height));
+        sf::RectangleShape line(sf::Vector2f(floatWidth, floatHeight));
         line.setPosition(xPosition, yPosition);
         line.setFillColor(hexadecimalToSfmlColor(color));
         renderWindow.draw(line);
@@ -66,12 +68,52 @@ void SfmlGraphics::drawStripes(
 }
 
 /**
+ * Draw a rectangle
+ */
+void SfmlGraphics::drawRectangle(unsigned long xLeft, unsigned long width, unsigned long yTop, unsigned long height, unsigned long color)
+{
+    sf::RenderWindow & renderWindow(dynamic_cast<sf::RenderWindow &>(
+        *((dynamic_cast<SfmlGraphicsWindow &>(*(getGraphicsWindow().get()))).getRenderWindow())
+    ));
+
+    sf::RectangleShape rectangle(sf::Vector2f((float)(width), (float)(height)));
+    rectangle.setPosition((float)(xLeft), (float)(yTop));
+    rectangle.setFillColor(hexadecimalToSfmlColor(color));
+    renderWindow.draw(rectangle);
+}
+
+/**
  * Draw a circle
  */
 void SfmlGraphics::drawCircle(unsigned long x, unsigned long y, unsigned long radius, unsigned long color)
 {
+    sf::RenderWindow & renderWindow(dynamic_cast<sf::RenderWindow &>(
+        *((dynamic_cast<SfmlGraphicsWindow &>(*(getGraphicsWindow().get()))).getRenderWindow())
+    ));
+
+    sf::CircleShape circle(radius);
+    circle.setPosition((float)(x), (float)(y));
+    circle.setFillColor(hexadecimalToSfmlColor(color));
+    renderWindow.draw(circle);
 }
 
+/**
+ * Draw a text
+ */
+void SfmlGraphics::drawText(unsigned long x, unsigned long y, string text, unsigned long size, unsigned long color)
+{
+    sf::RenderWindow & renderWindow(dynamic_cast<sf::RenderWindow &>(
+        *((dynamic_cast<SfmlGraphicsWindow &>(*(getGraphicsWindow().get()))).getRenderWindow())
+    ));
+
+    sf::Text sfmlText;
+    sfmlText.setFont(my_font);
+    sfmlText.setString(text);
+    sfmlText.setCharacterSize((unsigned int)size);
+    sfmlText.setColor(hexadecimalToSfmlColor(color));
+    sfmlText.setPosition((float)(x), (float)(y));
+    renderWindow.draw(sfmlText);
+}
 
 /**
  * Hex to SFML color converter

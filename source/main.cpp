@@ -19,9 +19,9 @@ int main()
     srand(static_cast<unsigned int>(time(NULL)));
 
     unique_ptr<Simulation> simulation = make_unique<Simulation>();
-    simulation->toStep(MAX_STEP);
 
     sf::RenderWindow * renderWindow = (dynamic_cast<SfmlGraphicsWindow &>(*(simulation->getRenderWindow()->getGraphicsWindow()))).getRenderWindow();
+    renderWindow->setFramerateLimit(FRAMERATE);
     vector<unsigned long> rgbBackgroundColor = hexadecimalToRGB(BACKGROUND_COLOR);
     sf::Color backgroundColor(rgbBackgroundColor[0], rgbBackgroundColor[1], rgbBackgroundColor[2]);
     while (renderWindow->isOpen())
@@ -31,6 +31,10 @@ int main()
 		{
             if (event.type == sf::Event::Closed) {
                 renderWindow->close();
+            } else if (event.type == sf::Event::KeyPressed) {
+                 if (event.key.code == sf::Keyboard::Return) {
+                    simulation->nextStep();
+                }
             }
 		}
         renderWindow->clear(backgroundColor);

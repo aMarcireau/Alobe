@@ -140,37 +140,41 @@ void Land::applyChanges(Stepper & stepper)
  */
 void Land::trace()
 {
-    getGraphics()->drawStripes(
-        0, getGraphics()->getGraphicsWindow()->getWidth(),
-        0, getGraphics()->getGraphicsWindow()->getHeight(),
-        "horizontal",
-        my_height,
-        2,
-        GRID_COLOR
-    );
-    getGraphics()->drawStripes(
-        0, getGraphics()->getGraphicsWindow()->getWidth(),
-        0, getGraphics()->getGraphicsWindow()->getHeight(),
-        "vertical",
-        my_width,
-        2,
-        GRID_COLOR
-    );
+    unsigned long tileWidth = getGraphics()->getWidth() / my_width - GRID_THICKNESS;
+    unsigned long tileHeight = getGraphics()->getHeight() / my_height - GRID_THICKNESS;
     for (unsigned long x = 0; x < my_width; ++x) {
         for (unsigned long y = 0; y < my_height; ++y) {
             getTile(x, y)->getGraphics()->setXOffset(intervalToCoordinate(
                 getGraphics()->getXOffset(),
-                getGraphics()->getGraphicsWindow()->getWidth(),
+                getGraphics()->getWidth() - 1,
                 my_width,
                 x
-            ));
+            ) + GRID_THICKNESS / 2);
             getTile(x, y)->getGraphics()->setYOffset(intervalToCoordinate(
                 getGraphics()->getYOffset(),
-                getGraphics()->getGraphicsWindow()->getHeight(),
+                getGraphics()->getHeight() - 1,
                 my_height,
                 y
-            ));
+            ) + GRID_THICKNESS / 2);
+            getTile(x, y)->getGraphics()->setWidth(tileWidth);
+            getTile(x, y)->getGraphics()->setHeight(tileHeight);
             getTile(x, y)->trace();
         }
     }
+    getGraphics()->drawStripes(
+        getGraphics()->getXOffset(), getGraphics()->getWidth(),
+        getGraphics()->getYOffset(), getGraphics()->getHeight(),
+        "horizontal",
+        my_height,
+        GRID_THICKNESS,
+        GRID_COLOR
+    );
+    getGraphics()->drawStripes(
+        getGraphics()->getXOffset(), getGraphics()->getWidth(),
+        getGraphics()->getYOffset(), getGraphics()->getHeight(),
+        "vertical",
+        my_width,
+        GRID_THICKNESS,
+        GRID_COLOR
+    );
 }
