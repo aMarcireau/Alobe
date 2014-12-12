@@ -68,11 +68,17 @@ void Simulation::nextStepCallback()
     my_land->applyChanges(*getStepper());
     my_population->applyChanges(*getStepper());
 
-    cout << "\n" << "Step "<< my_stepper->getStep() << "\n"
+    cout << "\n" << "Step " << my_stepper->getStep() << "\n"
         << "    Alive beings: " << my_population->getBeingsNumber() << "\n"
         << "    Dead beings: " << my_population->getDeadBeingsNumber() << "\n"
-		<< "    Sick beings: " << my_population->getSickBeingsNumber() << "\n"
-        << std::endl;
+        << "    Sick beings: " << my_population->getSickBeingsNumber() << endl;
+
+	for (unsigned long x = 0; x < my_land->getWidth(); ++x) {
+		for (unsigned long y = 0; y < my_land->getHeight(); ++y) {
+            cout << "    [" << x << " ," << y << "]: " << my_land->getTile(x, y)->getBeingsNumber() << endl;
+		}
+	}
+
 }
 
 /**
@@ -86,6 +92,10 @@ void Simulation::initialize()
     my_land = make_unique<Land>(make_unique<SfmlGraphics>(sfmlGraphicsWindow), LAND_WIDTH, LAND_HEIGHT);
     my_land->applyChanges(*getStepper()); // Apply changes in order to generate the tiles
     my_land->attachEvent(make_shared<MigrationEvent>());
+    my_land->getGraphics()->setXOffset(LAND_PADDING);
+    my_land->getGraphics()->setYOffset(LAND_PADDING);
+    my_land->getGraphics()->setWidth(my_land->getGraphics()->getWidth() - LAND_PADDING * 2);
+    my_land->getGraphics()->setHeight(my_land->getGraphics()->getHeight() - LAND_PADDING * 2);
 
     my_beingFactory = make_unique<BeingFactory>(make_unique<SfmlGraphics>(sfmlGraphicsWindow));
 
@@ -127,4 +137,19 @@ Graphics * Simulation::getRenderWindow() const
 void Simulation::trace()
 {
     my_land->trace();
+    my_graphics->drawText(
+        LAND_PADDING, TITLE_PADDING,
+        "Step: " + to_string(my_stepper->getStep()),
+        LAND_PADDING - TITLE_PADDING * 2 - GRID_THICKNESS / 2,
+        TITLE_COLOR
+    );
+
+    my_graphics->drawText(
+        LAND_PADDING, TITLE_PADDING + WINDOW_HEIGHT - LAND_PADDING,
+        "Alive beings: " + to_string(my_population->getBeingsNumber()) +
+        "    Dead Beings: " + to_string(my_population->getDeadBeingsNumber()) +
+        "    Sick beings: " + to_string(my_population->getSickBeingsNumber()),
+        LAND_PADDING - TITLE_PADDING * 2 - GRID_THICKNESS / 2,
+        TITLE_COLOR
+    );
 }

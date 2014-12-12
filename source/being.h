@@ -7,6 +7,7 @@
 #include <vector>
 #include <stdlib.h>
 
+#include "configuration.h"
 #include "actor.h"
 #include "state.h"
 #include "behavior.h"

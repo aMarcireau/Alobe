@@ -99,7 +99,7 @@ void Population::addBeing()
 void Population::addBeing(unique_ptr<Being> being, unsigned long x, unsigned long y)
 {
     mod_beings.push_back(move(being));
-    my_land->getTile(x, y)->attachBeing(*(mod_beings.back().get()));
+    my_land->getTile(x, y)->attachBeing(mod_beings.back().get());
 }
 
 /**
@@ -122,17 +122,32 @@ void Population::applyChanges(Stepper & stepper)
         vector<unique_ptr<Being> >::iterator beingIterator = my_beings.begin();
         beingIterator != my_beings.end();
     ) {
+        (*beingIterator)->applyChanges(stepper);
+
         if ((*beingIterator)->isDead()) {
+            bool isRemoved = false;
+
             for (unsigned long x = 0; x < my_land->getWidth(); ++x) {
                 for (unsigned long y = 0; y < my_land->getHeight(); ++y) {
-                    my_land->getTile(x, y)->detachBeing(*(*beingIterator));
+                    isRemoved = my_land->getTile(x, y)->detachBeing(beingIterator->get());
+                    if (isRemoved) {
+                        break;
+                    }
+                }
+                if (isRemoved) {
+                    break;
                 }
             }
             dead_beings.push_back(move(*beingIterator));
             beingIterator = my_beings.erase(beingIterator);
         } else {
-            (*beingIterator)->applyChanges(stepper);
             ++beingIterator;
+        }
+    }
+
+    for (unsigned long x = 0; x < my_land->getWidth(); ++x) {
+        for (unsigned long y = 0; y < my_land->getHeight(); ++y) {
+            my_land->getTile(x, y)->applyChanges(stepper);
         }
     }
 }

@@ -46,6 +46,8 @@ class BeingFactory
     private:
         unique_ptr<Graphics> my_graphics;
         static const map<string, pair<vector<string>, map<unsigned long, string> > > behaviorsByChromosomes; // Map the behaviors to the chromosomes combinations
+        static const vector<string> firstNames;                                                              // Vector of first names
+        static const vector<string> lastNames;                                                               // Vector of last names
         map<string, vector<string> > my_chromosomes;
         map<string, unique_ptr<State> > my_states;
         map<string, map<string, shared_ptr<Behavior> > > my_behaviors;

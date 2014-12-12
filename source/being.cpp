@@ -191,4 +191,18 @@ void Being::applyChanges(Stepper & stepper)
  */
 void Being::trace()
 {
+    getGraphics()->drawCircle(
+        getGraphics()->getXOffset(),
+        getGraphics()->getYOffset(),
+        BEING_RADIUS,
+        (hasState("alobe")) ? (SICK_BEING_COLOR) : (BEING_COLOR)
+    );
+
+    getGraphics()->drawText(
+        getGraphics()->getXOffset() + 2 * BEING_RADIUS + BEING_NAME_SPACING,
+        getGraphics()->getYOffset() - BEING_RADIUS,
+        getName(),
+        BEING_NAME_SIZE,
+        BEING_NAME_COLOR
+    );
 }

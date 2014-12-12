@@ -20,6 +20,40 @@ const map<string, pair<vector<string>, map<unsigned long, string> > > BeingFacto
 };
 
 /**
+ * Vector of first names
+ */
+const vector<string> BeingFactory::firstNames = {
+    "Jean",
+    "Loic",
+    "Pierre",
+    "Nico",
+    "Jack",
+    "Philippe"
+};
+
+/**
+ * Vector of last names
+ */
+const vector<string> BeingFactory::lastNames = {
+    "Moust",
+    "Hum",
+    "Jacques",
+    "Pierre",
+    "Zgueg",
+    "Poule",
+    "Baptiste",
+    "Chie",
+    "Menage",
+    "Joly",
+    "Lecoy",
+    "La Moquette",
+    "Lagnol",
+    "Martin",
+    "Boutin"
+};
+
+
+/**
  * Constructor
  */
 BeingFactory::BeingFactory(unique_ptr<Graphics> graphics):
@@ -118,7 +152,11 @@ unique_ptr<Being> BeingFactory::generateBeing(Being & firstParent, Being & secon
  */
 unique_ptr<Being> BeingFactory::generateBeing(map<string, vector<string> > chromosomes)
 {
-    unique_ptr<Being> being = make_unique<Being>(my_graphics->clone(), to_string(rand()), chromosomes);
+    unique_ptr<Being> being = make_unique<Being>(
+        my_graphics->clone(),
+        firstNames[rand() % firstNames.size()] + " " + lastNames[rand() % lastNames.size()],
+        chromosomes
+    );
 
     for (
         map<string, unique_ptr<State> >::iterator stateIterator = my_states.begin();
