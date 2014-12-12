@@ -27,28 +27,24 @@ unsigned long Tile::getBeingsNumber() const
 /**
  * Attach a being
  */
-void Tile::attachBeing(Being & being)
+void Tile::attachBeing(Being * being)
 {
-    mod_beings.push_back(&being);
+    mod_beings.push_back(being);
 }
 
 /**
  * Detach a being
  */
-void Tile::detachBeing(Being & being)
+bool Tile::detachBeing(Being * being)
 {
-    vector<Being *> keptBeings;
-    for (
-        vector<Being *>::iterator beingIterator = mod_beings.begin();
-        beingIterator != mod_beings.end();
-        ++beingIterator
-    ) {
-        if (*beingIterator != &being) {
-            keptBeings.push_back(*beingIterator);
-        }
+    vector<Being *>::iterator position = find(mod_beings.begin(), mod_beings.end(), being);
+    if (position != mod_beings.end()) {
+        mod_beings.erase(position);
+
+        return true;
     }
 
-    mod_beings = keptBeings;
+    return false;
 }
 
 /**
@@ -64,4 +60,44 @@ void Tile::applyChanges(Stepper & stepper)
  */
 void Tile::trace()
 {
+    for (
+        vector<Being *>::iterator beingIterator = my_beings.begin();
+        beingIterator != my_beings.end();
+        ++beingIterator
+    ) {
+        if (
+            (*beingIterator)->getGraphics()->getXOffset() < getGraphics()->getXOffset() or
+            (*beingIterator)->getGraphics()->getXOffset() > getGraphics()->getXOffset() + getGraphics()->getWidth() - BEING_RADIUS * 2
+        ) {
+            (*beingIterator)->getGraphics()->setXOffset(
+                getGraphics()->getXOffset() + rand() % (getGraphics()->getWidth() - BEING_RADIUS * 2)
+            );
+        }
+
+        if (
+            (*beingIterator)->getGraphics()->getYOffset() < getGraphics()->getYOffset() or
+            (*beingIterator)->getGraphics()->getYOffset() > getGraphics()->getYOffset() + getGraphics()->getHeight() - BEING_RADIUS * 2
+        ) {
+            (*beingIterator)->getGraphics()->setYOffset(
+                getGraphics()->getYOffset() + rand() % (getGraphics()->getHeight() - BEING_RADIUS * 2)
+            );
+        }
+
+        (*beingIterator)->getGraphics()->setXOffset(smoothedMove(
+            (*beingIterator)->getGraphics()->getXOffset(),
+            (*beingIterator)->getGraphics()->getXSpeed(),
+            getGraphics()->getXOffset(),
+            getGraphics()->getXOffset() + getGraphics()->getWidth() - BEING_RADIUS * 2,
+            BEING_TURNOVER
+        ));
+        (*beingIterator)->getGraphics()->setYOffset(smoothedMove(
+            (*beingIterator)->getGraphics()->getYOffset(),
+            (*beingIterator)->getGraphics()->getYSpeed(),
+            getGraphics()->getYOffset(),
+            getGraphics()->getYOffset() + getGraphics()->getHeight() - BEING_RADIUS * 2,
+            BEING_TURNOVER
+        ));
+
+        (*beingIterator)->trace();
+    }
 }

@@ -5,6 +5,8 @@
 #include <map>
 #include <string>
 
+#include "configuration.h"
+#include "utilities.h"
 #include "actor.h"
 #include "being.h"
 
@@ -22,8 +24,8 @@ class Tile: public Actor
         Tile(unique_ptr<Graphics> graphics);
         vector<Being *> getBeings() const;     // Getter for the beings
         unsigned long getBeingsNumber() const; // Retrieve the number of beings
-        void attachBeing(Being & being);       // Attach a being
-        void detachBeing(Being & being);       // Detach a being
+        void attachBeing(Being * being);       // Attach a being
+        bool detachBeing(Being * being);       // Detach a being
         void applyChanges(Stepper & stepper);  // Apply changes after a step
         void trace();                          // Trace the tile
 
