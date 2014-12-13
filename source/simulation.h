@@ -18,6 +18,7 @@
 #include "ageEvent.h"
 #include "diseaseEvent.h"
 #include "exponentialDistribution.h"
+#include "constantDistribution.h"
 
 using namespace std;
 

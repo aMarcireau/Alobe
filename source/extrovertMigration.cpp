@@ -13,30 +13,15 @@ ExtrovertMigration::ExtrovertMigration():
  */
 Tile * ExtrovertMigration::chooseTile(multimap<unsigned long, Tile *> & neighboringTilesBydistance) const
 {
-    vector<Tile *> mostPopulatedTiles;
-    unsigned long maximalBeingsNumber = 0;
+    vector<pair<Tile *, unsigned long> > tokenizedTiles;
 
     for (
         map<unsigned long, Tile *>::iterator tilesByDistanceIterator = neighboringTilesBydistance.begin();
         tilesByDistanceIterator != neighboringTilesBydistance.end();
         ++tilesByDistanceIterator
     ) {
-        unsigned long tileBeingsNumber = tilesByDistanceIterator->second->getBeingsNumber();
-
-        if (mostPopulatedTiles.empty()) {
-            maximalBeingsNumber = tileBeingsNumber;
-            mostPopulatedTiles.push_back(tilesByDistanceIterator->second);
-        } else {
-            if (tileBeingsNumber >= maximalBeingsNumber) {
-                if (tileBeingsNumber > maximalBeingsNumber) {
-                    mostPopulatedTiles.clear();
-                    maximalBeingsNumber = tileBeingsNumber;
-                }
-
-                mostPopulatedTiles.push_back(tilesByDistanceIterator->second);
-            }
-        }
+        tokenizedTiles.push_back(make_pair(tilesByDistanceIterator->second, tilesByDistanceIterator->second->getBeingsNumber() + 1));
     }
 
-    return mostPopulatedTiles[rand() %  mostPopulatedTiles.size()];
+    return my_tokenDistribution->getDecision(tokenizedTiles);
 }

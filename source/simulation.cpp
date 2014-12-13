@@ -91,16 +91,17 @@ void Simulation::initialize()
     my_population = make_unique<Population>(make_unique<SfmlGraphics>(sfmlGraphicsWindow), *getLand(), *getBeingFactory());
     for (
         unsigned long beingsIndex = 0;
-        beingsIndex < INITIAL_BEING_NUMBER;
+        beingsIndex < (unsigned long)(LAND_WIDTH * LAND_HEIGHT * INITIAL_MEDIAN_DENSITY);
         ++beingsIndex
     ) {
         my_population->addBeing();
     }
-	my_population->attachEvent(make_shared<MatingEvent>());
+	my_population->attachEvent(make_shared<MatingEvent>(make_unique<ConstantDistribution>(BEING_MATE_RATIO)));
     my_population->attachEvent(make_shared<AgeEvent>(make_unique<ExponentialDistribution>(BEING_MAXIMUM_AGE, 0)));
+
 	for (unsigned long x = 0; x < my_land->getWidth(); ++x) {
 		for (unsigned long y = 0; y < my_land->getHeight(); ++y) {
-			my_land->getTile(x, y)->attachEvent(make_shared<DiseaseEvent>());
+			//my_land->getTile(x, y)->attachEvent(make_shared<DiseaseEvent>());
 		}
 	}
     my_population->applyChanges(*getStepper());

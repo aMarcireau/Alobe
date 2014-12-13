@@ -161,18 +161,6 @@ void Being::addChild(Being & child)
 }
 
 /**
- * Is the being willing to mathe with the given other being?
- */
-bool Being::isWillingToMateWith(Being & other)
-{
-    if (dynamic_cast<Gender &>(*(getBehavior("gender"))).get() == dynamic_cast<Gender &>(*(other.getBehavior("gender"))).get()) {
-        return false;
-    }
-
-    return (rand() < (0.2 * RAND_MAX));
-}
-
-/**
  * Apply changes after a step
  */
 void Being::applyChanges(Stepper & stepper)

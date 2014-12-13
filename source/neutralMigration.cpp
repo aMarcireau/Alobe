@@ -13,8 +13,15 @@ NeutralMigration::NeutralMigration():
  */
 Tile * NeutralMigration::chooseTile(multimap<unsigned long, Tile *> & neighboringTilesBydistance) const
 {
-    multimap<unsigned long, Tile *>::iterator tilesByDistanceIterator = neighboringTilesBydistance.begin();
-    advance(tilesByDistanceIterator, rand() % neighboringTilesBydistance.size());
+    vector<pair<Tile *, unsigned long> > tokenizedTiles;
 
-    return tilesByDistanceIterator->second;
+    for (
+        map<unsigned long, Tile *>::iterator tilesByDistanceIterator = neighboringTilesBydistance.begin();
+        tilesByDistanceIterator != neighboringTilesBydistance.end();
+        ++tilesByDistanceIterator
+    ) {
+        tokenizedTiles.push_back(make_pair(tilesByDistanceIterator->second, 1));
+    }
+
+    return my_tokenDistribution->getDecision(tokenizedTiles);
 }

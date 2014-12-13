@@ -13,30 +13,26 @@ IntrovertMigration::IntrovertMigration():
  */
 Tile * IntrovertMigration::chooseTile(multimap<unsigned long, Tile *> & neighboringTilesBydistance) const
 {
-    vector<Tile *> leastPopulatedTiles;
-    unsigned long minimalBeingsNumber = 0;
-
+    unsigned long beingsTotal = 0;
     for (
         map<unsigned long, Tile *>::iterator tilesByDistanceIterator = neighboringTilesBydistance.begin();
         tilesByDistanceIterator != neighboringTilesBydistance.end();
         ++tilesByDistanceIterator
     ) {
-        unsigned long tileBeingsNumber = tilesByDistanceIterator->second->getBeingsNumber();
-
-        if (leastPopulatedTiles.empty()) {
-            minimalBeingsNumber = tileBeingsNumber;
-            leastPopulatedTiles.push_back(tilesByDistanceIterator->second);
-        } else {
-            if (tileBeingsNumber <= minimalBeingsNumber) {
-                if (tileBeingsNumber < minimalBeingsNumber) {
-                    leastPopulatedTiles.clear();
-                    minimalBeingsNumber = tileBeingsNumber;
-                }
-
-                leastPopulatedTiles.push_back(tilesByDistanceIterator->second);
-            }
-        }
+        beingsTotal += tilesByDistanceIterator->second->getBeingsNumber();
     }
 
-    return leastPopulatedTiles[rand() %  leastPopulatedTiles.size()];
+    vector<pair<Tile *, unsigned long> > tokenizedTiles;
+    for (
+        map<unsigned long, Tile *>::iterator tilesByDistanceIterator = neighboringTilesBydistance.begin();
+        tilesByDistanceIterator != neighboringTilesBydistance.end();
+        ++tilesByDistanceIterator
+    ) {
+        tokenizedTiles.push_back(make_pair(
+            tilesByDistanceIterator->second,
+            beingsTotal - tilesByDistanceIterator->second->getBeingsNumber() + 1
+        ));
+    }
+
+    return my_tokenDistribution->getDecision(tokenizedTiles);
 }

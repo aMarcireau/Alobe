@@ -3,7 +3,7 @@
 
 #define LAND_WIDTH 10
 #define LAND_HEIGHT 10
-#define INITIAL_BEING_NUMBER 100
+#define INITIAL_MEDIAN_DENSITY 0.8
 
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 800
@@ -24,6 +24,9 @@
 #define TITLE_COLOR 0x000000
 #define FONT_PATH "/Users/Alex/Scripts/Alobe/Quicksand.otf"
 
-#define BEING_MAXIMUM_AGE 20
+#define BEING_MAXIMUM_AGE 120
+#define BEING_MATE_RATIO 0.8
+#define BEING_MINIMUM_MATE_AGE 20
+#define BEING_MAXIMUM_MATE_AGE 50
 
 #endif // __ALOBE__CONFIGURATION__
