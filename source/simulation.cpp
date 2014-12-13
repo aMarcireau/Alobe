@@ -68,18 +68,6 @@ void Simulation::nextStepCallback()
 {
     my_land->applyChanges(*getStepper());
     my_population->applyChanges(*getStepper());
-
-    cout << "\n" << "Step " << my_stepper->getStep() << "\n"
-        << "    Alive beings: " << my_population->getBeingsNumber() << "\n"
-        << "    Dead beings: " << my_population->getDeadBeingsNumber() << "\n"
-        << "    Sick beings: " << my_population->getSickBeingsNumber() << endl;
-
-	for (unsigned long x = 0; x < my_land->getWidth(); ++x) {
-		for (unsigned long y = 0; y < my_land->getHeight(); ++y) {
-            cout << "    [" << x << " ," << y << "]: " << my_land->getTile(x, y)->getBeingsNumber() << endl;
-		}
-	}
-
 }
 
 /**
@@ -110,7 +98,6 @@ void Simulation::initialize()
     }
 	my_population->attachEvent(make_shared<MatingEvent>());
     my_population->attachEvent(make_shared<AgeEvent>(make_unique<ExponentialDistribution>(BEING_MAXIMUM_AGE, 0)));
-
 	for (unsigned long x = 0; x < my_land->getWidth(); ++x) {
 		for (unsigned long y = 0; y < my_land->getHeight(); ++y) {
 			my_land->getTile(x, y)->attachEvent(make_shared<DiseaseEvent>());

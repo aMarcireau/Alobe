@@ -16,6 +16,7 @@ class TabulatedDistribution
 {
     public:
         TabulatedDistribution();
+        virtual ~TabulatedDistribution() = default;
         void setDistribution(map<unsigned long, float> distribution); // Setter for the distribution
         float getProbability(unsigned long value);                    // Get probability value
         bool getDecision(unsigned long value);                        // Get a boolean decision for the given value
