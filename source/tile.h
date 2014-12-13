@@ -6,7 +6,6 @@
 #include <string>
 
 #include "configuration.h"
-#include "utilities.h"
 #include "actor.h"
 #include "being.h"
 
@@ -29,8 +28,14 @@ class Tile: public Actor
         void applyChanges(Stepper & stepper);  // Apply changes after a step
         void trace();                          // Trace the tile
 
-
     private:
+        unsigned long smoothedMove(
+            unsigned long position,
+            long long speed,
+            unsigned long minimum,
+            unsigned long maximum,
+            float turnover
+        ) const;                               // Smoothed move next step
         vector<Being *> my_beings;
         vector<Being *> mod_beings;
 };

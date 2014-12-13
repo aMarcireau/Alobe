@@ -31,9 +31,7 @@ void SfmlGraphics::drawStripes(
     unsigned long thickness,
     unsigned long color
 ) {
-    sf::RenderWindow & renderWindow(dynamic_cast<sf::RenderWindow &>(
-        *((dynamic_cast<SfmlGraphicsWindow &>(*(getGraphicsWindow().get()))).getRenderWindow())
-    ));
+    sf::RenderWindow * renderWindow = (dynamic_cast<SfmlGraphicsWindow &>(*(getGraphicsWindow().get()))).getRenderWindow();
 
     float floatWidth;
     float floatHeight;
@@ -63,7 +61,7 @@ void SfmlGraphics::drawStripes(
         sf::RectangleShape line(sf::Vector2f(floatWidth, floatHeight));
         line.setPosition(xPosition, yPosition);
         line.setFillColor(hexadecimalToSfmlColor(color));
-        renderWindow.draw(line);
+        renderWindow->draw(line);
 	}
 }
 
@@ -72,14 +70,12 @@ void SfmlGraphics::drawStripes(
  */
 void SfmlGraphics::drawRectangle(unsigned long xLeft, unsigned long width, unsigned long yTop, unsigned long height, unsigned long color)
 {
-    sf::RenderWindow & renderWindow(dynamic_cast<sf::RenderWindow &>(
-        *((dynamic_cast<SfmlGraphicsWindow &>(*(getGraphicsWindow().get()))).getRenderWindow())
-    ));
+    sf::RenderWindow * renderWindow = (dynamic_cast<SfmlGraphicsWindow &>(*(getGraphicsWindow().get()))).getRenderWindow();
 
     sf::RectangleShape rectangle(sf::Vector2f((float)(width), (float)(height)));
     rectangle.setPosition((float)(xLeft), (float)(yTop));
     rectangle.setFillColor(hexadecimalToSfmlColor(color));
-    renderWindow.draw(rectangle);
+    renderWindow->draw(rectangle);
 }
 
 /**
@@ -87,14 +83,12 @@ void SfmlGraphics::drawRectangle(unsigned long xLeft, unsigned long width, unsig
  */
 void SfmlGraphics::drawCircle(unsigned long x, unsigned long y, unsigned long radius, unsigned long color)
 {
-    sf::RenderWindow & renderWindow(dynamic_cast<sf::RenderWindow &>(
-        *((dynamic_cast<SfmlGraphicsWindow &>(*(getGraphicsWindow().get()))).getRenderWindow())
-    ));
+    sf::RenderWindow * renderWindow = (dynamic_cast<SfmlGraphicsWindow &>(*(getGraphicsWindow().get()))).getRenderWindow();
 
     sf::CircleShape circle(radius);
     circle.setPosition((float)(x), (float)(y));
     circle.setFillColor(hexadecimalToSfmlColor(color));
-    renderWindow.draw(circle);
+    renderWindow->draw(circle);
 }
 
 /**
@@ -102,9 +96,7 @@ void SfmlGraphics::drawCircle(unsigned long x, unsigned long y, unsigned long ra
  */
 void SfmlGraphics::drawText(unsigned long x, unsigned long y, string text, unsigned long size, unsigned long color)
 {
-    sf::RenderWindow & renderWindow(dynamic_cast<sf::RenderWindow &>(
-        *((dynamic_cast<SfmlGraphicsWindow &>(*(getGraphicsWindow().get()))).getRenderWindow())
-    ));
+    sf::RenderWindow * renderWindow = (dynamic_cast<SfmlGraphicsWindow &>(*(getGraphicsWindow().get()))).getRenderWindow();
 
     sf::Text sfmlText;
     sfmlText.setFont(my_font);
@@ -112,7 +104,7 @@ void SfmlGraphics::drawText(unsigned long x, unsigned long y, string text, unsig
     sfmlText.setCharacterSize((unsigned int)size);
     sfmlText.setColor(hexadecimalToSfmlColor(color));
     sfmlText.setPosition((float)(x), (float)(y));
-    renderWindow.draw(sfmlText);
+    renderWindow->draw(sfmlText);
 }
 
 /**

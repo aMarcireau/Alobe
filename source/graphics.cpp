@@ -101,3 +101,25 @@ void Graphics::setHeight(unsigned long height)
 {
     my_height = height;
 }
+
+/**
+ * Convert hexadecimal color to RGB
+ */
+vector<unsigned long> Graphics::hexadecimalToRGB(unsigned long color)
+{
+    return {color / 0x10000, (color / 0x100) % 0x100, color % 0x100};
+}
+
+
+/**
+ * Calculate the position of an element in a divided interval
+ * Interval [minimum, minimum + length] divided by 'total' elements
+ */
+unsigned long Graphics::intervalToCoordinate(unsigned long minimum, unsigned long length, unsigned long total, unsigned long position) const
+{
+    if (position > total) {
+        throw out_of_range("total");
+    }
+
+    return minimum + (unsigned long)((double)(length) / total * position);
+}

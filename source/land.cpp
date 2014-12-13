@@ -144,13 +144,13 @@ void Land::trace()
     unsigned long tileHeight = getGraphics()->getHeight() / my_height - GRID_THICKNESS;
     for (unsigned long x = 0; x < my_width; ++x) {
         for (unsigned long y = 0; y < my_height; ++y) {
-            getTile(x, y)->getGraphics()->setXOffset(intervalToCoordinate(
+            getTile(x, y)->getGraphics()->setXOffset(getGraphics()->intervalToCoordinate(
                 getGraphics()->getXOffset(),
                 getGraphics()->getWidth() - 1,
                 my_width,
                 x
             ) + GRID_THICKNESS / 2);
-            getTile(x, y)->getGraphics()->setYOffset(intervalToCoordinate(
+            getTile(x, y)->getGraphics()->setYOffset(getGraphics()->intervalToCoordinate(
                 getGraphics()->getYOffset(),
                 getGraphics()->getHeight() - 1,
                 my_height,
@@ -177,4 +177,12 @@ void Land::trace()
         GRID_THICKNESS,
         GRID_COLOR
     );
+}
+
+/**
+ * Calculate dividend mod(divisor) for long long numbers
+ */
+long long Land::llModulo(long long dividend, long long divisor) const
+{
+    return (dividend % divisor + divisor) % divisor;
 }

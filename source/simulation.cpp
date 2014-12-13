@@ -6,6 +6,7 @@
 Simulation::Simulation():
     my_stepper(make_unique<Stepper>())
 {
+    srand((unsigned int)(time(NULL)));
     initialize();
 }
 
@@ -108,7 +109,7 @@ void Simulation::initialize()
         my_population->addBeing();
     }
 	my_population->attachEvent(make_shared<MatingEvent>());
-    my_population->attachEvent(make_shared<AgeEvent>());
+    my_population->attachEvent(make_shared<AgeEvent>(make_unique<ExponentialDistribution>(BEING_MAXIMUM_AGE, 0)));
 
 	for (unsigned long x = 0; x < my_land->getWidth(); ++x) {
 		for (unsigned long y = 0; y < my_land->getHeight(); ++y) {
@@ -126,7 +127,7 @@ void Simulation::initialize()
 /**
  * Getter for the render window
  */
-Graphics * Simulation::getRenderWindow() const
+Graphics * Simulation::getGraphics() const
 {
     return my_graphics.get();
 }
