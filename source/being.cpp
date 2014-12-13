@@ -183,7 +183,7 @@ void Being::trace()
         getGraphics()->getXOffset(),
         getGraphics()->getYOffset(),
         BEING_RADIUS,
-        (hasState("alobe")) ? (SICK_BEING_COLOR) : (BEING_COLOR)
+        (hasState("sick")) ? (SICK_BEING_COLOR) : (BEING_COLOR)
     );
 
     getGraphics()->drawText(

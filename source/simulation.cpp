@@ -174,7 +174,7 @@ void Simulation::initializeSickness()
             sickBeingIterator != sickBeings.end();
             ++sickBeingIterator
         ) {
-            (*sickBeingIterator)->addState("alobe", make_unique<State>(DISEASE_ALWAYS_DEAD));
+            (*sickBeingIterator)->addState("sick", make_unique<State>(DISEASE_ALWAYS_DEAD));
         }
     }
     for (unsigned long x = 0; x < my_land->getWidth(); ++x) {
