@@ -8,6 +8,7 @@
 #include <math.h>
 
 #include "graphics.h"
+#include "configuration.h"
 #include "being.h"
 #include "state.h"
 #include "behavior.h"

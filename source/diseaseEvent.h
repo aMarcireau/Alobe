@@ -3,6 +3,7 @@
 
 #include <map>
 #include <string>
+
 #include "land.h"
 #include "periodicEvent.h"
 #include "tile.h"
@@ -17,12 +18,12 @@
 */
 class DiseaseEvent : public PeriodicEvent
 {
-public:
-	DiseaseEvent();
+    public:
+        DiseaseEvent();
 
-private:
-	void filteredAction(Actor & actor); // Get all the nearest beings to share disease
-	// Actor must be a Population
+    private:
+        void filteredAction(Actor & actor); // Get all the nearest beings to share disease
+                                            // Actor must be a Tile
 };
 
 #endif // __ALOBE__DISEASE_EVENT__
