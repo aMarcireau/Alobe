@@ -13,13 +13,6 @@ Graphics::Graphics(shared_ptr<GraphicsWindow> graphicsWindow):
 }
 
 /**
- * Pure virtual destructor
- */
-Graphics::~Graphics()
-{
-}
-
-/**
  * Getter for the graphics window
  */
 shared_ptr<GraphicsWindow> Graphics::getGraphicsWindow()

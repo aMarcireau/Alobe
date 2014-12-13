@@ -14,7 +14,7 @@ class Behavior
 {
     public:
         Behavior();
-        virtual ~Behavior() = 0;
+        virtual ~Behavior() = default;
 };
 
 #endif // ALOBE__BEHAVIOR

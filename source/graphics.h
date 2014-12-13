@@ -17,7 +17,7 @@ class Graphics
 {
     public:
         Graphics(shared_ptr<GraphicsWindow> graphicsWindow);
-        virtual ~Graphics() = 0;
+        virtual ~Graphics() = default;
         virtual unique_ptr<Graphics> clone() = 0;
         shared_ptr<GraphicsWindow> getGraphicsWindow(); // Getter for the graphics window
         unsigned long getXOffset();                     // Getter for the x offset

@@ -10,13 +10,6 @@ Actor::Actor(unique_ptr<Graphics> graphics):
 }
 
 /**
- * Pure virtual destructor
- */
-Actor::~Actor()
-{
-}
-
-/**
  * Getter for the Graphics
  */
 Graphics * Actor::getGraphics()

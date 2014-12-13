@@ -20,7 +20,7 @@ class Actor
 {
     public:
         Actor(unique_ptr<Graphics> graphics);
-        virtual ~Actor() = 0;
+        virtual ~Actor() = default;
         Graphics * getGraphics();                         // Getter for the Graphics
         void attachEvent(shared_ptr<Event> event);        // Attach an event
         void detachEvent(Event & event);                  // Detach an event

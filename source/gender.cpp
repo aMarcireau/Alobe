@@ -7,10 +7,3 @@ Gender::Gender():
     Behavior()
 {
 }
-
-/**
- * Pure virtual destructor
- */
-Gender::~Gender()
-{
-}

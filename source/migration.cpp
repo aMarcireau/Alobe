@@ -7,10 +7,3 @@ Migration::Migration():
     Behavior()
 {
 }
-
-/**
- * Pure virtual destructor
- */
-Migration::~Migration()
-{
-}
