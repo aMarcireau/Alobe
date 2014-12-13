@@ -3,8 +3,15 @@
 /**
  * Constructor
  */
-DiseaseEvent::DiseaseEvent():
-    PeriodicEvent()
+DiseaseEvent::DiseaseEvent(
+    unique_ptr<TabulatedDistribution> transmissionDistribution,
+    unique_ptr<TabulatedDistribution> remissionDistribution,
+    unique_ptr<TabulatedDistribution> deathDistribution
+):
+    PeriodicEvent(),
+    my_transmissionDistribution(move(transmissionDistribution)),
+    my_remissionDistribution(move(remissionDistribution)),
+    my_deathDistribution(move(deathDistribution))
 {
 }
 
@@ -20,40 +27,41 @@ void DiseaseEvent::filteredAction(Actor & actor)
 	Tile & tile(dynamic_cast<Tile &>(actor));
 
     vector<Being *> beings = tile.getBeings();
-    vector<Being *> healthyBeings;
-	vector<Being *> sickBeings;
-	for (
+    unsigned long sickBeingsNumber = 0;
+    for (
         vector<Being *>::iterator beingIterator = beings.begin();
         beingIterator != beings.end();
         ++beingIterator
     ) {
-		if ((*beingIterator)->hasState("alobe")) {
-			sickBeings.push_back((*beingIterator));
-		} else {
-			healthyBeings.push_back((*beingIterator));
-		}
-	}
+        if ((*beingIterator)->hasState("sick")) {
+            (*beingIterator)->getState("sick")->decrement();
+            sickBeingsNumber++;
+            
+            if (my_remissionDistribution->getDecision()) {
+                (*beingIterator)->removeState("sick");
+                (*beingIterator)->addState("cured", make_unique<State>());
+            } else if (my_deathDistribution->getDecision((*beingIterator)->getState("sick")->getValue())) {
+                (*beingIterator)->kill();
+            }
+        }
+    }
 
-	unsigned long healthyBeingsNumber = healthyBeings.size();
-	unsigned long sickBeingsNumber = sickBeings.size();
+    for (
+        vector<Being *>::iterator beingIterator = beings.begin();
+        beingIterator != beings.end();
+        ++beingIterator
+    ) {
+        if (!(*beingIterator)->hasState("sick") && !(*beingIterator)->hasState("cured")) {
 
-	for (
-		unsigned long beingIndex = 0;
-		beingIndex < ceil(healthyBeingsNumber * 0.1);
-		++beingIndex
-		){
-		healthyBeings[beingIndex]->addState("alobe", make_unique<State>(5));
-	}
-
-	for (
-		unsigned long beingIndex = 0;
-		beingIndex < sickBeingsNumber;
-		++beingIndex
-    ){
-		sickBeings[beingIndex]->getState("alobe")->decrement(1);
-
-		if (sickBeings[beingIndex]->getState("alobe")->getValue() == 0) {
-			sickBeings[beingIndex]->kill();
-		}
-	}
+            for (
+                unsigned long sickIndex = 0;
+                sickIndex < sickBeingsNumber;
+                ++sickIndex
+            ) {
+                if (my_transmissionDistribution->getDecision()) {
+                    (*beingIterator)->addState("sick", make_unique<State>(DISEASE_ALWAYS_DEAD));
+                }
+            }
+        }
+    }
 }
