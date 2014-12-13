@@ -24,4 +24,6 @@
 #define TITLE_COLOR 0x000000
 #define FONT_PATH "/Users/Alex/Scripts/Alobe/Quicksand.otf"
 
+#define BEING_MAXIMUM_AGE 20
+
 #endif // __ALOBE__CONFIGURATION__

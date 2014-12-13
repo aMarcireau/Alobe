@@ -10,7 +10,7 @@ class GraphicsWindow
 {
     public:
         GraphicsWindow(unsigned long width, unsigned long height);
-        virtual ~GraphicsWindow() = 0;
+        virtual ~GraphicsWindow() = default;
         unsigned long getWidth();      // Getter for the width
         unsigned long getHeight();     // Getter for the height
     private:

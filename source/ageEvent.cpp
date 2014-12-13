@@ -3,8 +3,9 @@
 /**
  * Constructor
  */
-AgeEvent::AgeEvent():
-    PeriodicEvent()
+AgeEvent::AgeEvent(unique_ptr<TabulatedDistribution> deathDistribution):
+    PeriodicEvent(),
+    my_deathDistribution(move(deathDistribution))
 {
 }
 
@@ -24,7 +25,7 @@ void AgeEvent::filteredAction(Actor & actor)
     ) {
         (*beingIterator)->getState("age")->decrement();
 
-        if ((*beingIterator)->getState("age")->getValue() == 0) {
+        if (my_deathDistribution->getDecision((*beingIterator)->getState("age")->getValue())) {
             (*beingIterator)->kill();
         }
     }

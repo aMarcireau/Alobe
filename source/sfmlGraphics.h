@@ -5,7 +5,6 @@
 #include <SFML/Graphics.hpp>
 
 #include "configuration.h"
-#include "utilities.h"
 #include "graphics.h"
 #include "sfmlGraphicsWindow.h"
 
@@ -27,33 +26,33 @@ class SfmlGraphics: public Graphics
             unsigned long width,
             unsigned long yTop,
             unsigned long height,
-            string direction,           // "horizontal" or "vertical"
+            string direction,                                  // "horizontal" or "vertical"
             unsigned long spacesNumber,
             unsigned long thickness,
             unsigned long color
-        );                              // Draw stripes
+        );                                                     // Draw stripes
         void drawRectangle(
             unsigned long xLeft,
             unsigned long width,
             unsigned long yTop,
             unsigned long height,
             unsigned long color
-        );                              // Draw a rectangle
+        );                                                     // Draw a rectangle
         void drawCircle(
             unsigned long x,
             unsigned long y,
             unsigned long radius,
             unsigned long color
-        );                              // Draw a circle
+        );                                                     // Draw a circle
         void drawText(
             unsigned long x,
             unsigned long y,
             string text,
             unsigned long size,
             unsigned long color
-        );                              // Draw a text
-    private:
+        );                                                     // Draw a text
         sf::Color hexadecimalToSfmlColor(unsigned long color); // Hex to SFML color converter
+    private:
         sf::Font my_font;
 };
 

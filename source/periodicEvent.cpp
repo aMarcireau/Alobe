@@ -11,13 +11,6 @@ PeriodicEvent::PeriodicEvent(unsigned long step, unsigned long period):
 }
 
 /**
- * Pure virtual destructor
- */
-PeriodicEvent::~PeriodicEvent()
-{
-}
-
-/**
  * Change event filter rules (add periodicity)
  */
 void PeriodicEvent::action(Actor & actor, unsigned long step)

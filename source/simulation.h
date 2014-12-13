@@ -17,6 +17,7 @@
 #include "matingEvent.h"
 #include "ageEvent.h"
 #include "diseaseEvent.h"
+#include "exponentialDistribution.h"
 
 using namespace std;
 
@@ -35,7 +36,7 @@ class Simulation
         Land * getLand() const;                 // Getter for the land
         BeingFactory * getBeingFactory() const; // Getter for the being factory
         Population * getPopulation() const;     // Getter for the population
-        Graphics * getRenderWindow() const;     // Getter for the render window
+        Graphics * getGraphics() const;         // Getter for the render window
         void trace();                           // Trace the current step
 
     private:

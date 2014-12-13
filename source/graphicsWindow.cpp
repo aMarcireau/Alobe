@@ -10,13 +10,6 @@ GraphicsWindow::GraphicsWindow(unsigned long width, unsigned long height):
 }
 
 /**
- * Pure virtual destructor
- */
-GraphicsWindow::~GraphicsWindow()
-{
-}
-
-/**
  * Getter for the width
  */
 unsigned long GraphicsWindow::getWidth()

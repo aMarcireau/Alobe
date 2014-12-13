@@ -6,10 +6,3 @@
 Behavior::Behavior()
 {
 }
-
-/**
- * Pure virtual destructor
- */
-Behavior::~Behavior()
-{
-}

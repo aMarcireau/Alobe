@@ -14,7 +14,7 @@ class Event
 {
     public:
         Event(unsigned long step = 0);
-        virtual ~Event() = 0;
+        virtual ~Event() = default;
         virtual void action(Actor & actor, unsigned long step); // Trigger event action on an actor with a given step
 
     protected:

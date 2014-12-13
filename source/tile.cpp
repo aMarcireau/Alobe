@@ -101,3 +101,53 @@ void Tile::trace()
         (*beingIterator)->trace();
     }
 }
+
+/**
+ * Smoothed move next step
+ */
+unsigned long Tile::smoothedMove(unsigned long position, long long speed, unsigned long minimum, unsigned long maximum, float turnover) const
+{
+    if (position < minimum or position > maximum) {
+        throw out_of_range("position");
+    }
+    if (turnover < 0 or turnover > 1) {
+        throw out_of_range("turnover");
+    }
+
+    long long newSpeed;
+    if (position == minimum) {
+        if (rand() % 2 == 0) {
+            newSpeed = 0;
+        } else {
+            newSpeed = 1;
+        }
+    } else if (position == maximum) {
+        if (rand() % 2 == 0) {
+            newSpeed = -1;
+        } else {
+            newSpeed = 0;
+        }
+    } else {
+        if (rand() < turnover * RAND_MAX) {
+            if (speed > 0 or speed < 0) {
+                newSpeed = 0;
+            } else {
+                if (rand() % 2 == 0) {
+                    newSpeed = -1;
+                } else {
+                    newSpeed = 1;
+                }
+            }
+        } else {
+            if (speed < 0) {
+                newSpeed = -1;
+            } else if (speed > 0) {
+                newSpeed = 1;
+            } else {
+                newSpeed = 0;
+            }
+        }
+    }
+
+    return position + newSpeed;
+}

@@ -75,7 +75,7 @@ void BeingFactory::initialize()
     my_chromosomes["migration"].push_back("extrovert");
     my_chromosomes["migration"].push_back("introvert");
 
-    my_states["age"] = make_unique<State>(10);
+    my_states["age"] = make_unique<State>(BEING_MAXIMUM_AGE);
 
     my_behaviors["gender"]["female"] = make_unique<Female>();
     my_behaviors["gender"]["male"] = make_unique<Male>();
