@@ -5,6 +5,7 @@
 #include <memory>
 #include <fstream>
 #include <time.h>
+#include <map>
 
 #include "configuration.h"
 #include "sfmlGraphicsWindow.h"
@@ -31,20 +32,21 @@ class Simulation
 {
     public:
         Simulation();
-        void toStep(unsigned long step);        // Calculate simulation steps until reaching 'step'
-        void nextStep();                        // Calculate the simulation next step
-        Stepper * getStepper() const;           // Getter for the stepper
-        Land * getLand() const;                 // Getter for the land
-        BeingFactory * getBeingFactory() const; // Getter for the being factory
-        Population * getPopulation() const;     // Getter for the population
-        Graphics * getGraphics() const;         // Getter for the render window
-        void trace();                           // Trace the current step
+        void toStep(unsigned long step);                                              // Calculate simulation steps until reaching 'step'
+        void nextStep();                                                              // Calculate the simulation next step
+        Stepper * getStepper() const;                                                 // Getter for the stepper
+        Land * getLand() const;                                                       // Getter for the land
+        BeingFactory * getBeingFactory() const;                                       // Getter for the being factory
+        Population * getPopulation() const;                                           // Getter for the population
+        Graphics * getGraphics() const;                                               // Getter for the render window
+        void trace();                                                                 // Trace the current step
 
     private:
-        void nextStepCallback();                // Called at the end of the nextStep method
-        void initialize();                      // Initialize the simulation
-
-    private:
+        void nextStepCallback();                                                      // Called at the end of the nextStep method
+        void initialize();                                                            // Initialize the simulation
+        void initializeLand(shared_ptr<SfmlGraphicsWindow> sfmlGraphicsWindow);       // Initialize the land
+        void initializePopulation(shared_ptr<SfmlGraphicsWindow> sfmlGraphicsWindow); // Initialize the population
+        void initializeSickness();                                                    // Initialize the sickness
         unique_ptr<Graphics> my_graphics;
         unique_ptr<Stepper> my_stepper;
         unique_ptr<Land> my_land;
