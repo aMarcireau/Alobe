@@ -87,7 +87,27 @@ multimap<unsigned long, Tile *> Land::getNeighboringTilesByDistance(unsigned lon
                 )
             ));
 
-            if (ll_xDelta != 0 || ll_yDelta != 0) {
+            if (ll_xDelta != 0) {
+                neighboringTilesByDistance.insert(pair<unsigned long, Tile *>(
+                    deltaDistance,
+                    getTile(
+                        static_cast<unsigned long>(llModulo(ll_x + ll_xDelta, ll_width)),
+                        static_cast<unsigned long>(llModulo(ll_y - ll_yDelta, ll_height))
+                    )
+                ));
+            }
+
+            if (ll_yDelta != 0) {
+                neighboringTilesByDistance.insert(pair<unsigned long, Tile *>(
+                    deltaDistance,
+                    getTile(
+                        static_cast<unsigned long>(llModulo(ll_x - ll_xDelta, ll_width)),
+                        static_cast<unsigned long>(llModulo(ll_y + ll_yDelta, ll_height))
+                    )
+                ));
+            }
+
+            if (ll_xDelta != 0 && ll_yDelta != 0) {
                 neighboringTilesByDistance.insert(pair<unsigned long, Tile *>(
                     deltaDistance,
                     getTile(
@@ -166,16 +186,14 @@ void Land::trace()
         getGraphics()->getYOffset(), getGraphics()->getHeight(),
         "horizontal",
         my_height,
-        GRID_THICKNESS,
-        GRID_COLOR
+        GRID_THICKNESS
     );
     getGraphics()->drawStripes(
         getGraphics()->getXOffset(), getGraphics()->getWidth(),
         getGraphics()->getYOffset(), getGraphics()->getHeight(),
         "vertical",
         my_width,
-        GRID_THICKNESS,
-        GRID_COLOR
+        GRID_THICKNESS
     );
 }
 

@@ -27,8 +27,8 @@ class Being : public Actor
 {
     public:
         Being(unique_ptr<Graphics> graphics, string name, map<string, vector<string> > chromosomes);
-        string getName() const;                                       // Getter for the being name
-        map<string, vector<string> > getChromosomes() const;	      // Getter for the being chromosomes
+        string getName() const;                              // Getter for the being name
+        map<string, vector<string> > getChromosomes() const; // Getter for the being chromosomes
 
         bool isDead(); // Is the being dead?
         void kill();   // Kill the being
@@ -43,12 +43,12 @@ class Being : public Actor
         void addBehavior(string behaviorName, shared_ptr<Behavior> behavior); // Add a behavior
         void removeBehavior(string behaviorName);                             // Remove a behavior by name
 
-        vector<Being *> getParents() const;                     // Getter for the being parents
-        void addParent(Being & parent);                         // Add a parent
-        vector<Being *> getChildren() const;                    // Getter for the being children
-        void addChild(Being & child);                           // Add a child
-
-        bool isWillingToMateWith(Being & other); // Is the being willing to mate with the given other being?
+        vector<Being *> getParents() const;  // Getter for the being parents
+        void addParent(Being & parent);      // Add a parent
+        bool hasParents() const;             // Check if the being has parents
+        vector<Being *> getChildren() const; // Getter for the being children
+        void addChild(Being & child);        // Add a child
+        bool hasChildren() const;            // Check if the being has children
 
         void applyChanges(Stepper & stepper); // Apply changes after a step
         void trace();                         // Trace the being

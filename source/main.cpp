@@ -16,9 +16,8 @@ int main()
     unique_ptr<Simulation> simulation = make_unique<Simulation>();
 
     sf::RenderWindow * renderWindow = (dynamic_cast<SfmlGraphicsWindow &>(*(simulation->getGraphics()->getGraphicsWindow().get()))).getRenderWindow();
-    sf::Color backgroundColor = dynamic_cast<SfmlGraphics *>(simulation->getGraphics())->hexadecimalToSfmlColor(BACKGROUND_COLOR);
-
     renderWindow->setFramerateLimit(FRAMERATE);
+    
     while (renderWindow->isOpen())
 	{
         sf::Event event;
@@ -30,9 +29,17 @@ int main()
                  if (event.key.code == sf::Keyboard::Return) {
                     simulation->nextStep();
                 }
+            } else if (event.type == sf::Event::MouseButtonPressed || event.type == sf::Event::MouseButtonReleased) {
+                if (event.mouseButton.button == sf::Mouse::Left) {
+                    simulation->getEventManager()->setBeingsColors(
+                        event.type == sf::Event::MouseButtonPressed,
+                        event.mouseButton.x, event.mouseButton.y,
+                        *(simulation->getLand())
+                    );
+                }
             }
-		}
-        renderWindow->clear(backgroundColor);
+        }
+        renderWindow->clear(sf::Color::White);
         simulation->trace();
         renderWindow->display();
     }

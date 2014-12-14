@@ -13,7 +13,7 @@ using namespace std;
 class State
 {
     public:
-        State(unsigned long value);
+        State(unsigned long value = 0);
         unsigned long getValue() const;           // Getter for the state value
         void applyChanges();                      // Apply changes after a step
         void decrement(unsigned long amount = 1); // Decrement the state value. The value is set to 0

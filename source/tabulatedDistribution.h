@@ -8,7 +8,7 @@
 using namespace std;
 
 /**
- * Tabulated distribution
+ * <<Abstract>> Tabulated distribution
  *
  * A tabulated distribution for probabilities calculations
  */
@@ -18,8 +18,8 @@ class TabulatedDistribution
         TabulatedDistribution();
         virtual ~TabulatedDistribution() = default;
         void setDistribution(map<unsigned long, float> distribution); // Setter for the distribution
-        float getProbability(unsigned long value);                    // Get probability value
-        bool getDecision(unsigned long value);                        // Get a boolean decision for the given value
+        float getProbability(unsigned long value = 0);                // Get probability value
+        bool getDecision(unsigned long value = 0);                    // Get a boolean decision for the given value
     private:
         map<unsigned long, float> my_distribution;
 };

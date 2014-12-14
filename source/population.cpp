@@ -71,14 +71,14 @@ unsigned long Population::getSickBeingsNumber()
 	for (
 		vector<unique_ptr<Being> >::iterator beingIterator = my_beings.begin();
 		beingIterator != my_beings.end();
-		++beingIterator)
-	{
-		if ((*beingIterator)->hasState("alobe"))
-		{
+		++beingIterator
+    ) {
+		if ((*beingIterator)->hasState("sick")) {
 			++sickBeingNumber;
 		}
 	}
-		return sickBeingNumber;
+
+    return sickBeingNumber;
 }
 
 /**

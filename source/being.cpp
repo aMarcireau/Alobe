@@ -145,6 +145,14 @@ void Being::addParent(Being & parent)
 }
 
 /**
+ * Check if the being has parents
+ */
+bool Being::hasParents() const
+{
+    return my_parents.size() > 0;
+}
+
+/**
  * Getter for the being children
  */
 vector<Being *> Being::getChildren() const
@@ -161,15 +169,11 @@ void Being::addChild(Being & child)
 }
 
 /**
- * Is the being willing to mathe with the given other being?
+ * Check if the being has children
  */
-bool Being::isWillingToMateWith(Being & other)
+bool Being::hasChildren() const
 {
-    if (dynamic_cast<Gender &>(*(getBehavior("gender"))).get() == dynamic_cast<Gender &>(*(other.getBehavior("gender"))).get()) {
-        return false;
-    }
-
-    return (rand() < (0.2 * RAND_MAX));
+    return my_children.size() > 0;
 }
 
 /**
@@ -194,15 +198,6 @@ void Being::trace()
     getGraphics()->drawCircle(
         getGraphics()->getXOffset(),
         getGraphics()->getYOffset(),
-        BEING_RADIUS,
-        (hasState("alobe")) ? (SICK_BEING_COLOR) : (BEING_COLOR)
-    );
-
-    getGraphics()->drawText(
-        getGraphics()->getXOffset() + 2 * BEING_RADIUS + BEING_NAME_SPACING,
-        getGraphics()->getYOffset() - BEING_RADIUS,
-        getName(),
-        BEING_NAME_SIZE,
-        BEING_NAME_COLOR
+        BEING_RADIUS
     );
 }

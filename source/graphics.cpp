@@ -8,7 +8,8 @@ Graphics::Graphics(shared_ptr<GraphicsWindow> graphicsWindow):
     my_xOffset(0),
     my_yOffset(0),
     my_width(graphicsWindow->getWidth()),
-    my_height(graphicsWindow->getHeight())
+    my_height(graphicsWindow->getHeight()),
+    my_color(0xffffff)
 {
 }
 
@@ -103,11 +104,19 @@ void Graphics::setHeight(unsigned long height)
 }
 
 /**
+ * Setter for the color
+ */
+void Graphics::setColor(unsigned long color)
+{
+    my_color = color;
+}
+
+/**
  * Convert hexadecimal color to RGB
  */
-vector<unsigned long> Graphics::hexadecimalToRGB(unsigned long color)
+vector<unsigned long> Graphics::getRGB()
 {
-    return {color / 0x10000, (color / 0x100) % 0x100, color % 0x100};
+    return {my_color / 0x10000, (my_color / 0x100) % 0x100, my_color % 0x100};
 }
 
 

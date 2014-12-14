@@ -19,6 +19,7 @@ class ExtrovertMigration: public Migration
     public:
         ExtrovertMigration();
         Tile * chooseTile(multimap<unsigned long, Tile *> & neighboringTilesBydistance) const; // Choose the tile where the being is willing to migrate
+        string getType() const;                                                                // Get migration type
 };
 
 #endif // __ALOBE__EXTROVERT_MIGRATION__

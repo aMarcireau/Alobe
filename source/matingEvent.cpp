@@ -3,8 +3,9 @@
 /**
 * Constructor
 */
-MatingEvent::MatingEvent():
-	PeriodicEvent()
+MatingEvent::MatingEvent(unique_ptr<TabulatedDistribution> willingToMateDistribution):
+	PeriodicEvent(),
+    my_willingToMateDistribution(move(willingToMateDistribution))
 {
 }
 
@@ -20,22 +21,47 @@ void MatingEvent::filteredAction(Actor & actor)
 		for (unsigned long y = 0; y < population.getLand()->getHeight(); ++y) {
 
 			vector<Being *> beings = population.getLand()->getTile(x, y)->getBeings();
-            unsigned long beingsNumber = beings.size();
-			for (
-                unsigned long beingIndex = 0;
-                beingIndex < beingsNumber;
-                ++beingIndex
+            vector<Being *> females;
+            vector<Being *> males;
+            for (
+                vector<Being *>::iterator beingIterator = beings.begin();
+                beingIterator != beings.end();
+                ++beingIterator
+            ) {
+                if (
+                    (*(beingIterator))->getState("age")->getValue() <= BEING_MAXIMUM_AGE - BEING_MINIMUM_MATE_AGE &&
+                    (*(beingIterator))->getState("age")->getValue() >= BEING_MAXIMUM_AGE - BEING_MAXIMUM_MATE_AGE
+                ) {
+                    if ((dynamic_cast<Gender *>((*(beingIterator))->getBehavior("gender")))->get() == "female") {
+                        females.push_back(*(beingIterator));
+                    } else if ((dynamic_cast<Gender *>((*(beingIterator))->getBehavior("gender")))->get() == "male"){
+                        males.push_back(*(beingIterator));
+                    } else {
+                        throw logic_error("Gender unknown");
+                    }
+                }
+            }
+
+            random_shuffle(females.begin(), females.end());
+            random_shuffle(males.begin(), males.end());
+
+            for (
+                vector<Being *>::iterator femaleIterator = females.begin();
+                femaleIterator != females.end();
+                ++femaleIterator
             ) {
                 for (
-                    unsigned long otherBeingIndex = beingIndex + 1;
-                    otherBeingIndex < beingsNumber;
-                    ++otherBeingIndex
+                    vector<Being *>::iterator maleIterator = males.begin();
+                    maleIterator != males.end();
+                    ++maleIterator
                 ) {
-					if (beings[beingIndex]->isWillingToMateWith(*beings[otherBeingIndex]) && beings[otherBeingIndex]->isWillingToMateWith(*beings[beingIndex])) {
+                    if (my_willingToMateDistribution->getDecision()) {
                         population.addBeing(
-                            population.getBeingFactory()->generateBeing(*beings[beingIndex], *beings[otherBeingIndex]),
+                            population.getBeingFactory()->generateBeing(*(*maleIterator), *(*femaleIterator)),
                             x, y
                         );
+                        males.erase(maleIterator);
+                        break;
                     }
                 }
             }

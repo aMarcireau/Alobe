@@ -4,6 +4,7 @@
  * Constructor
  */
 Migration::Migration():
-    Behavior()
+    Behavior(),
+    my_tokenDistribution(make_unique<TokenDistribution<Tile *> >())
 {
 }
