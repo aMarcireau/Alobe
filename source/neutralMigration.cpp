@@ -25,3 +25,11 @@ Tile * NeutralMigration::chooseTile(multimap<unsigned long, Tile *> & neighborin
 
     return my_tokenDistribution->getDecision(tokenizedTiles);
 }
+
+/**
+ * Get migration type
+ */
+string NeutralMigration::getType() const
+{
+    return "neutral";
+}

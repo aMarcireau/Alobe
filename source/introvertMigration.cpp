@@ -36,3 +36,11 @@ Tile * IntrovertMigration::chooseTile(multimap<unsigned long, Tile *> & neighbor
 
     return my_tokenDistribution->getDecision(tokenizedTiles);
 }
+
+/**
+ * Get migration type
+ */
+string IntrovertMigration::getType() const
+{
+    return "introvert";
+}

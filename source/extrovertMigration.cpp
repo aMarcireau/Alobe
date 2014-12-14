@@ -25,3 +25,11 @@ Tile * ExtrovertMigration::chooseTile(multimap<unsigned long, Tile *> & neighbor
 
     return my_tokenDistribution->getDecision(tokenizedTiles);
 }
+
+/**
+ * Get migration type
+ */
+string ExtrovertMigration::getType() const
+{
+    return "extrovert";
+}
