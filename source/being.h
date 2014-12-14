@@ -45,8 +45,10 @@ class Being : public Actor
 
         vector<Being *> getParents() const;  // Getter for the being parents
         void addParent(Being & parent);      // Add a parent
+        bool hasParents() const;             // Check if the being has parents
         vector<Being *> getChildren() const; // Getter for the being children
         void addChild(Being & child);        // Add a child
+        bool hasChildren() const;            // Check if the being has children
 
         void applyChanges(Stepper & stepper); // Apply changes after a step
         void trace();                         // Trace the being
