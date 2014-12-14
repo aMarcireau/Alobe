@@ -98,6 +98,9 @@ void Tile::trace()
             BEING_TURNOVER
         ));
 
+        (*beingIterator)->getGraphics()->setWidth(BEING_RADIUS * 2);
+        (*beingIterator)->getGraphics()->setHeight(BEING_RADIUS * 2);
+
         (*beingIterator)->trace();
     }
 }

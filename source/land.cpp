@@ -186,16 +186,14 @@ void Land::trace()
         getGraphics()->getYOffset(), getGraphics()->getHeight(),
         "horizontal",
         my_height,
-        GRID_THICKNESS,
-        GRID_COLOR
+        GRID_THICKNESS
     );
     getGraphics()->drawStripes(
         getGraphics()->getXOffset(), getGraphics()->getWidth(),
         getGraphics()->getYOffset(), getGraphics()->getHeight(),
         "vertical",
         my_width,
-        GRID_THICKNESS,
-        GRID_COLOR
+        GRID_THICKNESS
     );
 }
 
