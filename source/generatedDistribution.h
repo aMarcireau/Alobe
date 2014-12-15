@@ -2,7 +2,7 @@
 #define __ALOBE__GENERATED_DISTRIBUTION__
 
 #include <map>
-
+#include <algorithm>
 #include "tabulatedDistribution.h"
 
 using namespace std;

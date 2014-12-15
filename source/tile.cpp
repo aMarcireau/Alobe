@@ -66,7 +66,7 @@ void Tile::trace()
         ++beingIterator
     ) {
         if (
-            (*beingIterator)->getGraphics()->getXOffset() < getGraphics()->getXOffset() or
+			(*beingIterator)->getGraphics()->getXOffset() < getGraphics()->getXOffset() ||
             (*beingIterator)->getGraphics()->getXOffset() > getGraphics()->getXOffset() + getGraphics()->getWidth() - BEING_RADIUS * 2
         ) {
             (*beingIterator)->getGraphics()->setXOffset(
@@ -75,7 +75,7 @@ void Tile::trace()
         }
 
         if (
-            (*beingIterator)->getGraphics()->getYOffset() < getGraphics()->getYOffset() or
+			(*beingIterator)->getGraphics()->getYOffset() < getGraphics()->getYOffset() ||
             (*beingIterator)->getGraphics()->getYOffset() > getGraphics()->getYOffset() + getGraphics()->getHeight() - BEING_RADIUS * 2
         ) {
             (*beingIterator)->getGraphics()->setYOffset(
@@ -110,10 +110,10 @@ void Tile::trace()
  */
 unsigned long Tile::smoothedMove(unsigned long position, long long speed, unsigned long minimum, unsigned long maximum, float turnover) const
 {
-    if (position < minimum or position > maximum) {
+	if (position < minimum || position > maximum) {
         throw out_of_range("position");
     }
-    if (turnover < 0 or turnover > 1) {
+	if (turnover < 0 || turnover > 1) {
         throw out_of_range("turnover");
     }
 
@@ -132,7 +132,7 @@ unsigned long Tile::smoothedMove(unsigned long position, long long speed, unsign
         }
     } else {
         if (rand() < turnover * RAND_MAX) {
-            if (speed > 0 or speed < 0) {
+			if (speed > 0 || speed < 0) {
                 newSpeed = 0;
             } else {
                 if (rand() % 2 == 0) {
