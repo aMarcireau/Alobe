@@ -182,7 +182,7 @@ unique_ptr<Being> BeingFactory::generateBeing(map<string, vector<string> > chrom
                 (chromosomes[chromosomeTypeIterator->first]).begin(),
                 (chromosomes[chromosomeTypeIterator->first]).end(),
                 ((behaviorsByChromosomes.at(chromosomeTypeIterator->first)).first).at(chromosomeIndex)
-            ) * pow(10, mappedChromosomesSize - chromosomeIndex - 1);
+            ) * (unsigned long)(pow(10, mappedChromosomesSize - chromosomeIndex - 1));
         }
 
         being->addBehavior(chromosomeTypeIterator->first, my_behaviors[chromosomeTypeIterator->first][
