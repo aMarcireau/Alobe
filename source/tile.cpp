@@ -88,14 +88,14 @@ void Tile::trace()
             (*beingIterator)->getGraphics()->getXSpeed(),
             getGraphics()->getXOffset(),
             getGraphics()->getXOffset() + getGraphics()->getWidth() - BEING_RADIUS * 2,
-            BEING_TURNOVER
+            (float)(BEING_TURNOVER)
         ));
         (*beingIterator)->getGraphics()->setYOffset(smoothedMove(
             (*beingIterator)->getGraphics()->getYOffset(),
             (*beingIterator)->getGraphics()->getYSpeed(),
             getGraphics()->getYOffset(),
             getGraphics()->getYOffset() + getGraphics()->getHeight() - BEING_RADIUS * 2,
-            BEING_TURNOVER
+			(float)(BEING_TURNOVER)
         ));
 
         (*beingIterator)->getGraphics()->setWidth(BEING_RADIUS * 2);
@@ -152,5 +152,5 @@ unsigned long Tile::smoothedMove(unsigned long position, long long speed, unsign
         }
     }
 
-    return position + newSpeed;
+    return position + (unsigned long)(newSpeed);
 }
