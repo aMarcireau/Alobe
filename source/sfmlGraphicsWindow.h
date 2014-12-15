@@ -1,6 +1,7 @@
 #ifndef __ALOBE__SFML_GRAPHICS_WINDOW__
 #define __ALOBE__SFML_GRAPHICS_WINDOW__
 
+#include <memory>
 #include <SFML/Graphics.hpp>
 
 #include "graphicsWindow.h"
