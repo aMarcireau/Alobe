@@ -2,7 +2,7 @@
 #define __ALOBE__CONFIGURATION__
 
 // Font
-#define FONT_PATH "/Users/Alex/Scripts/Alobe/Quicksand.otf"
+#define FONT_PATH "Quicksand.otf"
 
 // Land
 #define LAND_WIDTH 31
