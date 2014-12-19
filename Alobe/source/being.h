@@ -11,7 +11,6 @@
 #include "actor.h"
 #include "state.h"
 #include "behavior.h"
-#include "gender.h"
 
 class Tile;
 

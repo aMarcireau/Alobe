@@ -31,7 +31,7 @@ void State::applyChanges()
  */
 void State::decrement(unsigned long amount)
 {
-    long long difference = mod_value - amount;
+	long long difference = (long long)mod_value - (long long)amount;
 
     if (difference >= 0) {
         mod_value = static_cast<unsigned long>(difference);
