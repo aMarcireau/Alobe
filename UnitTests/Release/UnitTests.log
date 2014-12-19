@@ -1,0 +1,38 @@
+﻿Build started 19/12/2014 00:42:19.
+     1>Project "C:\Users\Alexandre\Scripts\Alobe\UnitTests\UnitTests.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\Users\Alexandre\Scripts\Alobe\Alobe\source /I"C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\UnitTest\include" /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _WINDLL /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yc"stdafx.h" /Fp"Release\UnitTests.pch" /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /FC /errorReport:prompt stdafx.cpp
+         stdafx.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\Users\Alexandre\Scripts\Alobe\Alobe\source /I"C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\UnitTest\include" /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _WINDLL /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Release\UnitTests.pch" /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /FC /errorReport:prompt distributionUnitTests.cpp
+         distributionUnitTests.cpp
+     1>c:\program files (x86)\microsoft visual studio 12.0\vc\include\utility(144): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+                 c:\users\alexandre\scripts\alobe\unittests\distributionunittests.cpp(27) : see reference to function template instantiation 'std::pair<const _Kty,_Ty>::pair<int,double,void>(_Other1 &&,_Other2 &&)' being compiled
+                 with
+                 [
+                     _Kty=unsigned long
+         ,            _Ty=float
+         ,            _Other1=int
+         ,            _Other2=double
+                 ]
+                 c:\users\alexandre\scripts\alobe\unittests\distributionunittests.cpp(27) : see reference to function template instantiation 'std::pair<const _Kty,_Ty>::pair<int,double,void>(_Other1 &&,_Other2 &&)' being compiled
+                 with
+                 [
+                     _Kty=unsigned long
+         ,            _Ty=float
+         ,            _Other1=int
+         ,            _Other2=double
+                 ]
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Alexandre\Scripts\Alobe\Release\UnitTests.dll" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\UnitTest\lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Alexandre\Scripts\Alobe\Release\UnitTests.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Alexandre\Scripts\Alobe\Release\UnitTests.lib" /MACHINE:X86 /SAFESEH /DLL Release\stdafx.obj
+         Release\distributionUnitTests.obj
+     1>LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/LTCG' specification
+            Creating library C:\Users\Alexandre\Scripts\Alobe\Release\UnitTests.lib and object C:\Users\Alexandre\Scripts\Alobe\Release\UnitTests.exp
+     1>distributionUnitTests.obj : error LNK2001: unresolved external symbol "public: __thiscall TabulatedDistribution::TabulatedDistribution(void)" (??0TabulatedDistribution@@QAE@XZ)
+     1>distributionUnitTests.obj : error LNK2001: unresolved external symbol "public: void __thiscall TabulatedDistribution::setDistribution(class std::map<unsigned long,float,struct std::less<unsigned long>,class std::allocator<struct std::pair<unsigned long const ,float> > >)" (?setDistribution@TabulatedDistribution@@QAEXV?$map@KMU?$less@K@std@@V?$allocator@U?$pair@$$CBKM@std@@@2@@std@@@Z)
+     1>distributionUnitTests.obj : error LNK2001: unresolved external symbol "public: float __thiscall TabulatedDistribution::getProbability(unsigned long)" (?getProbability@TabulatedDistribution@@QAEMK@Z)
+     1>C:\Users\Alexandre\Scripts\Alobe\Release\UnitTests.dll : fatal error LNK1120: 3 unresolved externals
+     1>Done Building Project "C:\Users\Alexandre\Scripts\Alobe\UnitTests\UnitTests.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:01.26
